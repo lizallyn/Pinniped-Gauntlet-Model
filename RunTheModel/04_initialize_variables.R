@@ -1,5 +1,9 @@
 ## Set Up Variables ----
 
+# create data.frame for gauntlet_salmon tracking
+salmon_list <- data.frame(matrix(data = NA, nrow = nrow(salmon_arrival), ncol = ncol(salmon_arrival), dimnames = dimnames(salmon_arrival)))
+salmon_list$Day <- salmon_arrival$Day
+
 ### Parameters that are derived from other parameters----
 
 # convert to loop t from dayofyear
