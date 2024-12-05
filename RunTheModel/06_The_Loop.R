@@ -71,14 +71,13 @@ for(t in 1:(days - 1)) {
   num_zc_at_gauntlet <- length(zc_at_gauntlet)
   num_ej_at_gauntlet <- length(ej_at_gauntlet)
   
-  salmon_result <- run_rungeKutta(Ns = c(gauntlet_sockeye[t], gauntlet_chinook[t], gauntlet_coho[t]), 
-                                  species_list = c("Sockeye", "Chinook", "Coho"), Cmax = Cmax, 
+  salmon_result <- run_rungeKutta(salmon = daily_update, Cmax = Cmax, 
                                   Nseal = num_seals_at_gauntlet, alpha = alpha, gamma = gamma, Y = Y,
                                   NSSL = num_ej_at_gauntlet, NCSL = num_zc_at_gauntlet, Cmax_SSL = Cmax_ej, 
                                   alpha_SSL = alpha, gamma_SSL = gamma, Y_SSL = Y, Cmax_CSL = Cmax_zc, 
                                   alpha_CSL = alpha, gamma_CSL = gamma, Y_CSL = Y,
-                                  F_catch = c(sockeye_catch_rate[t], chinook_catch_rate[t], coho_catch_rate[t]), 
-                                  M = natural_mort, E = c(sockeye_escape_rate, chinook_escape_rate, coho_escape_rate), 
+                                  F_catch = salmon_catch_rates[t, 2:ncol(salmon_catch_rates)], 
+                                  M = natural_mort, E = run_info$Escape, 
                                   deltat = deltat_val)
   
   # assign escape and gauntlet updates

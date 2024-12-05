@@ -1,8 +1,14 @@
 ## Set Up Variables ----
 
 # create data.frame for gauntlet_salmon tracking
-salmon_list <- data.frame(matrix(data = 0, nrow = nrow(salmon_arrival), ncol = ncol(salmon_arrival), dimnames = dimnames(salmon_arrival)))
-salmon_list$Day <- salmon_arrival$Day
+empty_salmon_df <- data.frame(matrix(data = 0, nrow = n_days, ncol = ncol(salmon_arrival), dimnames = dimnames(salmon_arrival)))
+empty_salmon_df$Day <- salmon_arrival$Day
+
+salmon_list <- empty_salmon_df
+escape_salmon <- empty_salmon_df
+fished_salmon <- empty_salmon_df
+eaten_salmon <- empty_salmon_df
+
 
 
 ### Parameters that are derived from other parameters----
@@ -136,6 +142,7 @@ harvest_plan_zc <- createHarvestPlan(scenario = scenario_sealion,
                                      empty.array = oneDzeroes)
 
 ### Actual States that I Need ----
+
 escape_chinook <- oneDzeroes
 escape_sockeye <- oneDzeroes
 escape_coho <- oneDzeroes
@@ -156,14 +163,6 @@ eaten_chinook <- oneDzeroes
 eaten_sockeye <- oneDzeroes
 eaten_coho <- oneDzeroes
 consumed_total <- oneDzeroes
-
-### Variable Rates ----
-coho_catch_rate <- oneDzeroes
-coho_catch_rate[fishery_days] <- coho_fish_rate
-chinook_catch_rate <- oneDzeroes
-chinook_catch_rate[fishery_days] <- chinook_fish_rate
-sockeye_catch_rate <- oneDzeroes
-sockeye_catch_rate[fishery_days] <- sockeye_fish_rate
 
 
 ### Troubleshooting & BS ----
