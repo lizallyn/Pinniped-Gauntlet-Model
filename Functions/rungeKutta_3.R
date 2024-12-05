@@ -36,13 +36,14 @@ rungeKutta <- function(X, Cmax, Nseal, alpha, gamma, Y=0, NSSL, NCSL, Cmax_SSL, 
   return(c(Xsim))
 }
 
-run_rungeKutta <- function(Ns, species_list, Cmax, Nseal, alpha, gamma, Y=0, NSSL, NCSL, Cmax_SSL, alpha_SSL, gamma_SSL, Y_SSL=0, 
+run_rungeKutta <- function(salmon, Cmax, Nseal, alpha, gamma, Y=0, NSSL, NCSL, Cmax_SSL, alpha_SSL, gamma_SSL, Y_SSL=0, 
                            Cmax_CSL, alpha_CSL, gamma_CSL, Y_CSL=0, F_catch, M, E, deltat) {
   times <- seq(0, 1, by = deltat)
   if (times[length(times)]!= 1) {
     stop("deltat must be a division of 1")
   }
-  n_species <- length(species_list)
+  n_species <- ncol(salmon)-1
+  Ns <- salmon[,2:ncol(salmon)]
   X <- c(Ns, rep(0, n_species), rep(0, n_species), rep(0, n_species), rep(0, n_species), rep(0, n_species))
   for (i in 1:length(times)) {
     X <- rungeKutta(X, Cmax, Nseal, alpha, gamma, Y, NSSL, NCSL, Cmax_SSL, alpha_SSL, gamma_SSL, Y_SSL, 
@@ -51,7 +52,7 @@ run_rungeKutta <- function(Ns, species_list, Cmax, Nseal, alpha, gamma, Y=0, NSS
   }
   X.res <- matrix(X, nrow = n_species, ncol = length(X)/n_species, byrow = F)
   colnames(X.res) <- c("Ns", "C", "C_SSL", "C_CSL", "Catch", "E")
-  rownames(X.res) <- species_list
+  rownames(X.res) <- colnames(salmon)
   return(X.res)
 }
 
