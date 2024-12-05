@@ -7,14 +7,13 @@ library(dplyr)
 
 
 salmonSpeciesUpdate <- function(day, salmon_list, arrive_data) {
-  onthisday <- NA
-  for (i in 1:nrow(salmon_list)){
-    onthisday[i] <- salmon_list[i, "Count"] + 
-      (arrive_data %>% slice(day) %>% pull(salmon_list$Run[i]))
+  onthisday <- data.frame(day)
+  for (i in 2:ncol(salmon_list)){
+    onthisday[i] <- salmon_list[i] + 
+      (arrive_data %>% slice(day) %>% pull(colnames(salmon_list[i])))
   }
-  return(data.frame(Run = salmon_list$Run,
-                    Count = onthisday))
+  colnames(onthisday) <- colnames(salmon_list)
+  return(onthisday)
 }
 
-# salmon_list <- data.frame(Run = run_info$Run, Count = c(150, 10))
-# salmonSpeciesUpdate(20, salmon_list, arrive_data = salmon_arrival)
+salmonSpeciesUpdate(50, daily_salmon_list, arrive_data = salmon_arrival)
