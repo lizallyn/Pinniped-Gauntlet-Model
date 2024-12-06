@@ -8,12 +8,8 @@ for(t in 1:(days - 1)) {
   daily_salmon_list <- salmon_list[t,]
   daily_update <- salmonSpeciesUpdate(day = t, 
                                       salmon_list = daily_salmon_list, 
-                                      arrive_data = salmon_arrive)
+                                      arrive_data = salmon_arrival)
   salmon_list[t,] <- daily_update
-  # gauntlet_chinook[t] <- daily_update$Chinook[1]
-  # gauntlet_sockeye[t] <- daily_update$Sockeye[1]
-  # gauntlet_coho[t] <- daily_update$Coho[1]
-  # gauntlet_salmon[t] <- sum(c(gauntlet_chinook[t], gauntlet_sockeye[t], gauntlet_coho[t]))
   
   # decide where each seal goes that day
   seal_forage_loc[,t] <- sapply(X = seal_prob_gauntlet[,t], FUN = decideForagingDestination)
@@ -76,7 +72,7 @@ for(t in 1:(days - 1)) {
                                   NSSL = num_ej_at_gauntlet, NCSL = num_zc_at_gauntlet, Cmax_SSL = Cmax_ej, 
                                   alpha_SSL = alpha, gamma_SSL = gamma, Y_SSL = Y, Cmax_CSL = Cmax_zc, 
                                   alpha_CSL = alpha, gamma_CSL = gamma, Y_CSL = Y,
-                                  F_catch = salmon_catch_rates[t, 2:ncol(salmon_catch_rates)], 
+                                  F_catch = as.numeric(salmon_catch_rates[t, 2:ncol(salmon_catch_rates)]), 
                                   M = natural_mort, E = run_info$Escape, 
                                   deltat = deltat_val)
   
@@ -106,7 +102,7 @@ for(t in 1:(days - 1)) {
   
   # assign consumed salmon to pinnipeds at gauntlet
   
-  consumed_total[t] <- sum(c(eaten_sockeye[t], eaten_chinook[t], eaten_coho[t]))
+  # consumed_total[t] <- sum(c(eaten_sockeye[t], eaten_chinook[t], eaten_coho[t]))
   
   consumed_by_pv <- sum(salmon_result[,"C"])
   consumed_by_zc <- sum(salmon_result[,"C_CSL"])
