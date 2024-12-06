@@ -58,20 +58,20 @@ mean <- 0.5 # of the beta dist
 beta <- 15 # spread of the beta dist
 
 # salmon parameters
-sockeye_escape_rate <- 1/sockeye_residence
-chinook_escape_rate <- 1/chinook_residence
-coho_escape_rate <- 1/coho_residence
+# sockeye_escape_rate <- 1/sockeye_residence
+# chinook_escape_rate <- 1/chinook_residence
+# coho_escape_rate <- 1/coho_residence
 natural_mort <- 0.0005
 
-coho_fish_rate <- 0.05 # see "estFishingRate.R"
-chinook_fish_rate <- 0.025
-sockeye_fish_rate <- 0
+# coho_fish_rate <- 0.05 # see "estFishingRate.R"
+# chinook_fish_rate <- 0.025
+# sockeye_fish_rate <- 0
 
 # hunting parameters
 min_fishers <- 13
 max_fishers <- 25
-fishery_open <- yday(as.Date("2023-09-10"))
-fishery_close <- yday(as.Date("2023-11-17"))
+# fishery_open <- yday(as.Date("2023-09-10"))
+# fishery_close <- yday(as.Date("2023-11-17"))
 
 zone_efficiency <- NA
 zone_steepness <- NA
@@ -80,8 +80,6 @@ availability <- 0.1 # prop of seals spatially overlapping with fishers
 accuracy <- 0.1 # prop harvested of encountered
 efficiency <- availability * accuracy # what prop of total seals do they take
 
-harvest_open <- yday(as.Date("2023-09-10"))
-harvest_close <- yday(as.Date("2023-11-17"))
 scenario <- "Boat"
 scenario_sealion <- "None"
 
