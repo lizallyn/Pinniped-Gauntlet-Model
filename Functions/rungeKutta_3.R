@@ -7,7 +7,7 @@ get_dXdt <- function(Ns, Cmax, Nseal, alpha, gamma, Y=0, NSSL, NCSL, Cmax_SSL, a
   Nseal <- max(Nseal, 1E-20)
   NSSL <- max(NSSL, 1E-20)
   NCSL <- max(NCSL, 1E-20)
-  dNdt <- ((-Cmax *alpha * Ns * Nseal^(1 + gamma)) / (Cmax + alpha * Ns * Nseal ^ gamma + Y)) - 
+  dNdt <- (((-Cmax) * alpha * Ns * Nseal^(1 + gamma)) / (Cmax + alpha * Ns * Nseal ^ gamma + Y)) - 
     ((Cmax_SSL * alpha_SSL * Ns * NSSL ^ (1 + gamma_SSL)) / (Cmax_SSL + alpha_SSL * Ns * NSSL ^ gamma_SSL + Y_SSL)) - 
     ((Cmax_CSL * alpha_CSL * Ns * NCSL ^ (1 + gamma_CSL)) / (Cmax_CSL + alpha_CSL * Ns * NCSL ^ gamma_CSL + Y_CSL)) - 
     F_catch * Ns - M * Ns - E * Ns
@@ -42,8 +42,8 @@ run_rungeKutta <- function(salmon, Cmax, Nseal, alpha, gamma, Y=0, NSSL, NCSL, C
   if (times[length(times)]!= 1) {
     stop("deltat must be a division of 1")
   }
-  n_species <- ncol(salmon)-1
-  Ns <- salmon[,2:ncol(salmon)]
+  Ns <- as.numeric(salmon[,2:ncol(salmon)])
+  n_species <- length(Ns)
   X <- c(Ns, rep(0, n_species), rep(0, n_species), rep(0, n_species), rep(0, n_species), rep(0, n_species))
   for (i in 1:length(times)) {
     X <- rungeKutta(X, Cmax, Nseal, alpha, gamma, Y, NSSL, NCSL, Cmax_SSL, alpha_SSL, gamma_SSL, Y_SSL, 
@@ -52,7 +52,7 @@ run_rungeKutta <- function(salmon, Cmax, Nseal, alpha, gamma, Y=0, NSSL, NCSL, C
   }
   X.res <- matrix(X, nrow = n_species, ncol = length(X)/n_species, byrow = F)
   colnames(X.res) <- c("Ns", "C", "C_SSL", "C_CSL", "Catch", "E")
-  rownames(X.res) <- colnames(salmon)
+  rownames(X.res) <- colnames(salmon[,2:ncol(salmon)])
   return(X.res)
 }
 
