@@ -8,6 +8,7 @@ salmon_list <- empty_salmon_df
 escape_salmon <- empty_salmon_df
 fished_salmon <- empty_salmon_df
 eaten_salmon <- empty_salmon_df
+consumed_total <- rep(0, n_days)
 
 ### Parameters that are derived from other parameters----
 
@@ -42,13 +43,6 @@ oneDzeroes <- makeArray(days, start.val = 0, names = "Day")
 twoDzeroes <- makeArray(c(num_seals, days), start.val = 0, names = c("Seal", "Day"))
 twoDzeroes_zc <- makeArray(c(num_zc, days), start.val = 0, names = c("CSL", "Day"))
 twoDzeroes_ej <- makeArray(c(num_ej, days), start.val = 0, names = c("SSL", "Day"))
-
-### Create Salmon Data----
-
-The_Fish <- data.frame(DayofYear = start_loop:end_loop)
-The_Fish$Sockeye <- floor(predictFish(sockeye_params, start_loop:end_loop, start_loop))
-The_Fish$Chinook <- floor(predictFish(chinook_params, start_loop:end_loop))
-The_Fish$Coho <- floor(predictFish(coho_params, start_loop:end_loop))
 
 ### Individual Values ----
 salmon_consumed_pv <- twoDzeroes
@@ -125,10 +119,6 @@ harvest_days_pv <- (harvest_open:harvest_close) - (start_loop - 1)
 harvest_days_ej <- harvest_open:harvest_close - (start_loop - 1)
 harvest_days_zc <- harvest_open:harvest_close - (start_loop - 1)
 
-fishery_range <- fishery_open:fishery_close
-# convert to loop t from dayofyear
-fishery_days <- fishery_range[which(fishery_range %in% day_range)] - (start_loop - 1)
-
 harvest_plan_pv <- createHarvestPlan(scenario = scenario, 
                                   harvest_days = harvest_days_pv,
                                   empty.array = oneDzeroes)
@@ -139,35 +129,10 @@ harvest_plan_zc <- createHarvestPlan(scenario = scenario_sealion,
                                      harvest_days = harvest_days_zc,
                                      empty.array = oneDzeroes)
 
-### Actual States that I Need ----
-
-escape_chinook <- oneDzeroes
-escape_sockeye <- oneDzeroes
-escape_coho <- oneDzeroes
-
-gauntlet_chinook <- oneDzeroes
-gauntlet_sockeye <- oneDzeroes
-gauntlet_coho <- oneDzeroes
-
-fished_chinook <- oneDzeroes
-fished_sockeye <- oneDzeroes
-fished_coho <- oneDzeroes
-
 H <- oneDzeroes
 H_zc <- oneDzeroes
 H_ej <- oneDzeroes
 
-eaten_chinook <- oneDzeroes
-eaten_sockeye <- oneDzeroes
-eaten_coho <- oneDzeroes
-consumed_total <- oneDzeroes
-
-
-### Troubleshooting & BS ----
-# for that one plot
-gauntlet_salmon <- oneDzeroes
-# troubleshooting ghost salmons
-screwy <- c(species = NA, day = NA, gauntlet_t = NA, Ns = NA, C = NA, Catch = NA, E = NA)
 
 
 
