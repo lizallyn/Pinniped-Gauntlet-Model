@@ -81,23 +81,30 @@ for(t in 1:(days - 1)) {
                                   deltat = deltat_val)
   
   # assign escape and gauntlet updates
-  escape_sockeye[t+1] <- escape_sockeye[t] + salmon_result["Sockeye", "E"]
-  escape_chinook[t+1] <- escape_chinook[t] + salmon_result["Chinook", "E"]
-  escape_coho[t+1] <- escape_coho[t] + salmon_result["Coho", "E"]
+  escape_salmon[t+1] <- salmon_result[, "E"]
+  fished_salmon[t] <- salmon_result[, "Catch"]
+  eaten_salmon[t] <- salmon_result[, "C"] +
+    salmon_result[, "C_CSL"] + 
+    salmon_result[, "C_SSL"]
+  consumed_total[t] <- sum(eaten_salmon[t])
   
-  fished_sockeye[t] <- salmon_result["Sockeye", "Catch"]
-  fished_chinook[t] <- salmon_result["Chinook", "Catch"]
-  fished_coho[t] <- salmon_result["Coho", "Catch"]
-  
-  gauntlet_sockeye[t+1] <- salmon_result["Sockeye", "Ns"]
-  gauntlet_chinook[t+1] <- salmon_result["Chinook", "Ns"]
-  gauntlet_coho[t+1] <- salmon_result["Coho", "Ns"]
+  # escape_sockeye[t+1] <- escape_sockeye[t] + salmon_result["Sockeye", "E"]
+  # escape_chinook[t+1] <- escape_chinook[t] + salmon_result["Chinook", "E"]
+  # escape_coho[t+1] <- escape_coho[t] + salmon_result["Coho", "E"]
+  # 
+  # fished_sockeye[t] <- salmon_result["Sockeye", "Catch"]
+  # fished_chinook[t] <- salmon_result["Chinook", "Catch"]
+  # fished_coho[t] <- salmon_result["Coho", "Catch"]
+  # 
+  # gauntlet_sockeye[t+1] <- salmon_result["Sockeye", "Ns"]
+  # gauntlet_chinook[t+1] <- salmon_result["Chinook", "Ns"]
+  # gauntlet_coho[t+1] <- salmon_result["Coho", "Ns"]
+  # 
+  # eaten_sockeye[t] <- salmon_result["Sockeye", "C"] + salmon_result["Sockeye", "C_CSL"] + salmon_result["Sockeye", "C_SSL"]
+  # eaten_chinook[t] <- salmon_result["Chinook", "C"] + salmon_result["Chinook", "C_CSL"] + salmon_result["Chinook", "C_SSL"]
+  # eaten_coho[t] <- salmon_result["Coho", "C"] + salmon_result["Coho", "C_CSL"] + salmon_result["Coho", "C_SSL"]
   
   # assign consumed salmon to pinnipeds at gauntlet
-  
-  eaten_sockeye[t] <- salmon_result["Sockeye", "C"] + salmon_result["Sockeye", "C_CSL"] + salmon_result["Sockeye", "C_SSL"]
-  eaten_chinook[t] <- salmon_result["Chinook", "C"] + salmon_result["Chinook", "C_CSL"] + salmon_result["Chinook", "C_SSL"]
-  eaten_coho[t] <- salmon_result["Coho", "C"] + salmon_result["Coho", "C_CSL"] + salmon_result["Coho", "C_SSL"]
   
   consumed_total[t] <- sum(c(eaten_sockeye[t], eaten_chinook[t], eaten_coho[t]))
   
@@ -181,8 +188,6 @@ for(t in 1:(days - 1)) {
       P_y[seal, t+1] <- NA
     }
   }
-
-  
   
   # stellers
   
@@ -241,8 +246,6 @@ for(t in 1:(days - 1)) {
       P_y_zc[csl, t+1] <- NA
     }
   }
-  
-
   
 
 } # days loop

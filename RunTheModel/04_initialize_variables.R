@@ -9,8 +9,6 @@ escape_salmon <- empty_salmon_df
 fished_salmon <- empty_salmon_df
 eaten_salmon <- empty_salmon_df
 
-
-
 ### Parameters that are derived from other parameters----
 
 # convert to loop t from dayofyear
