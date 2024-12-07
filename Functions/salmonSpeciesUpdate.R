@@ -4,13 +4,13 @@
 library(tidyr)
 library(dplyr)
 
-salmonSpeciesUpdate <- function(day, salmon_list, arrive_data) {
+salmonSpeciesUpdate <- function(day, salmon, arrive_data) {
   onthisday <- data.frame(day)
-  for (i in 2:ncol(salmon_list)){
-    onthisday[i] <- salmon_list[i] + 
-      (arrive_data %>% slice(day) %>% pull(colnames(salmon_list[i])))
+  for (i in 2:ncol(salmon)){
+    onthisday[i] <- salmon[i] + 
+      (arrive_data %>% slice(day) %>% pull(colnames(salmon[i])))
   }
-  colnames(onthisday) <- colnames(salmon_list)
+  colnames(onthisday) <- colnames(salmon)
   return(onthisday)
 }
 

@@ -7,7 +7,7 @@ for(t in 1:(days - 1)) {
   # salmon arrive at the gauntlet
   daily_salmon_list <- salmon_list[t,]
   daily_update <- salmonSpeciesUpdate(day = t, 
-                                      salmon_list = daily_salmon_list, 
+                                      salmon = daily_salmon_list, 
                                       arrive_data = salmon_arrival)
   salmon_list[t,] <- daily_update
   
@@ -77,12 +77,13 @@ for(t in 1:(days - 1)) {
                                   deltat = deltat_val)
   
   # assign escape and gauntlet updates
-  escape_salmon[t+1] <- salmon_result[, "E"]
-  fished_salmon[t] <- salmon_result[, "Catch"]
-  eaten_salmon[t] <- salmon_result[, "C"] +
+  salmon_list[t+1, 2:ncol(salmon_list)] <- salmon_result[, "Ns"]
+  escape_salmon[t+1, 2:ncol(escape_salmon)] <- salmon_result[, "E"]
+  fished_salmon[t, 2:ncol(escape_salmon)] <- salmon_result[, "Catch"]
+  eaten_salmon[t, 2:ncol(escape_salmon)] <- salmon_result[, "C"] +
     salmon_result[, "C_CSL"] + 
     salmon_result[, "C_SSL"]
-  consumed_total[t] <- sum(eaten_salmon[t])
+  consumed_total[t] <- sum(eaten_salmon[t, 2:ncol(escape_salmon)])
   
   # escape_sockeye[t+1] <- escape_sockeye[t] + salmon_result["Sockeye", "E"]
   # escape_chinook[t+1] <- escape_chinook[t] + salmon_result["Chinook", "E"]

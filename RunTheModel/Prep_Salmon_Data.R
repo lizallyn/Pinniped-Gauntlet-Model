@@ -2,20 +2,31 @@
 library(tidyr)
 library(dplyr)
 
-source("Functions/createSalmonArrival.R")
-
 #### Arrival Data ----
 
 # matrix with run information
 # can also upload .csv with same column names
-run_info <- data.frame(Run = c("Run1", "Run2"), Peak_Date = c(150, 175), 
-                       sd = c(10, 5), Run_Size = c(10000, 1000), Residence = c(2, 9))
+
+# from data.frame
+# run_info <- data.frame(Run = c("Run1", "Run2"), Peak_Date = c(150, 175),
+#                        sd = c(10, 5), Run_Size = c(10000, 1000), Residence = c(2, 9))
+
+# from .csv
+run_info <- read.csv("RunTheModel/salmon_run_info.csv")
+
+# 2 Runs
+# run_info <- run_info[1:2,]
+# 3 Runs
+# run_info <- run_info[1:3,]
+# 4 Runs
+run_info <- run_info[1:4,]
+
 # sd: # days that encompass 60% of the run peak / 2
 run_info$Escape <- 1/run_info$Residence
 n_species <- nrow(run_info)
 
 # create arrival data frame
-salmon_arrival <- create_salmon_arrival(6, run_info, arrival)
+salmon_arrival <- create_salmon_arrival(4, run_info)
 colnames(salmon_arrival) <- c("Day", run_info$Run)
 n_days <- nrow(salmon_arrival)
 data_start <- salmon_arrival$Day[1]
