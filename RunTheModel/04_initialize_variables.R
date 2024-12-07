@@ -115,9 +115,9 @@ kill_list_ej <- list()
 
 # harvest
 
-harvest_days_pv <- (harvest_open:harvest_close) - (start_loop - 1)
-harvest_days_ej <- harvest_open:harvest_close - (start_loop - 1)
-harvest_days_zc <- harvest_open:harvest_close - (start_loop - 1)
+harvest_days_pv <- harvest_open:harvest_close
+harvest_days_ej <- harvest_open:harvest_close
+harvest_days_zc <- harvest_open:harvest_close
 
 harvest_plan_pv <- createHarvestPlan(scenario = scenario, 
                                   harvest_days = harvest_days_pv,
