@@ -1,0 +1,7 @@
+Run,Peak_Date,sd,Run_Size,Residence,Fish_Rate,Fishery_Open,Fishery_Close
+Run1,90,10,10000,2,0.05,85,100
+Run2,100,5,1000,10,0,NA,NA
+Run3,110,3,5000,5,0.01,110,115
+Run4,120,15,8000,3,0.025,120,130
+Run5,130,8,3000,8,0,NA,NA
+Run6,140,12,1000,10,0,NA,NA
