@@ -26,14 +26,15 @@ salmon_escapement
 salmon_eaten
 escape_plot / eaten_sp_plot / fished_plot + plot_layout(axis_titles = "collect", guides = "collect")
 
-
+# check colorblind grid:
+cvd_grid(eaten_sp_plot)
 
 ## Run it Manually
 
 # 01 Set-Up Functions
-source("Functions/01_predictFish.R")
 source("Functions/makeArray.R")
 source("Functions/createHarvestPlan.R")
+source("Functions/createSalmonArrival.R")
 
 # 02 Prep Data
 source("RunTheModel/Prep_Salmon_Data.R")
@@ -64,5 +65,5 @@ source("Functions/makePlots.R")
 source("Functions/Plots_Pv.R")
 source("Functions/Plots_Ej.R")
 source("Functions/Plots_Zc.R")
-source("Ballard/07_Plots_salmon.R")
+source("Functions/Plots_salmon.R")
 source("Functions/Plots_responses.R")

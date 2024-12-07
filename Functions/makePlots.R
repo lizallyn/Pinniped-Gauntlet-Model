@@ -5,6 +5,8 @@ library(reshape2)
 library(ggplot2)
 library(patchwork)
 library(kableExtra)
+library(paletteer)
+
 
 # plot_x_range <- start_loop:end_loop
 
@@ -32,6 +34,11 @@ names(colors_zc) <- color.names.zc
 colors_ej <- rep(RColorBrewer::brewer.pal(10, "Set3"), length.out = num_ej)
 color.names.ej <- 1:num_ej
 names(colors_ej) <- color.names.ej
+
+# colors_salmon <- paletteer_d("IslamicArt::alhambra", n = 6)
+colors_salmon <- paletteer_d("Manu::Kereru", n = 6)
+# colors_salmon <- paletteer_d("calecopal::chaparral1", n = 6)
+
 
 # Plotting Function - individual seal dots
 makePlot_1 <- function(data, value.col, colors, legend.inc = F){
@@ -77,6 +84,26 @@ makePlot_3 <- function(x, data, col.names, variable.name, value.name, colors, le
     theme_classic() + 
     theme(legend.position = "none") +
     labs(y = value.name, x = col.names[1], color = variable.name)
+  if(legend.inc == T){
+    plot <- plot + theme(legend.position = "right")
+  }
+  return(plot)
+}
+
+# same as above but data is already in a df with day column
+makePlot_4 <- function(data, variable.name, value.name, colors, legend.inc = F, loop_days = T, start_loop = 1){
+  data_for_plot <- melt(data = data, id.vars = colnames(data)[1], variable.name = variable.name, value.name = value.name)
+  data_for_plot[,2] <- as.factor(data_for_plot[,2])
+  if(loop_days == F){
+    data_for_plot[,1] <- data_for_plot[,1] + (start_loop - 1)
+  }
+  plot <- 
+    ggplot(data = data_for_plot) + 
+    geom_point(aes(x = data_for_plot[,1], y = data_for_plot[,3], color = data_for_plot[,2])) +
+    scale_color_manual(values = colors) +
+    theme_classic() + 
+    theme(legend.position = "none") +
+    labs(y = value.name, x = colnames(data)[1], color = variable.name)
   if(legend.inc == T){
     plot <- plot + theme(legend.position = "right")
   }
