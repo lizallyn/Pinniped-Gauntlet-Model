@@ -10,6 +10,10 @@ fished_salmon <- empty_salmon_df
 eaten_salmon <- empty_salmon_df
 consumed_total <- rep(0, n_days)
 
+
+
+
+
 ### Parameters that are derived from other parameters----
 
 # convert to loop t from dayofyear
