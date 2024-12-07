@@ -40,22 +40,17 @@ data_end <- max(salmon_arrival$Day)
 
 #### Fishery Catch Rates ----
 
-Run1_fish_rate <- 0.05 # see "estFishingRate.R"
-Run2_fish_rate <- 0.025
-
-Run1_fishery_days <- 70:80
-Run2_fishery_days <- NA
-# fishery_range <- fishery_open:fishery_close
-# # convert to loop t from dayofyear
-# fishery_days <- fishery_range[which(fishery_range %in% day_range)] - (start_loop - 1)
-
-Run1_catch_rate <- rep(0, nrow(salmon_arrival))
-Run1_catch_rate[Run1_fishery_days] <- Run1_fish_rate
-Run2_catch_rate <- rep(0, nrow(salmon_arrival))
-Run2_catch_rate[Run2_fishery_days] <- Run2_fish_rate
-
-salmon_catch_rates <- data.frame(salmon_arrival$Day, Run1_catch_rate, Run2_catch_rate)
+salmon_catch_rates <- matrix(data = 0, nrow = n_days, ncol = nrow(run_info)+1)
 colnames(salmon_catch_rates) <- colnames(salmon_arrival)
+for(i in 1:nrow(run_info)){
+  if(run_info$Fish_Rate[i] > 0){
+    fishery_dates <- (run_info$Fishery_Open[i]:run_info$Fishery_Close[i]) - (data_start-1)
+    salmon_catch_rates[fishery_dates, i+1] <- run_info$Fish_Rate[i]
+  }
+}
 
+#### Harvest ----
+
+# yday not loop day
 harvest_open <- 70
 harvest_close <- 80
