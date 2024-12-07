@@ -5,7 +5,7 @@ create_salmon_arrival <- function(buffer, run_info){
   start_date <- min(run_info$Peak_Date) - 
     (buffer * run_info$sd[which(run_info$Peak_Date == min(run_info$Peak_Date))])
   end_date <- max(run_info$Peak_Date) + 
-    (2 * buffer * run_info$sd[which(run_info$Peak_Date == max(run_info$Peak_Date))])
+    (1.5 * buffer * run_info$sd[which(run_info$Peak_Date == max(run_info$Peak_Date))])
   arrival <- data.frame(Day = start_date:end_date)
   num_runs <- nrow(run_info)
   for(t in 1:num_runs){
