@@ -36,8 +36,17 @@ color.names.ej <- 1:num_ej
 names(colors_ej) <- color.names.ej
 
 # colors_salmon <- paletteer_d("IslamicArt::alhambra", n = 6)
-colors_salmon <- paletteer_d("Manu::Kereru", n = 6)
+# colors_salmon <- paletteer_d("Manu::Kereru", n = 6)
 # colors_salmon <- paletteer_d("calecopal::chaparral1", n = 6)
+# salmon_colors <- paletteer_d("dutchmasters::pearl_earring")[c(1,2,3,4,6,10)]
+# salmon_colors <- paletteer_d("feathers::rose_crowned_fruit_dove")[c(1,2,3,5,6,8)]
+# salmon_colors <- c("dodgerblue", "orchid1", "turquoise1", "goldenrod", "orchid4", "lightseagreen")
+# salmon_colors <- c("mediumblue", "dodgerblue2", "yellow2", "sienna1", "red2", "magenta2")
+# salmon_colors <- paletteer_d("nationalparkcolors::Saguaro")
+# salmon_colors <- paletteer_d("nationalparkcolors::DeathValley")
+# salmon_colors <- c(paletteer_d("nationalparkcolors::MtRainier"), "#554C6CFF")
+salmon_colors <- paletteer_d("PNWColors::Sailboat")
+
 
 
 # Plotting Function - individual seal dots
