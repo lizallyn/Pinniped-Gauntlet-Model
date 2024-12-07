@@ -1,0 +1,1 @@
+This only works with single opener fisheries in the current format. Would be easy to feed a vector of dates into the catch_rate creation process in the "Prep_Salmon_Data.R" script if needed. 
