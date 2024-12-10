@@ -37,7 +37,7 @@ if(no_seals == F && no_zc == F && no_ej == F){
   source("Functions/rungeKutta_3.R")
   source("RunTheModel/06_The_Loop.R")
 } else if(no_seals == F && no_zc == F && no_ej == T){
-  
+  source("RunTheModel/06_The_Loop_pv_zc.R")
 } else if(no_seals == F && no_zc == T && no_ej == F){
   
 } else if(no_seals == F && no_zc == T && no_ej == T){
