@@ -8,27 +8,8 @@ end_loop <- data_end
 day_range <- start_loop:end_loop
 days <- length(day_range)
 
-# seal parameters
-num_seals <- 300
-prop_specialists <- 0.025
-
-# sea lions
-num_zc <- 25
-num_ej <- 1
-num_specialist_zc <- 3
-sealion_arrival <- yday(as.Date("2024-08-25")) - start_loop
-
-# seal consumption parameters
+# consumption parameters
 deltat_val <- 1/24
-alpha <- data.frame(matrix(nrow = n_species, ncol = n))
-alpha <- 0.05 
-Cmax <- 5 # this was initially made up but actually makes some sense
-gamma <- -1 # pred dep, this expects something between -1, 0
-Y <- 0 # this freaks out when I make it > 0, might just delete
-
-# sea lion consumption
-Cmax_zc <- 15
-Cmax_ej <- 20
 
 # seal learning parameters
 specialist_prob <- 0.5
@@ -62,8 +43,6 @@ beta <- 15 # spread of the beta dist
 natural_mort <- 0.0005
 
 # hunting parameters
-min_fishers <- 13
-max_fishers <- 25
 
 zone_efficiency <- NA
 zone_steepness <- NA

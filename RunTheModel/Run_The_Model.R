@@ -12,7 +12,8 @@ source("Functions/createHarvestPlan.R")
 source("Functions/createSalmonArrival.R")
 
 # 02 Prep Data
-source("RunTheModel/Prep_Salmon_Data.R")
+source("Data/Prep_Salmon_Data.R")
+source("Data/Prep_Pinniped_Data.R")
 
 # 03 Set Pars
 source("RunTheModel/03_set_pars.R")

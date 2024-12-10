@@ -55,3 +55,6 @@ for(i in 1:nrow(run_info)){
 # yday not loop day
 harvest_open <- 110
 harvest_close <- 140
+
+min_fishers <- 13
+max_fishers <- 25
