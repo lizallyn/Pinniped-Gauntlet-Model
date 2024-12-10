@@ -12,7 +12,7 @@ library(dplyr)
 #                        sd = c(10, 5), Run_Size = c(10000, 1000), Residence = c(2, 9))
 
 # from .csv
-run_info <- read.csv("RunTheModel/salmon_run_info.csv")
+run_info <- read.csv("Data/salmon_run_info.csv")
 
 # 2 Runs
 # run_info <- run_info[1:2,]
