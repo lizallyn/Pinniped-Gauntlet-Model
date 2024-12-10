@@ -55,8 +55,6 @@ for(t in 1:(days - 1)) {
   
   salmon_result <- run_rungeKutta(salmon = daily_update, Cmax = Cmax_pv, 
                                   Nseal = num_seals_at_gauntlet, alpha = alpha_mat[,"Pv"], gamma = gamma, Y = Y,
-                                  Nsealion = num_zc_at_gauntlet, Cmax_SL = Cmax_zc, 
-                                  alpha_SL = alpha_mat[,"Zc"], gamma_SL = gamma, Y_SL = Y,
                                   F_catch = as.numeric(salmon_catch_rates[t, 2:ncol(salmon_catch_rates)]), 
                                   M = natural_mort, E = run_info$Escape, 
                                   deltat = deltat_val)
@@ -64,15 +62,14 @@ for(t in 1:(days - 1)) {
   # assign escape and gauntlet updates
   salmon_list[t+1, 2:ncol(salmon_list)] <- salmon_result[, "Ns"]
   escape_salmon[t+1, 2:ncol(escape_salmon)] <- salmon_result[, "E"]
-  fished_salmon[t, 2:ncol(escape_salmon)] <- salmon_result[, "Catch"]
-  eaten_salmon[t, 2:ncol(escape_salmon)] <- salmon_result[, "C"] +
-    salmon_result[, "C_SL"]
+  fished_salmon[t, 2:ncol(fished_salmon)] <- salmon_result[, "Catch"]
+  eaten_salmon[t, 2:ncol(eaten_salmon)] <- salmon_result[, "C"]
   consumed_total[t] <- sum(eaten_salmon[t, 2:ncol(escape_salmon)])
   
   # assign consumed salmon to gauntlet pinnipeds
   
   consumed_by_pv <- sum(salmon_result[,"C"])
-  consumed_by_zc <- sum(salmon_result[,"C_SL"])
+  # consumed_by_zc <- sum(salmon_result[,"C_SL"])
   
   if(num_seals_at_gauntlet == 0 | consumed_by_pv == 0) {
     salmon_consumed_pv[,t] <- 0
@@ -80,30 +77,30 @@ for(t in 1:(days - 1)) {
     salmon_consumed_pv[seals_at_gauntlet, t] <- consumed_by_pv/num_seals_at_gauntlet
   }
     
-  if(num_zc_at_gauntlet == 0 | consumed_by_zc == 0){
-    salmon_consumed_zc[,t] <- 0
-  } else {
-    salmon_consumed_zc[zc_at_gauntlet, t] <- consumed_by_zc/num_zc_at_gauntlet
-  }
+  # if(num_zc_at_gauntlet == 0 | consumed_by_zc == 0){
+  #   salmon_consumed_zc[,t] <- 0
+  # } else {
+  #   salmon_consumed_zc[zc_at_gauntlet, t] <- consumed_by_zc/num_zc_at_gauntlet
+  # }
   
   # seal harvest
   num_harvesters <- sample(min_harvesters:max_harvesters, 1)
   H[t] <- getHarvested(day_plan = harvest_plan_pv[t], list_gauntlet_seals = seals_at_gauntlet, 
                        num_fishers = num_harvesters, zone_efficiency = zone_efficiency, zone_steepness = zone_steepness, 
                        efficiency = efficiency, steepness = steepness)
-  H_zc[t] <- getHarvested(day_plan = harvest_plan_zc[t], list_gauntlet_seals = zc_at_gauntlet, 
-                          num_fishers = num_harvesters, zone_efficiency = zone_efficiency, zone_steepness = zone_steepness,
-                          efficiency = efficiency, steepness = steepness)
+  # H_zc[t] <- getHarvested(day_plan = harvest_plan_zc[t], list_gauntlet_seals = zc_at_gauntlet, 
+  #                         num_fishers = num_harvesters, zone_efficiency = zone_efficiency, zone_steepness = zone_steepness,
+  #                         efficiency = efficiency, steepness = steepness)
   
   if(H[t] > 0){
     killed <- sample(seals_at_gauntlet, H[t])
     kill_list <- c(kill_list, killed)
   }
 
-  if(H_zc[t] > 0){
-    killed <- sample(zc_at_gauntlet, H_zc[t])
-    kill_list_zc <- c(kill_list_zc, killed)
-  }
+  # if(H_zc[t] > 0){
+  #   killed <- sample(zc_at_gauntlet, H_zc[t])
+  #   kill_list_zc <- c(kill_list_zc, killed)
+  # }
   
   ## calculate x, y and prob_gauntlet for next time step
   
@@ -140,32 +137,32 @@ for(t in 1:(days - 1)) {
   
   # californias
   
-  for(csl in 1:num_zc){
-    
-    update_output <- updateLearning(salmon_consumed = salmon_consumed_zc[csl, t], w = w_sealion, hunting = H_zc[t],
-                                    x_t = x_zc[csl, t], y_t = y_zc[csl, t],
-                                    forage_loc = zc_forage_loc[csl, t], bundle_dx_pars = bundle_dx_pars,
-                                    bundle_dy_pars = bundle_dy_pars, dead = csl %in% kill_list_zc,
-                                    baseline_x = baseline_x_zc[csl], baseline_y = baseline_y_zc[csl],
-                                    specialist = seal %in% specialist_zc, bundle_x_shape_pars = bundle_x_shape_pars_sl, 
-                                    bundle_x_linear_pars = bundle_x_linear_pars, 
-                                    bundle_y_shape_pars = bundle_y_shape_pars_sl)
-    x_zc[csl, t+1] <- as.numeric(update_output["x_t1"])
-    y_zc[csl, t+1] <- as.numeric(update_output["y_t1"])
-    P_x_zc[csl, t+1] <- as.numeric(update_output["P_x"])
-    P_y_zc[csl, t+1] <- as.numeric(update_output["P_y"])
-    zc_prob_gauntlet[csl, t+1] <- P_x_zc[csl, t+1] * P_y_zc[csl, t+1]
-    
-    if(csl %in% kill_list_zc){
-      zc_prob_gauntlet[csl, t+1] <- NA
-      zc_forage_loc[csl, t+1] <- NA
-      x_zc[csl, t+1] <- NA
-      y_zc[csl, t+1] <- NA
-      C_zc[csl, t] <- NA
-      P_x_zc[csl, t+1] <- NA
-      P_y_zc[csl, t+1] <- NA
-    }
-  }
+  # for(csl in 1:num_zc){
+  #   
+  #   update_output <- updateLearning(salmon_consumed = salmon_consumed_zc[csl, t], w = w_sealion, hunting = H_zc[t],
+  #                                   x_t = x_zc[csl, t], y_t = y_zc[csl, t],
+  #                                   forage_loc = zc_forage_loc[csl, t], bundle_dx_pars = bundle_dx_pars,
+  #                                   bundle_dy_pars = bundle_dy_pars, dead = csl %in% kill_list_zc,
+  #                                   baseline_x = baseline_x_zc[csl], baseline_y = baseline_y_zc[csl],
+  #                                   specialist = seal %in% specialist_zc, bundle_x_shape_pars = bundle_x_shape_pars_sl, 
+  #                                   bundle_x_linear_pars = bundle_x_linear_pars, 
+  #                                   bundle_y_shape_pars = bundle_y_shape_pars_sl)
+  #   x_zc[csl, t+1] <- as.numeric(update_output["x_t1"])
+  #   y_zc[csl, t+1] <- as.numeric(update_output["y_t1"])
+  #   P_x_zc[csl, t+1] <- as.numeric(update_output["P_x"])
+  #   P_y_zc[csl, t+1] <- as.numeric(update_output["P_y"])
+  #   zc_prob_gauntlet[csl, t+1] <- P_x_zc[csl, t+1] * P_y_zc[csl, t+1]
+  #   
+  #   if(csl %in% kill_list_zc){
+  #     zc_prob_gauntlet[csl, t+1] <- NA
+  #     zc_forage_loc[csl, t+1] <- NA
+  #     x_zc[csl, t+1] <- NA
+  #     y_zc[csl, t+1] <- NA
+  #     C_zc[csl, t] <- NA
+  #     P_x_zc[csl, t+1] <- NA
+  #     P_y_zc[csl, t+1] <- NA
+  #   }
+  # }
   
 
 } # days loop

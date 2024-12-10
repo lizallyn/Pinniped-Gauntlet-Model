@@ -1,8 +1,9 @@
-# calculate derivative expressions. apply 4th order runge-kutta to integrate over time period deltat
+# for single predator pop
 # From Tim Feb 2024
 
 get_dXdt <- function(Ns, Cmax, Nseal, alpha, gamma, Y, F_catch, M, E) {
-  dNdt <- -Cmax *alpha * Ns * Nseal^(1 + gamma) / (Cmax + alpha * Ns * Nseal^gamma + Y) - 
+  Nseal <- max(Nseal, 1E-20)
+  dNdt <- (-Cmax * alpha * Ns * Nseal^(1 + gamma)) / (Cmax + alpha * Ns * Nseal^gamma + Y) - 
     F_catch * Ns - M * Ns - E * Ns
   dCdt <-   Cmax * Nseal *(alpha * Ns * Nseal^gamma + Y) / (Cmax + alpha * Ns * Nseal^gamma + Y)
   dCatchdt <- F_catch * Ns
@@ -22,11 +23,12 @@ rungeKutta <- function(X, Cmax, Nseal, alpha, gamma, Y, F_catch, M, E, n_species
   return(c(Xsim))
 }
 
-run_rungeKutta <- function(Ns, Cmax, Nseal, alpha, gamma, Y, F_catch, M, E, deltat = deltat_val) {
+run_rungeKutta <- function(salmon, Cmax, Nseal, alpha, gamma, Y, F_catch, M, E, deltat = deltat_val) {
   times <- seq(0, 1, by = deltat)
   if (times[length(times)]!= 1) {
     stop("deltat must be a division of 1")
   }
+  Ns <- as.numeric(salmon[,2:ncol(salmon)])
   n_species <- length(Ns)
   X <- c(Ns, rep(0, n_species), rep(0, n_species), rep(0, n_species))
   for (i in 1:length(times)) {
@@ -34,17 +36,17 @@ run_rungeKutta <- function(Ns, Cmax, Nseal, alpha, gamma, Y, F_catch, M, E, delt
   }
   X.res <- matrix(X, nrow = n_species, ncol = length(X)/n_species, byrow = F)
   colnames(X.res) <- c("Ns", "C", "Catch", "E")
-  rownames(X.res) <- c("Sockeye", "Chinook", "Coho")
+  rownames(X.res) <- colnames(salmon[,2:ncol(salmon)])
   return(X.res)
 }
 
-Ns <- c(0, 0, 0)
-E <- c(0.3, 0.003, 0.1)
-F_catch <- c(0, 0, 0.1)
-gamma <- -0.5
-
-run_rungeKutta(Ns = Ns, Cmax = Cmax, Nseal = 0, alpha = alpha, gamma = gamma, Y = Y,
-               F_catch = F_catch, E = E, M = natural_mort)
+# Ns <- c(0, 0, 0)
+# E <- c(0.3, 0.003, 0.1)
+# F_catch <- c(0, 0, 0.1)
+# gamma <- -0.5
+# 
+# run_rungeKutta(Ns = Ns, Cmax = Cmax, Nseal = 0, alpha = alpha, gamma = gamma, Y = Y,
+#                F_catch = F_catch, E = E, M = natural_mort)
 
 
 
