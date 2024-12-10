@@ -14,7 +14,7 @@ prop_specialists <- 0.025
 
 # sea lions
 num_zc <- 25
-num_ej <- 1
+num_ej <- 0
 num_specialist_zc <- 3
 sealion_arrival <- yday(as.Date("2024-08-25")) - start_loop
 
