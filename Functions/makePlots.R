@@ -28,13 +28,18 @@ colors <- rep(RColorBrewer::brewer.pal(10, "Set3"), length.out = num_seals)
 color.names <- levels(prob_gauntlet_plot[,"Seal"])
 names(colors) <- color.names
 
-colors_zc <- rep(RColorBrewer::brewer.pal(10, "Set3"), length.out = num_zc)
-color.names.zc <- 1:num_zc
-names(colors_zc) <- color.names.zc
+if(num_zc > 0){
+  colors_zc <- rep(RColorBrewer::brewer.pal(10, "Set3"), length.out = num_zc)
+  color.names.zc <- 1:num_zc
+  names(colors_zc) <- color.names.zc
+}
 
-colors_ej <- rep(RColorBrewer::brewer.pal(10, "Set3"), length.out = num_ej)
-color.names.ej <- 1:num_ej
-names(colors_ej) <- color.names.ej
+if(num_ej > 0){
+  colors_ej <- rep(RColorBrewer::brewer.pal(10, "Set3"), length.out = num_ej)
+  color.names.ej <- 1:num_ej
+  names(colors_ej) <- color.names.ej
+}
+
 
 # colors_salmon <- paletteer_d("IslamicArt::alhambra", n = 6)
 # colors_salmon <- paletteer_d("Manu::Kereru", n = 6)

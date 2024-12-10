@@ -5,7 +5,7 @@
 get_dXdt <- function(Ns, Cmax, Nseal, alpha, gamma, Y, Nsealion, Cmax_SL, alpha_SL, gamma_SL, Y_SL, F_catch, M, E) {
   Nseal <- max(Nseal, 1E-20)
   Nsealion <- max(Nsealion, 1E-20)
-  dNdt <- ((-Cmax *alpha * Ns * Nseal^(1 + gamma)) / (Cmax + alpha * Ns * Nseal ^ gamma + Y)) - 
+  dNdt <- ((-Cmax * alpha * Ns * Nseal^(1 + gamma)) / (Cmax + alpha * Ns * Nseal ^ gamma + Y)) - 
     ((Cmax_SL * alpha_SL * Ns * Nsealion ^ (1 + gamma_SL)) / (Cmax_SL + alpha_SL * Ns * Nsealion ^ gamma_SL + Y_SL)) - 
     F_catch * Ns - M * Ns - E * Ns
   dC2dt <- Cmax_SL * Nsealion *(alpha_SL * Ns * Nsealion ^ gamma_SL + Y_SL) / (Cmax_SL + alpha_SL * Ns * Nsealion ^ gamma_SL + Y_SL)
@@ -28,11 +28,12 @@ rungeKutta <- function(X, Cmax, Nseal, alpha, gamma, Y, Nsealion, Cmax_SL, alpha
   return(c(Xsim))
 }
 
-run_rungeKutta <- function(Ns, n_species, Cmax, Nseal, alpha, gamma, Y, Nsealion, Cmax_SL, alpha_SL, gamma_SL, Y_SL, F_catch, M, E, deltat = deltat_val) {
+run_rungeKutta <- function(salmon, Cmax, Nseal, alpha, gamma, Y, Nsealion, Cmax_SL, alpha_SL, gamma_SL, Y_SL, F_catch, M, E, deltat = deltat_val) {
   times <- seq(0, 1, by = deltat)
   if (times[length(times)]!= 1) {
     stop("deltat must be a division of 1")
   }
+  Ns <- as.numeric(salmon[,2:ncol(salmon)])
   n_species <- length(Ns)
   X <- c(Ns, rep(0, n_species), rep(0, n_species), rep(0, n_species), rep(0, n_species))
   for (i in 1:length(times)) {
@@ -41,7 +42,7 @@ run_rungeKutta <- function(Ns, n_species, Cmax, Nseal, alpha, gamma, Y, Nsealion
   }
   X.res <- matrix(X, nrow = n_species, ncol = length(X)/n_species, byrow = F)
   colnames(X.res) <- c("Ns", "C", "C_SL", "Catch", "E")
-  rownames(X.res) <- c("Sockeye", "Chinook", "Coho")
+  rownames(X.res) <- colnames(salmon[,2:ncol(salmon)])
   return(X.res)
 }
 
