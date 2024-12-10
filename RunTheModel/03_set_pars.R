@@ -14,12 +14,13 @@ prop_specialists <- 0.025
 
 # sea lions
 num_zc <- 25
-num_ej <- 0
+num_ej <- 1
 num_specialist_zc <- 3
 sealion_arrival <- yday(as.Date("2024-08-25")) - start_loop
 
 # seal consumption parameters
 deltat_val <- 1/24
+alpha <- data.frame(matrix(nrow = n_species, ncol = n))
 alpha <- 0.05 
 Cmax <- 5 # this was initially made up but actually makes some sense
 gamma <- -1 # pred dep, this expects something between -1, 0

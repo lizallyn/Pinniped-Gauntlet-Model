@@ -4,6 +4,13 @@
 
 oneDzeroes <- makeArray(days, start.val = 0, names = "Day")
 
+### Bundle Consumption Parameters ----
+
+num_pinn_sp <- length(which(c(num_seals, num_zc, num_ej) > 0))
+
+consumption_pars <- data.frame(matrix(data = NA, nrow = 3, ncol = 6))
+colnames(consumption_pars) <- c("Species", "N", "Cmax", "alpha", "gamma", "Y")
+consumption_pars$Species <- c("Pv", "Ej", "Zc")
 
 ### Salmon ----
 
@@ -151,4 +158,6 @@ bundle_x_shape_pars_sl <- tibble(buffer = buffer_Pxmin_specialist, steepness = s
                                  threshold = threshold_x_specialist)
 bundle_y_shape_pars_sl <- tibble(buffer = buffer_Pymin_specialist, steepness = steepness, 
                                  threshold = threshold_specialist)
+
+
 

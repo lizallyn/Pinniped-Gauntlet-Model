@@ -38,18 +38,18 @@ for(t in 1:(days - 1)) {
       zc_forage_loc[,t] <- sapply(X = P_social_zc[,t], FUN = decideForagingDestination)
     }
     #Ej
-    if(num_ej_2_copy > 0){
-      P_social_ej[,t] <- sapply(X = ej_prob_gauntlet[,t], FUN = collusion, 
-                                probs_list = ej_prob_gauntlet[,t], seals_2_copy = num_ej_2_copy, 
-                                mean = mean, beta = beta)
-      ej_forage_loc[,t] <- sapply(X = P_social_ej[,t], FUN = decideForagingDestination)
-    }
+    # if(num_ej_2_copy > 0){
+    #   P_social_ej[,t] <- sapply(X = ej_prob_gauntlet[,t], FUN = collusion, 
+    #                             probs_list = ej_prob_gauntlet[,t], seals_2_copy = num_ej_2_copy, 
+    #                             mean = mean, beta = beta)
+    #   ej_forage_loc[,t] <- sapply(X = P_social_ej[,t], FUN = decideForagingDestination)
+    # }
     
   } else {
     zc_forage_loc[,t] <- 0
-    ej_forage_loc[,t] <- 0
+    # ej_forage_loc[,t] <- 0
     
-    P_social_ej[,t] <- NA
+    # P_social_ej[,t] <- NA
     P_social_zc[,t] <- NA
   }
   
@@ -57,15 +57,15 @@ for(t in 1:(days - 1)) {
   # calculate salmon mortality 
   seals_at_gauntlet <- which(seal_forage_loc[,t] == 1)
   zc_at_gauntlet <- which(zc_forage_loc[,t] == 1)
-  ej_at_gauntlet <- which(ej_forage_loc[,t] == 1)
+  # ej_at_gauntlet <- which(ej_forage_loc[,t] == 1)
   
   seals_at_gauntlet_save[[t]] <- seals_at_gauntlet
   zc_at_gauntlet_save[[t]] <- zc_at_gauntlet
-  ej_at_gauntlet_save[[t]] <- ej_at_gauntlet
+  # ej_at_gauntlet_save[[t]] <- ej_at_gauntlet
   
   num_seals_at_gauntlet <- length(seals_at_gauntlet)
   num_zc_at_gauntlet <- length(zc_at_gauntlet)
-  num_ej_at_gauntlet <- length(ej_at_gauntlet)
+  # num_ej_at_gauntlet <- length(ej_at_gauntlet)
   
   salmon_result <- run_rungeKutta(salmon = daily_update, Cmax = Cmax, 
                                   Nseal = num_seals_at_gauntlet, alpha = alpha, gamma = gamma, Y = Y,
