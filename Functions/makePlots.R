@@ -52,6 +52,7 @@ if(num_ej > 0){
 # colors_salmon <- paletteer_d("nationalparkcolors::DeathValley")
 # colors_salmon <- c(paletteer_d("nationalparkcolors::MtRainier"), "#554C6CFF")
 colors_salmon <- paletteer_d("PNWColors::Sailboat")
+# check out facelift on https://github.com/johnmackintosh/rockthemes
 
 
 
