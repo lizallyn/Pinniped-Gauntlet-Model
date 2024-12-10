@@ -3,9 +3,10 @@
 
 # Pinniped input
 num_seals <- 300
-num_zc <- 0
+num_zc <- 50
 num_ej <- 0
 pinnipeds <- data.frame(Pv = num_seals, Zc = num_zc, Ej = num_ej)
+print(pinnipeds)
 
 num_pinn_sp <- length(which(pinnipeds > 0))
 list_of_pinns <- colnames(pinnipeds[which(pinnipeds > 0)])
