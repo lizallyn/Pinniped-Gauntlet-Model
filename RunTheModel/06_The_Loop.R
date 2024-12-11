@@ -67,10 +67,10 @@ for(t in 1:(days - 1)) {
   num_zc_at_gauntlet <- length(zc_at_gauntlet)
   num_ej_at_gauntlet <- length(ej_at_gauntlet)
   
-  salmon_result <- run_rungeKutta(salmon = daily_update, Cmax = Cmax_pv, 
+  salmon_result <- run_rungeKutta(salmon = daily_update, Cmax = Cmax_mat[,"Pv"], 
                                   Nseal = num_seals_at_gauntlet, alpha = alpha_mat[,"Pv"], gamma = gamma, Y = Y,
-                                  NSSL = num_ej_at_gauntlet, NCSL = num_zc_at_gauntlet, Cmax_SSL = Cmax_ej, 
-                                  alpha_SSL = alpha_mat[,"Ej"], gamma_SSL = gamma, Y_SSL = Y, Cmax_CSL = Cmax_zc, 
+                                  NSSL = num_ej_at_gauntlet, NCSL = num_zc_at_gauntlet, Cmax_SSL = Cmax_mat[,"Ej"], 
+                                  alpha_SSL = alpha_mat[,"Ej"], gamma_SSL = gamma, Y_SSL = Y, Cmax_CSL = Cmax_mat[,"Zc"], 
                                   alpha_CSL = alpha_mat[,"Zc"], gamma_CSL = gamma, Y_CSL = Y,
                                   F_catch = as.numeric(salmon_catch_rates[t, 2:ncol(salmon_catch_rates)]), 
                                   M = natural_mort, E = run_info$Escape, 
