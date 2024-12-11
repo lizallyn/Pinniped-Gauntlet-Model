@@ -14,7 +14,8 @@ This folder contains scripts that are used to run the model.
 
 ## Acknowledgements
 ### PIs
-Dr. Tim Essington, Jon Scordino, Rob Jones, Liz Allyn  \newline
+Dr. Tim Essington, Jon Scordino, Rob Jones, Liz Allyn
+
 Liz's Thesis Committee: Dr. Tim Essington, Dr. Andrew Berdahl, Jon Scordino
 ### Collaborators
 Many many knowledgeable and generous experts, especially those from the Muckleshoot Tribe, Nisqually Tribe, NWIFC, WDFW, and NWFSC. Thank you!
