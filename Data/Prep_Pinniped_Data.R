@@ -3,7 +3,7 @@
 
 # Pinniped input
 num_seals <- 300
-num_zc <- 50
+num_zc <- 0
 num_ej <- 0
 pinnipeds <- data.frame(Pv = num_seals, Zc = num_zc, Ej = num_ej)
 print(pinnipeds)
