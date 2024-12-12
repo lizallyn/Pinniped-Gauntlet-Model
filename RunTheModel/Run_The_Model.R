@@ -1,4 +1,4 @@
-# Run the model for all three pinnipeds and flexible salmon runs
+# Run the model for all flexible pinnipeds and flexible salmon runs
 
 # clear environment
 rm(list=ls())
