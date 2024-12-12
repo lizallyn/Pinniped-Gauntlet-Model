@@ -5,7 +5,7 @@ get_dXdt <- function(Ns, Cmax, Nseal, alpha, gamma, Y, F_catch, M, E) {
   Nseal <- max(Nseal, 1E-20)
   dNdt <- (-Cmax * alpha * Ns * Nseal^(1 + gamma)) / (Cmax + alpha * Ns * Nseal^gamma + Y) - 
     F_catch * Ns - M * Ns - E * Ns
-  dCdt <-   Cmax * Nseal * (alpha * Ns * Nseal^gamma + Y) / (Cmax + alpha * Ns * Nseal^gamma + Y)
+  dCdt <-   Cmax * Nseal * (alpha * Ns * Nseal^gamma + Y) / (Cmax + (alpha * Ns * Nseal^gamma + Y))
   dCatchdt <- F_catch * Ns
   dEdt <- E * Ns
   return(c(dNdt, dCdt, dCatchdt, dEdt))

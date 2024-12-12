@@ -1,5 +1,5 @@
 # for single predator pop
-# From Tim Feb 2024
+# experiment Dec 2024
 
 get_dXdt <- function(Ns, Cmax, Nseal, alpha, gamma, Y, F_catch, M, E, H) {
   Nseal <- max(Nseal, 1E-20)
