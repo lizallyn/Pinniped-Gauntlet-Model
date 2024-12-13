@@ -17,9 +17,9 @@ learnY <- function(hunting, y_t, forage_loc, bundle_dy_pars, dead, baseline = ba
       }
   } else {
     if(hunting == 0){
-      d_y <- step*(ymax - y_t)
+      d_y <- step * (ymax - y_t)
     } else if(hunting > 0){
-      d_y <- step*(ymin - y_t)
+      d_y <- step * (ymin - y_t)
     }
   }
   
