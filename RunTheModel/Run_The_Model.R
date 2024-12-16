@@ -10,17 +10,19 @@ source("Functions/makeArray.R")
 source("Functions/createHarvestPlan.R")
 source("Functions/createSalmonArrival.R")
 
-# 02 Prep Data
+# 02 Prep Salmon Data
 source("Data/Prep_Salmon_Data.R")
+
+# 03 Prep Pinniped Data
 source("Data/Prep_Pinniped_Data.R")
 
-# 03 Set Pars
+# 04 Set Pars
 source("RunTheModel/03_set_pars.R")
 
-# 04 Initialize Variables
+# 05 Initialize Variables
 source("RunTheModel/04_initialize_variables.R")
 
-# 05 Loop Functions
+# 06 Loop Functions
 source("Functions/salmonSpeciesUpdate.R")
 source("Functions/decideForagingDestination.R")
 source("Functions/collusion.R")
@@ -32,7 +34,7 @@ source("Functions/linearFuncRes.R")
 source("Functions/updateLearning.R")
 source("Functions/makePlots.R")
 
-# 06 Run The Loop
+# 07 Run The Loop
 if(no_seals == F && no_zc == F && no_ej == F){
   source("Functions/rungeKutta_3.R")
   source("RunTheModel/06_The_Loop.R")
@@ -51,7 +53,7 @@ if(no_seals == F && no_zc == F && no_ej == F){
   source("RunTheModel/06_The_Loop_pv.R")
 } else {print("Error in pinniped accounting! They cannot count and neither can you!")}
 
-# 07 Plots
+# 08 Plots
 source("Functions/Plots_Pv.R")
 source("Functions/Plots_salmon.R")
 source("Functions/Plots_responses.R")
