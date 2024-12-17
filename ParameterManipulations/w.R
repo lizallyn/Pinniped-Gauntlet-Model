@@ -50,4 +50,7 @@ escape_plot <- makePlot_4(data = Escape, variable.name = "Run",
 eaten_plot <- makePlot_4(data = Consumed, variable.name = "Run", 
                          value.name = "Salmon Eaten", colors = colors_salmon,
                          loop_days = F, start_loop = 1)
+escape_plot
+eaten_plot
+
 
