@@ -107,7 +107,7 @@ makePlot_3 <- function(x, data, col.names, variable.name, value.name, colors, le
 }
 
 # same as above but data is already in a df with day column
-makePlot_4 <- function(data, variable.name, value.name, colors, legend.inc = F, loop_days = T, start_loop = 1){
+makePlot_4 <- function(data, variable.name = "Run", value.name, colors, legend.inc = F, loop_days = T, start_loop = 1){
   data_for_plot <- melt(data = data, id.vars = colnames(data)[1], variable.name = variable.name, value.name = value.name)
   data_for_plot[,2] <- as.factor(data_for_plot[,2])
   if(loop_days == F){

@@ -15,9 +15,11 @@ source("Data/Prep_Pinniped_Data.R")
 # 04 Set Pars
 source("RunTheModel/03_set_pars.R")
 
-list <- seq(0,1,0.2)
+list <- seq(from = 0, to = 1, length.out = 5)
+Escape <- data.frame(matrix(data = NA, ncol = n_species+1))
+Consumed <- data.frame(matrix(data = NA, ncol = n_species+1))
 
-for(i in 1:length(specialist_prob)){
+for(i in 1:length(list)){
   specialist_prob <- list[i]
   
   # 05 Initialize Variables
@@ -33,6 +35,11 @@ for(i in 1:length(specialist_prob)){
   source("Functions/Plots_Pv.R")
   source("Functions/Plots_salmon.R")
   source("Functions/Plots_responses.R")
+  
+  ## save relevant variables and responses
+  Escape[i,] <- c(list[i], salmon_escapement)
+  Consumed[i,] <- c(list[i], salmon_eaten)
 }
+
 
 
