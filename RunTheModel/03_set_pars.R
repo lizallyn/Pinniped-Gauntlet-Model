@@ -17,7 +17,7 @@ baseline_x_val <- 0
 baseline_y_val <- 0
 specialist_baseline_y <- 0
 w <- 6
-w_sealion <- 100
+w_sealion <- 10
 ymin <- -10
 ymax <- 0
 intercept_x_val <- 0.01
