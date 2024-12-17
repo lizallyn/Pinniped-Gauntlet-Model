@@ -41,5 +41,13 @@ for(i in 1:length(list)){
   Consumed[i,] <- c(list[i], salmon_eaten)
 }
 
+colnames(Escape) <- c("Par", rownames(run_info))
+colnames(Consumed) <- c("Par", rownames(run_info))
+escape_plot <- makePlot_4(data = Escape, variable.name = "Run", 
+                          value.name = "Salmon Escaped", colors = colors_salmon,
+                          loop_days = F, start_loop = 1)
+eaten_plot <- makePlot_4(data = Consumed, variable.name = "Run", 
+                          value.name = "Salmon Eaten", colors = colors_salmon,
+                          loop_days = F, start_loop = 1)
 
 
