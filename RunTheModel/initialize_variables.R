@@ -146,16 +146,30 @@ if(num_ej > 0){
 
 ### X and Y Shape Parameter Bundles ----
 
-bundle_dx_pars <- tibble(step = step, xmin = xmin, xmax = xmax, decay = decay)
-bundle_dy_pars <- tibble(step = step, ymin = ymin, ymax = ymax, decay = decay)
-bundle_x_shape_pars <- tibble(buffer = buffer_Pxmin_specialist, steepness = steepness, 
-                              threshold = threshold_x_specialist)
-bundle_x_linear_pars <- tibble(slope = slope_x_val, intercept = intercept_x_val)
+x_pars <- tibble(xmin = xmin, xmax = xmax)
+y_pars <- tibble(ymin = ymin, ymax = ymax)
 
-bundle_x_shape_pars_sl <- tibble(buffer = buffer_Pxmin_specialist, steepness = steepness, 
-                                 threshold = threshold_x_specialist)
-bundle_y_shape_pars_sl <- tibble(buffer = buffer_Pymin_specialist, steepness = steepness, 
-                                 threshold = threshold_specialist)
+# bundle_x_shape_pars <- tibble(buffer = buffer_Pxmin_specialist, steepness = steepness, 
+#                               threshold = threshold_x_specialist)
+# bundle_x_linear_pars <- tibble(slope = slope_x_val, intercept = intercept_x_val)
+# 
+# bundle_x_shape_pars_sl <- tibble(buffer = buffer_Pxmin_specialist, steepness = steepness, 
+#                                  threshold = threshold_x_specialist)
+# bundle_y_shape_pars_sl <- tibble(buffer = buffer_Pymin_specialist, steepness = steepness, 
+#                                  threshold = threshold_specialist)
 
+bundle_x <- tibble(asymp_right = asymp_right_x_val, asymp_left = asymp_left_x_val, 
+                   shift = shift_x_val, steepness = steepness_x_val)
+bundle_x_spec <- tibble(asymp_right = asymp_right_x_spec_val, 
+                        asymp_left = asymp_left_x_spec_val, 
+                   shift = shift_x_spec_val, steepness = steepness_x_spec_val)
+bundle_x_sl <- tibble(asymp_right = asymp_right_x_sl_val, 
+                        asymp_left = asymp_left_x_sl_val, 
+                        shift = shift_x_sl_val, steepness = steepness_x_sl_val)
+bundle_y <- tibble(asymp_right = asymp_right_y_val, asymp_left = asymp_left_y_val, 
+                   shift = shift_y_val, steepness = steepness_y_val)
+bundle_y_spec <- tibble(asymp_right = asymp_right_y_spec_val, 
+                        asymp_left = asymp_left_y_spec_val, 
+                   shift = shift_y_spec_val, steepness = steepness_y_spec_val)
 
 

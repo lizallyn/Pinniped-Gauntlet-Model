@@ -1,14 +1,17 @@
 
 
-updateLearning <- function(salmon_consumed, w, hunting, x_t, y_t, forage_loc, 
-                         bundle_dx_pars, bundle_dy_pars, dead, baseline_x, baseline_y,
-                         specialist, bundle_x_shape_pars, bundle_x_linear_pars, bundle_y_shape_pars){
+updateLearning <- function(salmon_consumed, w, hunting, x_t, y_t, step, decay, forage_loc, 
+                         x_pars, y_pars, dead, baseline_x, baseline_y,
+                         specialist, bundle_x_pars, bundle_x_linear_pars, bundle_y_shape_pars){
+  
   C <- salmon_consumed - w
   
-  d_x <- learnX(food = C, x_t = x_t, forage_loc = forage_loc, bundle_dx_pars, 
+  d_x <- learnX(food = C, x_t = x_t, step = step, decay = decay, 
+                forage_loc = forage_loc, x_pars = x_pars, 
                 dead = dead, baseline = baseline_x)
-  d_y <- learnY(hunting = hunting, y_t = y_t, forage_loc = forage_loc, 
-                bundle_dy_pars, dead = dead, baseline = baseline_y)
+  d_y <- learnY(hunting = hunting, y_t = y_t, step = step, decay = decay, 
+                forage_loc = forage_loc, y_pars = y_pars, 
+                dead = dead, baseline = baseline_y)
   
   x_t1 <- x_t + d_x
   y_t1 <- y_t + d_y

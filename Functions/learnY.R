@@ -1,10 +1,10 @@
 # function for calculating d_y if they go to the gauntlet
 
-learnY <- function(hunting, y_t, forage_loc, bundle_dy_pars, dead, baseline = baseline_y) {
-  step <- bundle_dy_pars["step"]
-  ymin <- bundle_dy_pars["ymin"]
-  ymax <- bundle_dy_pars["ymax"]
-  decay <- bundle_dy_pars["decay"]
+learnY <- function(hunting, y_t, step, decay, y_pars, forage_loc, bundle_dy_pars, 
+                   dead, baseline) {
+
+  ymin <- y_pars["ymin"]
+  ymax <- y_pars["ymax"]
   
 
   if(dead == TRUE){
