@@ -17,10 +17,10 @@ source("Data/Prep_Salmon_Data.R")
 source("Data/Prep_Pinniped_Data.R")
 
 # 04 Set Pars
-source("RunTheModel/03_set_pars.R")
+source("RunTheModel/set_pars.R")
 
 # 05 Initialize Variables
-source("RunTheModel/04_initialize_variables.R")
+source("RunTheModel/initialize_variables.R")
 
 # 06 Loop Functions
 source("Functions/salmonSpeciesUpdate.R")
@@ -42,7 +42,7 @@ if(no_seals == F && no_zc == F && no_ej == F){
   source("Functions/Plots_Zc.R")
 } else if(no_seals == F && no_zc == F && no_ej == T){
   source("Functions/rungeKutta_2.R")
-  source("RunTheModel/06_The_Loop_pv_zc.R")
+  source("RunTheModel/The_Loop_pv_zc.R")
   source("Functions/Plots_Zc.R")
 } else if(no_seals == F && no_zc == T && no_ej == F){
   source("Functions/rungeKutta_2.R")
@@ -51,7 +51,7 @@ if(no_seals == F && no_zc == F && no_ej == F){
 } else if(no_seals == F && no_zc == T && no_ej == T){
   source("Functions/rungeKutta.R")
   source("RunTheModel/06_The_Loop_pv.R")
-} else {print("Error in pinniped accounting! They cannot count and neither can you!")}
+} else {print(error_msg)}
 
 # 08 Plots
 source("Functions/Plots_Pv.R")
@@ -73,3 +73,6 @@ escape_plot / eaten_sp_plot / fished_plot + plot_layout(axis_titles = "collect",
 
 # check colorblind grid:
 cvd_grid(eaten_sp_plot)
+
+plot_probs
+plot_x

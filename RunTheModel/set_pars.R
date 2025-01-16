@@ -35,9 +35,9 @@ steepness_x_sl_val <- 1.25
 shift_x_sl_val <- 100
 
 # specialist x parameters
-asymp_left_x_spec_val <- 0.0001
+asymp_left_x_spec_val <- 0.1
 asymp_right_x_spec_val <- 1
-steepness_x_spec_val <- 1.25
+steepness_x_spec_val <- 1.5
 shift_x_spec_val <- 100
 
 # non-specialist y parameters
@@ -66,6 +66,7 @@ step <- 1
 decay <- 1
 
 # social learning parameters
+num_haulouts <- 2
 mean <- 0.5 # of the beta dist
 beta <- 15 # spread of the beta dist
 

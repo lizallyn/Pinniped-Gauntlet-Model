@@ -90,10 +90,10 @@ for(t in 1:(days - 1)) {
   num_harvesters <- sample(min_harvesters:max_harvesters, 1)
   H[t] <- getHarvested(day_plan = harvest_plan_pv[t], list_gauntlet_seals = seals_at_gauntlet, 
                        num_fishers = num_harvesters, zone_efficiency = zone_efficiency, zone_steepness = zone_steepness, 
-                       efficiency = efficiency, steepness = steepness)
+                       efficiency = efficiency, steepness = steepness_H)
   H_zc[t] <- getHarvested(day_plan = harvest_plan_zc[t], list_gauntlet_seals = zc_at_gauntlet, 
                           num_fishers = num_harvesters, zone_efficiency = zone_efficiency, zone_steepness = zone_steepness,
-                          efficiency = efficiency, steepness = steepness)
+                          efficiency = efficiency, steepness = steepness_H)
   
   if(H[t] > 0){
     killed <- sample(seals_at_gauntlet, H[t])
@@ -110,18 +110,20 @@ for(t in 1:(days - 1)) {
   # seals
   
   for(seal in 1:num_seals){
-    bundle_y_shape_pars <- tibble(buffer = buffer_Pymin[seal],
-                                  steepness = steepness, threshold = threshold[seal])
+    # bundle_y_shape_pars <- tibble(buffer = buffer_Pymin[seal],
+    #                               steepness = steepness, threshold = threshold[seal])
     
     update_output <- updateLearning(salmon_consumed = salmon_consumed_pv[seal, t], 
                                     w = w, hunting = H[t],
                                     x_t = x[seal, t], y_t = y[seal, t],
+                                    step = step, decay = decay,
                                     forage_loc = seal_forage_loc[seal, t], x_pars = x_pars,
                                     y_pars = y_pars, dead = seal %in% kill_list,
                                     baseline_x = base_x, baseline_y = base_y,
                                     specialist = seal %in% specialist_seals, 
                                     bundle_x = bundle_x, 
                                     bundle_x_spec = bundle_x_spec, 
+                                    bundle_y = bundle_y,
                                     bundle_y_spec = bundle_y_spec)
     
     x[seal, t+1] <- as.numeric(update_output["x_t1"])
@@ -148,14 +150,15 @@ for(t in 1:(days - 1)) {
     update_output <- updateLearning(salmon_consumed = salmon_consumed_zc[csl, t], 
                                     w = w_sealion, hunting = H_zc[t],
                                     x_t = x_zc[csl, t], y_t = y_zc[csl, t],
+                                    step = step, decay = decay,
                                     forage_loc = zc_forage_loc[csl, t], x_pars = x_pars,
                                     y_pars = y_pars, dead = csl %in% kill_list_zc,
                                     baseline_x = base_x, baseline_y = base_y,
                                     specialist = seal %in% specialist_zc, 
-                                    bundle_x = bundle_x_sl, 
-                                    bundle_x_spec = bundle_x_spec, 
-                                    bundle_y = bundle_y_sl,
-                                    bundle_y_spec = bundle_y_spec)
+                                    bundle_x = bundle_x, 
+                                    bundle_x_spec = bundle_x_sl, 
+                                    bundle_y = bundle_y,
+                                    bundle_y_spec = bundle_y_sl)
     x_zc[csl, t+1] <- as.numeric(update_output["x_t1"])
     y_zc[csl, t+1] <- as.numeric(update_output["y_t1"])
     P_x_zc[csl, t+1] <- as.numeric(update_output["P_x"])

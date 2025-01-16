@@ -15,11 +15,11 @@ library(dplyr)
 run_info <- read.csv("Data/salmon_run_info.csv")
 
 # 2 Runs
-# run_info <- run_info[1:2,]
+run_info <- run_info[1:2,]
 # 3 Runs
 # run_info <- run_info[1:3,]
 # 4 Runs
-run_info <- run_info[1:4,]
+# run_info <- run_info[1:4,]
 
 # sd: # days that encompass 60% of the run peak / 2
 run_info$Escape <- 1/run_info$Residence

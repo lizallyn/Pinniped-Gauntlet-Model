@@ -7,8 +7,6 @@ oneDzeroes <- makeArray(days, start.val = 0, names = "Day")
 
 ### Bundle Consumption Parameters ----
 
-num_pinn_sp <- length(which(c(num_seals, num_zc, num_ej) > 0))
-
 consumption_pars <- data.frame(matrix(data = NA, nrow = 3, ncol = 6))
 colnames(consumption_pars) <- c("Species", "N", "Cmax", "alpha", "gamma", "Y")
 consumption_pars$Species <- c("Pv", "Ej", "Zc")
@@ -34,7 +32,7 @@ if(num_seals > 0) {
   twoDzeroes <- makeArray(c(num_seals, days), start.val = 0, names = c("Seal", "Day"))
   
   num_specialists <- round(num_seals * prop_specialists)
-  num_seals_2_copy <- num_seals/2 
+  num_seals_2_copy <- num_seals/num_haulouts
   salmon_consumed_pv <- twoDzeroes
   seal_prob_gauntlet <- twoDzeroes
   seal_forage_loc <- twoDzeroes
@@ -46,15 +44,15 @@ if(num_seals > 0) {
     specialist_seals <- sample(1:num_seals, num_specialists)
   }
   
-  baseline_x <- makeArray(num_seals, start.val = baseline_x_val, names = "Seal")
-  baseline_y <- makeArray(num_seals, start.val = baseline_y_val, names = "Seal")
-  baseline_y[specialist_seals] <- specialist_baseline_y
-  
-  buffer_Pymin <- makeArray(num_seals, start.val = buffer_Pymin_val, names = "Seal")
-  buffer_Pymin[specialist_seals] <- buffer_Pymin_specialist
-  
-  threshold <- makeArray(num_seals, start.val = threshold_val, names = "Seal")
-  threshold[specialist_seals] <- threshold_specialist
+  # baseline_x <- makeArray(num_seals, start.val = baseline_x_val, names = "Seal")
+  # baseline_y <- makeArray(num_seals, start.val = baseline_y_val, names = "Seal")
+  # baseline_y[specialist_seals] <- specialist_baseline_y
+  # 
+  # buffer_Pymin <- makeArray(num_seals, start.val = buffer_Pymin_val, names = "Seal")
+  # buffer_Pymin[specialist_seals] <- buffer_Pymin_specialist
+  # 
+  # threshold <- makeArray(num_seals, start.val = threshold_val, names = "Seal")
+  # threshold[specialist_seals] <- threshold_specialist
   
   x <- twoDzeroes
   y <- twoDzeroes
@@ -92,9 +90,9 @@ if(num_zc > 0) {
     specialist_zc <- sample(1:num_zc, num_specialist_zc)
   }
   
-  baseline_x_zc <- makeArray(num_zc, start.val = baseline_x_val, names = "Seal")
-  baseline_y_zc <- makeArray(num_zc, start.val = baseline_y_val, names = "Seal")
-  baseline_y_zc[specialist_zc] <- specialist_baseline_y
+  # baseline_x_zc <- makeArray(num_zc, start.val = baseline_x_val, names = "Seal")
+  # baseline_y_zc <- makeArray(num_zc, start.val = baseline_y_val, names = "Seal")
+  # baseline_y_zc[specialist_zc] <- specialist_baseline_y
   
   x_zc <- twoDzeroes_zc
   y_zc <- twoDzeroes_zc
