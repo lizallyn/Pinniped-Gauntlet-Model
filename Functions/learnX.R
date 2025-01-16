@@ -1,10 +1,11 @@
 # function for calculating d_x
 
-learnX <- function(food, x_t, step, decay, x_pars, forage_loc, bundle_dx_pars, 
+learnX <- function(food, x_t, step, decay, x_pars, forage_loc,
                    dead, baseline) {
 
-  xmin <- x_pars["xmin"]
-  xmax <- x_pars["xmax"]
+  xmin <- as.numeric(x_pars["xmin"])
+  xmax <- as.numeric(x_pars["xmax"])
+  
   
   if(dead == TRUE){
     d_x <- NA
@@ -13,16 +14,19 @@ learnX <- function(food, x_t, step, decay, x_pars, forage_loc, bundle_dx_pars,
       if(x_t == baseline){
         d_x <- 0
       } else {
-        d_x <- decay * (baseline - x_t)
+        d_x <- max(-decay, (baseline - x_t))
       }
     } else {
       if(food > 0){
-        d_x <- step * (xmax - x_t)
-      } else {
-        d_x <- step * (xmin - x_t)
+        d_x <- min(step, (xmax - x_t))
+      } else  if(food <= 0){
+        d_x <- max(-step, (xmin - x_t))
       }
     }
   }
   
   return(as.numeric(d_x))
 }
+
+# learnX(food = 1, x_t = 1, step = step, decay = decay, x_pars = x_pars,
+#        forage_loc = 1, dead = F, baseline = 0)

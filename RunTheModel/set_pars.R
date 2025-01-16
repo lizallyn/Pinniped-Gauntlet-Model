@@ -30,6 +30,9 @@ shift_x_val <- 200
 
 # sea lion x parameters
 asymp_left_x_sl_val <- 0.25
+asymp_right_x_sl_val <- 1
+steepness_x_sl_val <- 1.25
+shift_x_sl_val <- 100
 
 # specialist x parameters
 asymp_left_x_spec_val <- 0.0001
@@ -43,6 +46,12 @@ asymp_right_y_val <- 0
 steepness_y_val <- 2
 shift_y_val <- 75
 
+# sea lion y parameters
+asymp_left_y_sl_val <- 1
+asymp_right_y_sl_val <- 0
+steepness_y_sl_val <- 2
+shift_y_sl_val <- 10000
+
 # specialist y parameters
 asymp_left_y_spec_val <- 1
 asymp_right_y_spec_val <- 0
@@ -53,8 +62,8 @@ shift_y_spec_val <- 500
 specialist_prob <- 0.5
 w <- 6
 w_sealion <- 10
-step <- 0.5
-decay <- 0.5
+step <- 1
+decay <- 1
 
 # social learning parameters
 mean <- 0.5 # of the beta dist

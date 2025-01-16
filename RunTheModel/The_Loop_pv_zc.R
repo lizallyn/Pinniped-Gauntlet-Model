@@ -113,13 +113,16 @@ for(t in 1:(days - 1)) {
     bundle_y_shape_pars <- tibble(buffer = buffer_Pymin[seal],
                                   steepness = steepness, threshold = threshold[seal])
     
-    update_output <- updateLearning(salmon_consumed = salmon_consumed_pv[seal, t], w = w, hunting = H[t],
+    update_output <- updateLearning(salmon_consumed = salmon_consumed_pv[seal, t], 
+                                    w = w, hunting = H[t],
                                     x_t = x[seal, t], y_t = y[seal, t],
-                                    forage_loc = seal_forage_loc[seal, t], bundle_dx_pars = bundle_dx_pars,
-                                    bundle_dy_pars = bundle_dy_pars, dead = seal %in% kill_list,
+                                    forage_loc = seal_forage_loc[seal, t], x_pars = x_pars,
+                                    y_pars = y_pars, dead = seal %in% kill_list,
                                     baseline_x = base_x, baseline_y = base_y,
-                                    specialist = seal %in% specialist_seals, bundle_x_shape_pars = bundle_x_shape_pars, 
-                                    bundle_x_linear_pars = bundle_x_linear_pars, bundle_y_shape_pars = bundle_y_shape_pars)
+                                    specialist = seal %in% specialist_seals, 
+                                    bundle_x = bundle_x, 
+                                    bundle_x_spec = bundle_x_spec, 
+                                    bundle_y_spec = bundle_y_spec)
     
     x[seal, t+1] <- as.numeric(update_output["x_t1"])
     y[seal, t+1] <- as.numeric(update_output["y_t1"])
@@ -142,14 +145,17 @@ for(t in 1:(days - 1)) {
   
   for(csl in 1:num_zc){
     
-    update_output <- updateLearning(salmon_consumed = salmon_consumed_zc[csl, t], w = w_sealion, hunting = H_zc[t],
+    update_output <- updateLearning(salmon_consumed = salmon_consumed_zc[csl, t], 
+                                    w = w_sealion, hunting = H_zc[t],
                                     x_t = x_zc[csl, t], y_t = y_zc[csl, t],
-                                    forage_loc = zc_forage_loc[csl, t], bundle_dx_pars = bundle_dx_pars,
-                                    bundle_dy_pars = bundle_dy_pars, dead = csl %in% kill_list_zc,
-                                    baseline_x = baseline_x_zc[csl], baseline_y = baseline_y_zc[csl],
-                                    specialist = seal %in% specialist_zc, bundle_x_shape_pars = bundle_x_shape_pars_sl, 
-                                    bundle_x_linear_pars = bundle_x_linear_pars, 
-                                    bundle_y_shape_pars = bundle_y_shape_pars_sl)
+                                    forage_loc = zc_forage_loc[csl, t], x_pars = x_pars,
+                                    y_pars = y_pars, dead = csl %in% kill_list_zc,
+                                    baseline_x = base_x, baseline_y = base_y,
+                                    specialist = seal %in% specialist_zc, 
+                                    bundle_x = bundle_x_sl, 
+                                    bundle_x_spec = bundle_x_spec, 
+                                    bundle_y = bundle_y_sl,
+                                    bundle_y_spec = bundle_y_spec)
     x_zc[csl, t+1] <- as.numeric(update_output["x_t1"])
     y_zc[csl, t+1] <- as.numeric(update_output["y_t1"])
     P_x_zc[csl, t+1] <- as.numeric(update_output["P_x"])

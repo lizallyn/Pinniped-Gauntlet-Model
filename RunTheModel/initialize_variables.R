@@ -171,5 +171,7 @@ bundle_y <- tibble(asymp_right = asymp_right_y_val, asymp_left = asymp_left_y_va
 bundle_y_spec <- tibble(asymp_right = asymp_right_y_spec_val, 
                         asymp_left = asymp_left_y_spec_val, 
                    shift = shift_y_spec_val, steepness = steepness_y_spec_val)
+bundle_y_sl <- tibble(asymp_right = asymp_right_y_sl_val, asymp_left = asymp_left_y_sl_val, 
+                   shift = shift_y_sl_val, steepness = steepness_y_sl_val)
 
 
