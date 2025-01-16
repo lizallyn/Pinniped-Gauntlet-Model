@@ -63,7 +63,7 @@ specialist_prob <- 0.5
 w <- 6
 w_sealion <- 10
 step <- 1
-decay <- 1
+decay <- 0
 
 # social learning parameters
 num_haulouts <- 2
