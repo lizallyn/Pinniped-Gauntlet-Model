@@ -29,7 +29,7 @@ threshold_specialist <- -10
 
 # steepness_x_specialist <- 0.1
 threshold_x_specialist <- 0.1
-step <- 0.5
+step <- 0.2
 decay <- 0.5
 buffer_Pymin_val <- 0
 buffer_Pymin_specialist <- 0.5

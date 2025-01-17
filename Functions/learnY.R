@@ -18,9 +18,11 @@ learnY <- function(hunting, y_t, step, decay, y_pars, forage_loc,
       }
     } else {
       if(hunting == 0) {
-        d_y <- max(-step, (ymin - y_t))
+        lambda <- absence
+        d_y <- step * (lambda - y_t)
       } else if(hunting > 0){
-        d_y <- min(step, (ymax - y_t))
+        lambda <- presence
+        d_y <- step * (lambda - y_t)
       }
     }
   }
