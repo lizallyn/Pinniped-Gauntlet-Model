@@ -64,6 +64,8 @@ w <- 6
 w_sealion <- 10
 step <- 1
 decay <- 0
+presence <- 10
+absence <- 0
 
 # social learning parameters
 num_haulouts <- 2
