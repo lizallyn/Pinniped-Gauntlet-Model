@@ -94,13 +94,15 @@ for(t in 1:(days - 1)) {
   H_zc[t] <- getHarvested(day_plan = harvest_plan_zc[t], list_gauntlet_seals = zc_at_gauntlet, 
                           num_fishers = num_harvesters, zone_efficiency = zone_efficiency, zone_steepness = zone_steepness,
                           efficiency = efficiency, steepness = steepness_H)
-  
+  hunt <- 0
   if(H[t] > 0){
+    hunt = 1
     killed <- sample(seals_at_gauntlet, H[t])
     kill_list <- c(kill_list, killed)
   }
-  
+  hunt_zc <- 0
   if(H_zc[t] > 0){
+    hunt_zc <- 1
     killed <- sample(zc_at_gauntlet, H_zc[t])
     kill_list_zc <- c(kill_list_zc, killed)
   }
@@ -114,12 +116,14 @@ for(t in 1:(days - 1)) {
     #                               steepness = steepness, threshold = threshold[seal])
     
     update_output <- updateLearning(salmon_consumed = salmon_consumed_pv[seal, t], 
-                                    w = w, hunting = H[t],
-                                    x_t = x[seal, t], y_t = y[seal, t],
+                                    boats = boats[t], rho = rho, learn_rate = learn_rate,
+                                    w = w, hunting = hunt,
+                                    x_t = x[seal, t], x_pars = x_pars,
                                     step = step, decay = decay,
-                                    forage_loc = seal_forage_loc[seal, t], x_pars = x_pars,
-                                    y_pars = y_pars, dead = seal %in% kill_list,
-                                    baseline_x = base_x, baseline_y = base_y,
+                                    forage_loc = seal_forage_loc[seal, t], 
+                                    dead = seal %in% kill_list,
+                                    baseline_x = base_x, w1 = risk_boat_pv[seal, t],
+                                    w2 = risk_hunt_pv[seal, t], w3 = risk_g_pv[seal, t],
                                     specialist = seal %in% specialist_seals, 
                                     bundle_x = bundle_x, 
                                     bundle_x_spec = bundle_x_spec, 
@@ -130,6 +134,9 @@ for(t in 1:(days - 1)) {
     y[seal, t+1] <- as.numeric(update_output["y_t1"])
     P_x[seal, t+1] <- as.numeric(update_output["P_x"])
     P_y[seal, t+1] <- as.numeric(update_output["P_y"])
+    risk_boat_pv[seal, t+1] <- as.numeric(update_output["w1"])
+    risk_hunt_pv[seal, t+1] <- as.numeric(update_output["w2"])
+    risk_g_pv[seal, t+1] <- as.numeric(update_output["w3"])
     seal_prob_gauntlet[seal, t+1] <- P_x[seal, t+1] * P_y[seal, t+1]
     
     if(seal %in% kill_list){

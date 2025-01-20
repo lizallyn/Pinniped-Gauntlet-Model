@@ -66,6 +66,8 @@ step <- 1
 decay <- 0
 presence <- 10
 absence <- 0
+rho <- 0.1
+learn_rate <- 0.15
 
 # social learning parameters
 num_haulouts <- 2

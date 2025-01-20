@@ -24,6 +24,7 @@ consumed_total <- rep(0, n_days)
 
 min_harvesters <- min_fishers
 max_harvesters <- max_fishers
+boats <- oneDzeroes
 
 ### Seals ----
 
@@ -44,16 +45,6 @@ if(num_seals > 0) {
     specialist_seals <- sample(1:num_seals, num_specialists)
   }
   
-  # baseline_x <- makeArray(num_seals, start.val = baseline_x_val, names = "Seal")
-  # baseline_y <- makeArray(num_seals, start.val = baseline_y_val, names = "Seal")
-  # baseline_y[specialist_seals] <- specialist_baseline_y
-  # 
-  # buffer_Pymin <- makeArray(num_seals, start.val = buffer_Pymin_val, names = "Seal")
-  # buffer_Pymin[specialist_seals] <- buffer_Pymin_specialist
-  # 
-  # threshold <- makeArray(num_seals, start.val = threshold_val, names = "Seal")
-  # threshold[specialist_seals] <- threshold_specialist
-  
   x <- twoDzeroes
   y <- twoDzeroes
   C <- twoDzeroes
@@ -61,10 +52,18 @@ if(num_seals > 0) {
   P_y <- twoDzeroes
   P_social <- twoDzeroes
   
+  #for learnY R-W&P
+  risk_boat_pv <- twoDzeroes
+  risk_hunt_pv <- twoDzeroes
+  risk_g_pv <- twoDzeroes
+  pred_risk_pv <- twoDzeroes
+  
   harvest_days_pv <- harvest_open:harvest_close
+  harvest_days_pv <- harvest_days_pv[which(harvest_days_pv %in% 1:days)]
   harvest_plan_pv <- createHarvestPlan(scenario = scenario, 
                                        harvest_days = harvest_days_pv,
                                        empty.array = oneDzeroes)
+  boats[which(harvest_plan_pv == scenario)] <- 1
   kill_list <- list()
   H <- oneDzeroes
   
@@ -90,10 +89,6 @@ if(num_zc > 0) {
     specialist_zc <- sample(1:num_zc, num_specialist_zc)
   }
   
-  # baseline_x_zc <- makeArray(num_zc, start.val = baseline_x_val, names = "Seal")
-  # baseline_y_zc <- makeArray(num_zc, start.val = baseline_y_val, names = "Seal")
-  # baseline_y_zc[specialist_zc] <- specialist_baseline_y
-  
   x_zc <- twoDzeroes_zc
   y_zc <- twoDzeroes_zc
   C_zc <- twoDzeroes_zc
@@ -101,10 +96,18 @@ if(num_zc > 0) {
   P_y_zc <- twoDzeroes_zc
   P_social_zc <- twoDzeroes_zc
   
+  #for learnY R-W&P
+  risk_boat_zc <- twoDzeroes_zc
+  risk_hunt_zc <- twoDzeroes_zc
+  risk_g_zc <- twoDzeroes_zc
+  pred_risk_zc <- twoDzeroes_zc
+  
   harvest_days_zc <- harvest_open:harvest_close
+  harvest_days_zc <- harvest_days_zc[which(harvest_days_zc %in% 1:days)]
   harvest_plan_zc <- createHarvestPlan(scenario = scenario_sealion, 
                                        harvest_days = harvest_days_zc,
                                        empty.array = oneDzeroes)
+  boats[which(harvest_plan_zc == scenario_sealion)] <- 1
   kill_list_zc <- list()
   H_zc <- oneDzeroes
   
@@ -131,30 +134,28 @@ if(num_ej > 0){
   P_y_ej <- twoDzeroes_ej
   P_social_ej <- twoDzeroes_ej
   
+  #for learnY R-W&P
+  risk_boat_ej <- twoDzeroes_ej
+  risk_hunt_ej <- twoDzeroes_ej
+  risk_g_ej <- twoDzeroes_ej
+  pred_risk_ej <- twoDzeroes_ej
+  
   harvest_days_ej <- harvest_open:harvest_close
+  harvest_days_ej <- harvest_days_ej[which(harvest_days_ej %in% 1:days)]
   harvest_plan_ej <- createHarvestPlan(scenario = scenario_sealion, 
                                        harvest_days = harvest_days_ej,
                                        empty.array = oneDzeroes)
+  boats[which(harvest_plan_ej == scenario_sealion)] <- 1
   kill_list_ej <- list()
   H_ej <- oneDzeroes
   
   no_ej <- FALSE
 } else {no_ej <- TRUE}
 
-
 ### X and Y Shape Parameter Bundles ----
 
 x_pars <- tibble(xmin = xmin, xmax = xmax)
 y_pars <- tibble(ymin = ymin, ymax = ymax)
-
-# bundle_x_shape_pars <- tibble(buffer = buffer_Pxmin_specialist, steepness = steepness, 
-#                               threshold = threshold_x_specialist)
-# bundle_x_linear_pars <- tibble(slope = slope_x_val, intercept = intercept_x_val)
-# 
-# bundle_x_shape_pars_sl <- tibble(buffer = buffer_Pxmin_specialist, steepness = steepness, 
-#                                  threshold = threshold_x_specialist)
-# bundle_y_shape_pars_sl <- tibble(buffer = buffer_Pymin_specialist, steepness = steepness, 
-#                                  threshold = threshold_specialist)
 
 bundle_x <- tibble(asymp_right = asymp_right_x_val, asymp_left = asymp_left_x_val, 
                    shift = shift_x_val, steepness = steepness_x_val)
