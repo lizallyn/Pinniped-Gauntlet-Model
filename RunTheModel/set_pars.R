@@ -31,7 +31,7 @@ shift_x_val <- 100
 # sea lion x parameters
 asymp_left_x_sl_val <- 0.25
 asymp_right_x_sl_val <- 1
-steepness_x_sl_val <- 1.25
+steepness_x_sl_val <- 1.5
 shift_x_sl_val <- 100
 
 # specialist x parameters
