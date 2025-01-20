@@ -12,7 +12,10 @@ learnY <- function(hunting, boats, learn_rate, rho, forage_loc, w1, w2, w3,
   w3 <- as.numeric(w3)
   
   if(dead == TRUE){
-    d_y <- NA
+    y_hat <- NA
+    w1_1 <- NA
+    w2_1 <- NA
+    w3_1 <- NA
   } else {
     y_hat <- max((x3*x1*w1 + x3*x2*w2 + x3*w3), 0)
     w1_1 <- w1 + x3*learn_rate * x1 * (y - y_hat)

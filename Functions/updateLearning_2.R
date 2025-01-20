@@ -41,10 +41,10 @@ updateLearning <- function(salmon_consumed, w, hunting, boats, x_t, step, decay,
 #              specialist = seal %in% specialist_seals, bundle_x_shape_pars,
 #              bundle_x_linear_pars, bundle_y_shape_pars)
 
-updateLearning(salmon_consumed = 10, boats = 1, w = w, hunting = 0, rho = rho, learn_rate = learn_rate,
-               x_t = 4, forage_loc = 1, step = step, decay = decay,
-               x_pars = x_pars, dead = F, specialist = F, w2 = 0.3, w1 = 0.2,
-               baseline_x = base_x, bundle_x = bundle_x, w3 = 0.3,
-               bundle_y = bundle_y, bundle_x_spec = bundle_x_spec,
-               bundle_y_spec = bundle_y_spec)
+# updateLearning(salmon_consumed = 10, boats = 1, w = w, hunting = 0, rho = rho, learn_rate = learn_rate,
+#                x_t = 4, forage_loc = 1, step = step, decay = decay,
+#                x_pars = x_pars, dead = F, specialist = F, w2 = 0.3, w1 = 0.2,
+#                baseline_x = base_x, bundle_x = bundle_x, w3 = 0.3,
+#                bundle_y = bundle_y, bundle_x_spec = bundle_x_spec,
+#                bundle_y_spec = bundle_y_spec)
 

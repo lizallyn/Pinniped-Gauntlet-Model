@@ -96,7 +96,7 @@ for(t in 1:(days - 1)) {
                           efficiency = efficiency, steepness = steepness_H)
   hunt <- 0
   if(H[t] > 0){
-    hunt = 1
+    hunt <- 1
     killed <- sample(seals_at_gauntlet, H[t])
     kill_list <- c(kill_list, killed)
   }
@@ -116,7 +116,7 @@ for(t in 1:(days - 1)) {
     #                               steepness = steepness, threshold = threshold[seal])
     
     update_output <- updateLearning(salmon_consumed = salmon_consumed_pv[seal, t], 
-                                    boats = boats[t], rho = rho, learn_rate = learn_rate,
+                                    boats = boat_days[t], rho = rho, learn_rate = learn_rate,
                                     w = w, hunting = hunt,
                                     x_t = x[seal, t], x_pars = x_pars,
                                     step = step, decay = decay,
@@ -155,21 +155,27 @@ for(t in 1:(days - 1)) {
   for(csl in 1:num_zc){
     
     update_output <- updateLearning(salmon_consumed = salmon_consumed_zc[csl, t], 
-                                    w = w_sealion, hunting = H_zc[t],
-                                    x_t = x_zc[csl, t], y_t = y_zc[csl, t],
-                                    step = step, decay = decay,
+                                    w = w_sealion, hunting = hunt, boats = boat_days[t],
+                                    x_t = x_zc[csl, t], rho = rho, 
+                                    step = step, decay = decay, learn_rate = learn_rate,
                                     forage_loc = zc_forage_loc[csl, t], x_pars = x_pars,
-                                    y_pars = y_pars, dead = csl %in% kill_list_zc,
-                                    baseline_x = base_x, baseline_y = base_y,
-                                    specialist = seal %in% specialist_zc, 
+                                    dead = csl %in% kill_list_zc,
+                                    w1 = risk_boat_zc[csl, t],
+                                    w2 = risk_hunt_zc[csl, t], w3 = risk_g_zc[csl, t],
+                                    baseline_x = base_x,
+                                    specialist = csl %in% specialist_zc, 
                                     bundle_x = bundle_x, 
                                     bundle_x_spec = bundle_x_sl, 
                                     bundle_y = bundle_y,
                                     bundle_y_spec = bundle_y_sl)
+
     x_zc[csl, t+1] <- as.numeric(update_output["x_t1"])
     y_zc[csl, t+1] <- as.numeric(update_output["y_t1"])
     P_x_zc[csl, t+1] <- as.numeric(update_output["P_x"])
     P_y_zc[csl, t+1] <- as.numeric(update_output["P_y"])
+    risk_boat_zc[csl, t+1] <- as.numeric(update_output["w1"])
+    risk_hunt_zc[csl, t+1] <- as.numeric(update_output["w2"])
+    risk_g_zc[csl, t+1] <- as.numeric(update_output["w3"])
     zc_prob_gauntlet[csl, t+1] <- P_x_zc[csl, t+1] * P_y_zc[csl, t+1]
     
     if(csl %in% kill_list_zc){

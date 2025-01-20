@@ -16,7 +16,7 @@ consumption_pars$Species <- c("Pv", "Ej", "Zc")
 empty_salmon_df <- data.frame(matrix(data = 0, nrow = n_days, ncol = ncol(salmon_arrival), dimnames = dimnames(salmon_arrival)))
 empty_salmon_df$Day <- salmon_arrival$Day
 
-salmon_list <- empty_salmon_df
+salmon_list <- empty_salmon_df[-n_days,] # this ends up needing to be in loopdays
 escape_salmon <- empty_salmon_df
 fished_salmon <- empty_salmon_df
 eaten_salmon <- empty_salmon_df
@@ -24,7 +24,6 @@ consumed_total <- rep(0, n_days)
 
 min_harvesters <- min_fishers
 max_harvesters <- max_fishers
-boats <- oneDzeroes
 
 ### Seals ----
 
@@ -63,7 +62,7 @@ if(num_seals > 0) {
   harvest_plan_pv <- createHarvestPlan(scenario = scenario, 
                                        harvest_days = harvest_days_pv,
                                        empty.array = oneDzeroes)
-  boats[which(harvest_plan_pv == scenario)] <- 1
+  boat_days[which(harvest_plan_pv == scenario)] <- 1
   kill_list <- list()
   H <- oneDzeroes
   
@@ -107,7 +106,7 @@ if(num_zc > 0) {
   harvest_plan_zc <- createHarvestPlan(scenario = scenario_sealion, 
                                        harvest_days = harvest_days_zc,
                                        empty.array = oneDzeroes)
-  boats[which(harvest_plan_zc == scenario_sealion)] <- 1
+  boat_days[which(harvest_plan_zc == scenario_sealion)] <- 1
   kill_list_zc <- list()
   H_zc <- oneDzeroes
   
@@ -145,7 +144,7 @@ if(num_ej > 0){
   harvest_plan_ej <- createHarvestPlan(scenario = scenario_sealion, 
                                        harvest_days = harvest_days_ej,
                                        empty.array = oneDzeroes)
-  boats[which(harvest_plan_ej == scenario_sealion)] <- 1
+  boat_days[which(harvest_plan_ej == scenario_sealion)] <- 1
   kill_list_ej <- list()
   H_ej <- oneDzeroes
   

@@ -147,7 +147,7 @@ for(t in 1:(days - 1)) {
                                     forage_loc = zc_forage_loc[csl, t], bundle_dx_pars = bundle_dx_pars,
                                     bundle_dy_pars = bundle_dy_pars, dead = csl %in% kill_list_zc,
                                     baseline_x = baseline_x_zc[csl], baseline_y = baseline_y_zc[csl],
-                                    specialist = seal %in% specialist_zc, bundle_x_shape_pars = bundle_x_shape_pars_sl, 
+                                    specialist = csl %in% specialist_zc, bundle_x_shape_pars = bundle_x_shape_pars_sl, 
                                     bundle_x_linear_pars = bundle_x_linear_pars, 
                                     bundle_y_shape_pars = bundle_y_shape_pars_sl)
     x_zc[csl, t+1] <- as.numeric(update_output["x_t1"])

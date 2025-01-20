@@ -31,7 +31,7 @@ source("Functions/learnX.R")
 source("Functions/learnY_2.R")
 source("Functions/type3FuncRes.R")
 source("Functions/linearFuncRes.R")
-source("Functions/updateLearning.R")
+source("Functions/updateLearning_2.R")
 source("Functions/makePlots.R")
 
 # 07 Run The Loop
@@ -76,3 +76,4 @@ escape_plot / eaten_sp_plot / fished_plot + plot_layout(axis_titles = "collect",
 
 plot_probs
 plot_x
+plot_y

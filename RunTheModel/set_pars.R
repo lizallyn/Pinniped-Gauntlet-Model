@@ -81,9 +81,9 @@ natural_mort <- 0.0005
 
 zone_efficiency <- NA
 zone_steepness <- NA
-steepness_H <- 20 # how quick does it saturate (higher = slower)
-availability <- 0.1 # prop of seals spatially overlapping with fishers
-accuracy <- 0.1 # prop harvested of encountered
+steepness_H <- 5 # how quick does it saturate (higher = slower)
+availability <- 0.9 # prop of seals spatially overlapping with fishers
+accuracy <- 0.9 # prop harvested of encountered
 efficiency <- availability * accuracy # what prop of total seals do they take
 
 scenario <- "Boat"

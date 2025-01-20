@@ -40,6 +40,9 @@ data_end <- max(salmon_arrival$Day)
 
 #### Fishery Catch Rates ----
 
+# for learning cues
+boat_days <- array(dim = n_days, data = 0)
+
 salmon_catch_rates <- data.frame(matrix(data = 0, nrow = n_days, ncol = ncol(salmon_arrival), dimnames = dimnames(salmon_arrival)))
 colnames(salmon_catch_rates) <- colnames(salmon_arrival)
 salmon_catch_rates$Day <- salmon_arrival$Day
@@ -47,14 +50,18 @@ for(i in 1:nrow(run_info)){
   if(run_info$Fish_Rate[i] > 0){
     fishery_dates <- (run_info$Fishery_Open[i]:run_info$Fishery_Close[i]) - (data_start-1)
     salmon_catch_rates[fishery_dates, i+1] <- run_info$Fish_Rate[i]
+    boat_days[fishery_dates] <- 1
   }
 }
 
-#### Harvest ----
+
+#### Pinniped Harvest ----
 
 # yday not loop day
-harvest_open <- 110 - (data_start-1)
-harvest_close <- 140 - (data_start-1)
+harvest_open <- 65 - (data_start - 1)
+harvest_close <- 105 - (data_start - 1)
 
 min_fishers <- 13
 max_fishers <- 25
+
+
