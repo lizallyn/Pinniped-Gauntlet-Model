@@ -14,7 +14,7 @@ list_of_pinns <- colnames(pinnipeds[which(pinnipeds > 0)])
 num_haulouts <- 2 # for Pv
 
 ## Specialist Behavior Prevalence
-prop_specialists <- 0.025
+prop_specialists <- 1
 num_specialist_zc <- num_zc
 
 ## Seasonality

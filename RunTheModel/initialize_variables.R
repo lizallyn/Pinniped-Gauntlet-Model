@@ -48,7 +48,7 @@ if(num_seals > 0) {
   y <- twoDzeroes
   C <- twoDzeroes
   P_x <- twoDzeroes
-  P_y <- twoDzeroes
+  P_y <- makeArray(c(num_seals, days), start.val = 1, names = c("Seal", "Day"))
   P_social <- twoDzeroes
   
   #for learnY R-W&P
@@ -92,7 +92,7 @@ if(num_zc > 0) {
   y_zc <- twoDzeroes_zc
   C_zc <- twoDzeroes_zc
   P_x_zc <- twoDzeroes_zc
-  P_y_zc <- twoDzeroes_zc
+  P_y_zc <- makeArray(c(num_zc, days), start.val = 1, names = c("CSL", "Day"))
   P_social_zc <- twoDzeroes_zc
   
   #for learnY R-W&P
@@ -130,7 +130,7 @@ if(num_ej > 0){
   y_ej <- twoDzeroes_ej
   C_ej <- twoDzeroes_ej
   P_x_ej <- twoDzeroes_ej
-  P_y_ej <- twoDzeroes_ej
+  P_y_ej <- makeArray(c(num_ej, days), start.val = 1, names = c("SSL", "Day"))
   P_social_ej <- twoDzeroes_ej
   
   #for learnY R-W&P

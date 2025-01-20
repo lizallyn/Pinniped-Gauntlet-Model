@@ -26,7 +26,7 @@ ymax <- 10
 asymp_left_x_val <- 0
 asymp_right_x_val <- 1
 steepness_x_val <- 0.75
-shift_x_val <- 150
+shift_x_val <- 100
 
 # sea lion x parameters
 asymp_left_x_sl_val <- 0.25
@@ -62,8 +62,8 @@ shift_y_spec_val <- 500
 specialist_prob <- 0.5
 w <- 6
 w_sealion <- 10
-step <- 1
-decay <- 0
+step <- 0.15
+decay <- 0.1
 presence <- 10
 absence <- 0
 rho <- 0.1
@@ -83,7 +83,7 @@ zone_efficiency <- NA
 zone_steepness <- NA
 steepness_H <- 5 # how quick does it saturate (higher = slower)
 availability <- 0.9 # prop of seals spatially overlapping with fishers
-accuracy <- 0.9 # prop harvested of encountered
+accuracy <- 0.5 # prop harvested of encountered
 efficiency <- availability * accuracy # what prop of total seals do they take
 
 scenario <- "Boat"
