@@ -26,7 +26,7 @@ ymax <- 10
 asymp_left_x_val <- 0
 asymp_right_x_val <- 1
 steepness_x_val <- 0.75
-shift_x_val <- 200
+shift_x_val <- 150
 
 # sea lion x parameters
 asymp_left_x_sl_val <- 0.25
