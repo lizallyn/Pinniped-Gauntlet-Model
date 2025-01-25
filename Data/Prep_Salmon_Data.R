@@ -7,42 +7,46 @@ library(dplyr)
 # matrix with run information
 # can also upload .csv with same column names
 
-# from data.frame
-# run_info <- data.frame(Run = c("Run1", "Run2"), Peak_Date = c(150, 175),
-#                        sd = c(10, 5), Run_Size = c(10000, 1000), Residence = c(2, 9))
+# case.study <- "Base"
+# run_count <- 3
+case.study <- "N1"
+# case.study <- "B1"
 
-# from .csv
-run_info <- read.csv("Data/salmon_run_info.csv")
+if(case.study == "Base"){
+  run_info <- read.csv("Data/salmon_run_info.csv")
+  run_info <- run_info[1:run_count,]
+}
+if(case.study == "N1"){
+  run_info <- read.csv("Data/salmon_run_info_N.csv")
+}
+if(case.study == "B1"){
+  run_info <- read.csv("Data/salmon_run_info_B.csv")
+}
 
-# 2 Runs
-run_info <- run_info[1:2,]
-# 3 Runs
-# run_info <- run_info[1:3,]
-# 4 Runs
-# run_info <- run_info[1:4,]
 
 # sd: # days that encompass 60% of the run peak / 2
 run_info$Escape <- 1/run_info$Residence
 n_species <- nrow(run_info)
 
 # create arrival data frame
-salmon_arrival <- create_salmon_arrival(4, run_info)
+salmon_arrival <- create_salmon_arrival(3, run_info)
 colnames(salmon_arrival) <- c("Day", run_info$Run)
 n_days <- nrow(salmon_arrival)
 data_start <- salmon_arrival$Day[1]
 data_end <- max(salmon_arrival$Day)
 
-# test it out:
-# days <- test$Day[1]:max(test$Day)
-# plot(days, test[,2])
-# lines(days, test[,3])
-
+# # test it out:
+# days <- data_start:data_end
+# plot(days, salmon_arrival[,2])
+# lines(days, salmon_arrival[,4])
+# lines(days, salmon_arrival[,3])
 
 #### Fishery Catch Rates ----
 
 # for learning cues
 boat_days <- array(dim = n_days, data = 0)
 
+# create catch rates
 salmon_catch_rates <- data.frame(matrix(data = 0, nrow = n_days, ncol = ncol(salmon_arrival), dimnames = dimnames(salmon_arrival)))
 colnames(salmon_catch_rates) <- colnames(salmon_arrival)
 salmon_catch_rates$Day <- salmon_arrival$Day
