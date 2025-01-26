@@ -1,6 +1,7 @@
 # Script to create salmon arrival data
 library(tidyr)
 library(dplyr)
+library(anytime)
 
 #### Arrival Data ----
 
@@ -18,6 +19,9 @@ if(case.study == "Base"){
 }
 if(case.study == "N1"){
   run_info <- read.csv("Data/salmon_run_info_N.csv")
+  catch_info <- read.csv("Data/salmon_catch_info_N.csv")
+  catch_info$Day <- yday(anydate(catch_info$Dates))
+  catch_info$Day[which(catch_info$Day < catch_info$Day[1])] <- catch_info$Day[which(catch_info$Day < catch_info$Day[1])] + 366
 }
 if(case.study == "B1"){
   run_info <- read.csv("Data/salmon_run_info_B.csv")
@@ -50,7 +54,9 @@ boat_days <- array(dim = n_days, data = 0)
 salmon_catch_rates <- data.frame(matrix(data = 0, nrow = n_days, ncol = ncol(salmon_arrival), dimnames = dimnames(salmon_arrival)))
 colnames(salmon_catch_rates) <- colnames(salmon_arrival)
 salmon_catch_rates$Day <- salmon_arrival$Day
-for(i in 1:nrow(run_info)){
+
+
+for(i in 1:n_species){
   if(run_info$Fish_Rate[i] > 0){
     fishery_dates <- (run_info$Fishery_Open[i]:run_info$Fishery_Close[i]) - (data_start-1)
     salmon_catch_rates[fishery_dates, i+1] <- run_info$Fish_Rate[i]
