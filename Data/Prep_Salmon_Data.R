@@ -2,6 +2,7 @@
 library(tidyr)
 library(dplyr)
 library(anytime)
+library(lubridate)
 
 #### Arrival Data ----
 
@@ -10,19 +11,48 @@ library(anytime)
 
 # case.study <- "Base"
 # run_count <- 3
-case.study <- "N1"
+# case.study <- "N1"
 # case.study <- "B1"
 
+boat_days <- array(dim = n_days, data = 0)
+
+# Case Base
 if(case.study == "Base"){
   run_info <- read.csv("Data/salmon_run_info.csv")
   run_info <- run_info[1:run_count,]
+  
+  salmon_catch_rates <- data.frame(matrix(data = 0, nrow = n_days, ncol = ncol(salmon_arrival), dimnames = dimnames(salmon_arrival)))
+  colnames(salmon_catch_rates) <- colnames(salmon_arrival)
+  salmon_catch_rates$Day <- salmon_arrival$Day
+  
+  
+  for(i in 1:n_species){
+    if(run_info$Fish_Rate[i] > 0){
+      fishery_dates <- (run_info$Fishery_Open[i]:run_info$Fishery_Close[i]) - (data_start-1)
+      salmon_catch_rates[fishery_dates, i+1] <- run_info$Fish_Rate[i]
+      boat_days[fishery_dates] <- 1
+    }
+  }
+  
+  harvest_open <- 65 - (data_start - 1)
+  harvest_close <- 105 - (data_start - 1)
+  
+  min_fishers <- 13
+  max_fishers <- 25
+  
 }
+# Case N1
 if(case.study == "N1"){
   run_info <- read.csv("Data/salmon_run_info_N.csv")
   catch_info <- read.csv("Data/salmon_catch_info_N.csv")
   catch_info$Day <- yday(anydate(catch_info$Dates))
   catch_info$Day[which(catch_info$Day < catch_info$Day[1])] <- catch_info$Day[which(catch_info$Day < catch_info$Day[1])] + 366
+  catch_info$cum_catch <- catch_info[,2] + catch_info[,3] + catch_info[,4]
+  fishery_dates <- which(catch_info$cum_catch > 0) # loop days not doy
+  boat_days[fishery_dates] <- 1
+  
 }
+# Case B1
 if(case.study == "B1"){
   run_info <- read.csv("Data/salmon_run_info_B.csv")
 }
@@ -47,31 +77,30 @@ data_end <- max(salmon_arrival$Day)
 
 #### Fishery Catch Rates ----
 
-# for learning cues
-boat_days <- array(dim = n_days, data = 0)
+# # for learning cues
+# boat_days <- array(dim = n_days, data = 0)
+# 
+# # create catch rates
+# salmon_catch_rates <- data.frame(matrix(data = 0, nrow = n_days, ncol = ncol(salmon_arrival), dimnames = dimnames(salmon_arrival)))
+# colnames(salmon_catch_rates) <- colnames(salmon_arrival)
+# salmon_catch_rates$Day <- salmon_arrival$Day
+# 
+# 
+# for(i in 1:n_species){
+#   if(run_info$Fish_Rate[i] > 0){
+#     fishery_dates <- (run_info$Fishery_Open[i]:run_info$Fishery_Close[i]) - (data_start-1)
+#     salmon_catch_rates[fishery_dates, i+1] <- run_info$Fish_Rate[i]
+#     boat_days[fishery_dates] <- 1
+#   }
+# }
 
-# create catch rates
-salmon_catch_rates <- data.frame(matrix(data = 0, nrow = n_days, ncol = ncol(salmon_arrival), dimnames = dimnames(salmon_arrival)))
-colnames(salmon_catch_rates) <- colnames(salmon_arrival)
-salmon_catch_rates$Day <- salmon_arrival$Day
-
-
-for(i in 1:n_species){
-  if(run_info$Fish_Rate[i] > 0){
-    fishery_dates <- (run_info$Fishery_Open[i]:run_info$Fishery_Close[i]) - (data_start-1)
-    salmon_catch_rates[fishery_dates, i+1] <- run_info$Fish_Rate[i]
-    boat_days[fishery_dates] <- 1
-  }
-}
 
 
 #### Pinniped Harvest ----
 
 # yday not loop day
-harvest_open <- 65 - (data_start - 1)
-harvest_close <- 105 - (data_start - 1)
 
-min_fishers <- 13
-max_fishers <- 25
+
+
 
 
