@@ -83,7 +83,7 @@ if(case.study == "N1"){
   catch_info$Day[which(catch_info$Day < catch_info$Day[1])] <- catch_info$Day[which(catch_info$Day < catch_info$Day[1])] + 366 #wrap year
   fishery_dates <- which(catch_info[,2] + catch_info[,3] + catch_info[,4] > 0) # loop days not doy
   
-  salmon_catch_rates$Chum[which(catch_info$Chum > 0)] <- 0.05
+  salmon_catch_rates$Chum[which(catch_info$Chum > 0)] <- 0.1
   salmon_catch_rates$LocNis[which(catch_info$LocNis > 0)] <- 0.08
   salmon_catch_rates$GR[which(catch_info$GR > 0)] <- 0.07
   # salmon_catch_rates$Chum[which(salmon_catch_rates$Chum > 1)] <- 0.2

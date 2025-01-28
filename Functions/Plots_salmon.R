@@ -19,7 +19,7 @@ eaten_sp_plot <- makePlot_4(data = round(eaten_salmon), variable.name = "Run",
                           loop_days = F, start_loop = start_loop)
 gauntlet_plot <- makePlot_4(data = round(salmon_list), variable.name = "Run", 
                             value.name = "Daily Salmon at Gauntlet", colors = colors_salmon,
-                            loop_days = F, start_loop = start_loop)
+                            loop_days = T, start_loop = start_loop)
 fished_plot <- makePlot_4(data = round(fished_salmon), variable.name = "Run", 
                           value.name = "Daily Salmon Fished", colors = colors_salmon,
                           loop_days = F, start_loop = start_loop)
