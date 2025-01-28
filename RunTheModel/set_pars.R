@@ -60,7 +60,7 @@ shift_y_spec_val <- 500
 
 # individual learning parameters
 specialist_prob <- 0.5
-w <- 5
+w <- 4
 w_sealion <- 10
 step <- 0.15
 decay <- 0.1

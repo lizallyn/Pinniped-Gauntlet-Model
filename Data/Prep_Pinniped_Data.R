@@ -2,7 +2,7 @@
 # Dec 2024
 
 # Pinniped input
-num_seals <- 300
+num_seals <- 100
 num_zc <- 2
 num_ej <- 0
 pinnipeds <- data.frame(Pv = num_seals, Zc = num_zc, Ej = num_ej)
