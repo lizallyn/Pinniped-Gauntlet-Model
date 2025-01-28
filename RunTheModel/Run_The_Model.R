@@ -81,5 +81,7 @@ escape_plot / eaten_sp_plot / fished_plot + plot_layout(axis_titles = "collect",
 
 plot_probs
 plot_x
+plot_Px
 plot_y
 plot_Py
+length(kill_list)

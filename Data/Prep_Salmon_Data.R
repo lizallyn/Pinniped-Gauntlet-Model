@@ -66,7 +66,7 @@ if(case.study == "N1"){
   n_species <- nrow(run_info)
   
   # create arrival data frame
-  salmon_arrival <- create_salmon_arrival(3, run_info)
+  salmon_arrival <- create_salmon_arrival(5, run_info)
   colnames(salmon_arrival) <- c("Day", run_info$Run)
   n_days <- nrow(salmon_arrival)
   data_start <- salmon_arrival$Day[1]
@@ -83,16 +83,16 @@ if(case.study == "N1"){
   catch_info$Day[which(catch_info$Day < catch_info$Day[1])] <- catch_info$Day[which(catch_info$Day < catch_info$Day[1])] + 366 #wrap year
   fishery_dates <- which(catch_info[,2] + catch_info[,3] + catch_info[,4] > 0) # loop days not doy
   
-  salmon_catch_rates$Chum <- catch_info$Chum / (salmon_arrival$Chum * 0.75) # catches were too high
-  salmon_catch_rates$LocNis <- catch_info$LocNis / salmon_arrival$LocNis (salmon_arrival$Chum * 0.75)
-  salmon_catch_rates$GR <- catch_info$GR / salmon_arrival$GR (salmon_arrival$Chum * 0.75)
-  salmon_catch_rates$Chum[which(salmon_catch_rates$Chum > 1)] <- 0.2
-  salmon_catch_rates$LocNis[which(salmon_catch_rates$LocNis > 1)] <- 0.2
-  salmon_catch_rates$GR[which(salmon_catch_rates$GR > 1)] <- 0.2
-  salmon_catch_rates <- salmon_catch_rates %>% 
-    mutate(
-      across(everything(), ~replace_na(.x, 0))
-    )
+  salmon_catch_rates$Chum[which(catch_info$Chum > 0)] <- 0.025
+  salmon_catch_rates$LocNis[which(catch_info$LocNis > 0)] <- 0.05
+  salmon_catch_rates$GR[which(catch_info$GR > 0)] <- 0.08
+  # salmon_catch_rates$Chum[which(salmon_catch_rates$Chum > 1)] <- 0.2
+  # salmon_catch_rates$LocNis[which(salmon_catch_rates$LocNis > 1)] <- 0.2
+  # salmon_catch_rates$GR[which(salmon_catch_rates$GR > 1)] <- 0.2
+  # salmon_catch_rates <- salmon_catch_rates %>% 
+  #   mutate(
+  #     across(everything(), ~replace_na(.x, 0))
+  #   )
   
   # for learning cues
   boat_days <- array(dim = n_days, data = 0)

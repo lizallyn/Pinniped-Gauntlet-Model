@@ -60,7 +60,7 @@ shift_y_spec_val <- 500
 
 # individual learning parameters
 specialist_prob <- 0.5
-w <- 6
+w <- 5
 w_sealion <- 10
 step <- 0.15
 decay <- 0.1
@@ -82,7 +82,7 @@ natural_mort <- 0.0005
 zone_efficiency <- NA
 zone_steepness <- NA
 steepness_H <- 5 # how quick does it saturate (higher = slower)
-availability <- 0.9 # prop of seals spatially overlapping with fishers
+availability <- 0.5 # prop of seals spatially overlapping with fishers
 accuracy <- 0.5 # prop harvested of encountered
 efficiency <- availability * accuracy # what prop of total seals do they take
 
