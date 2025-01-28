@@ -74,7 +74,7 @@ plot_H #+ plot_H_ej + plot_H_zc
 salmon_catch
 salmon_escapement
 salmon_eaten
-escape_plot / eaten_sp_plot / fished_plot + plot_layout(axis_titles = "collect", guides = "collect")
+# escape_plot / eaten_sp_plot / fished_plot + plot_layout(axis_titles = "collect", guides = "collect")
 
 # check colorblind grid:
 # cvd_grid(eaten_sp_plot)
