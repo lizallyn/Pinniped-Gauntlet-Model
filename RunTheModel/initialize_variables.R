@@ -22,9 +22,6 @@ fished_salmon <- empty_salmon_df
 eaten_salmon <- empty_salmon_df
 consumed_total <- rep(0, n_days)
 
-min_harvesters <- min_fishers
-max_harvesters <- max_fishers
-
 ### Seals ----
 
 if(num_seals > 0) {
@@ -57,8 +54,8 @@ if(num_seals > 0) {
   risk_g_pv <- twoDzeroes
   pred_risk_pv <- twoDzeroes
   
-  harvest_days_pv <- harvest_open:harvest_close
-  harvest_days_pv <- harvest_days_pv[which(harvest_days_pv %in% 1:days)]
+  harvest_days_pv <- harvest_days
+  # harvest_days_pv <- harvest_days[which(harvest_days %in% 1:days)]
   harvest_plan_pv <- createHarvestPlan(scenario = scenario, 
                                        harvest_days = harvest_days_pv,
                                        empty.array = oneDzeroes)
@@ -101,8 +98,8 @@ if(num_zc > 0) {
   risk_g_zc <- twoDzeroes_zc
   pred_risk_zc <- twoDzeroes_zc
   
-  harvest_days_zc <- harvest_open:harvest_close
-  harvest_days_zc <- harvest_days_zc[which(harvest_days_zc %in% 1:days)]
+  harvest_days_zc <- harvest_days
+  # harvest_days_zc <- harvest_days_zc[which(harvest_days_zc %in% 1:days)]
   harvest_plan_zc <- createHarvestPlan(scenario = scenario_sealion, 
                                        harvest_days = harvest_days_zc,
                                        empty.array = oneDzeroes)
@@ -139,8 +136,8 @@ if(num_ej > 0){
   risk_g_ej <- twoDzeroes_ej
   pred_risk_ej <- twoDzeroes_ej
   
-  harvest_days_ej <- harvest_open:harvest_close
-  harvest_days_ej <- harvest_days_ej[which(harvest_days_ej %in% 1:days)]
+  harvest_days_ej <- harvest_days
+  # harvest_days_ej <- harvest_days_ej[which(harvest_days_ej %in% 1:days)]
   harvest_plan_ej <- createHarvestPlan(scenario = scenario_sealion, 
                                        harvest_days = harvest_days_ej,
                                        empty.array = oneDzeroes)

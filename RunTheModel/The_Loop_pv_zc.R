@@ -87,12 +87,12 @@ for(t in 1:(days - 1)) {
   }
   
   # seal harvest
-  num_harvesters <- sample(min_harvesters:max_harvesters, 1)
+  # num_harvesters <- sample(min_harvesters:max_harvesters, 1)
   H[t] <- getHarvested(day_plan = harvest_plan_pv[t], list_gauntlet_seals = seals_at_gauntlet, 
-                       num_fishers = num_harvesters, zone_efficiency = zone_efficiency, zone_steepness = zone_steepness, 
+                       num_fishers = num_harvesters[t], zone_efficiency = zone_efficiency, zone_steepness = zone_steepness, 
                        efficiency = efficiency, steepness = steepness_H)
   H_zc[t] <- getHarvested(day_plan = harvest_plan_zc[t], list_gauntlet_seals = zc_at_gauntlet, 
-                          num_fishers = num_harvesters, zone_efficiency = zone_efficiency, zone_steepness = zone_steepness,
+                          num_fishers = num_harvesters[t], zone_efficiency = zone_efficiency, zone_steepness = zone_steepness,
                           efficiency = efficiency, steepness = steepness_H)
   hunt <- 0
   if(H[t] > 0){
