@@ -24,3 +24,16 @@ type3FuncRes <- function(bundle_shape_pars, val){
 # val <- seq(0, 10, 1)
 # bundle_shape_pars <- data.frame(buffer = 0, steepness = 0.75, threshold = 200)
 # type3FuncRes(bundle_shape_pars, val)
+
+type3FuncRes <- function(bundle_shape_pars, val){
+  p <- bundle_shape_pars["asymp_left"]
+  u <- bundle_shape_pars["steepness"]
+  z <- bundle_shape_pars["shift"]
+  v <- bundle_shape_pars["asymp_right"]
+  
+  res <- ((v - (((1+exp(u*z)) * p - v)/exp(u*z))) / (exp(-z*(x-u))+1)) +
+    (((1+exp(u*z)) * p - v)/((1+exp(u*z)) - 1))
+  
+  return(as.numeric(res))
+}
+
