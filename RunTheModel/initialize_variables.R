@@ -151,7 +151,7 @@ if(num_ej > 0){
 ### X and Y Shape Parameter Bundles ----
 
 x_pars <- tibble(xmin = xmin, xmax = xmax)
-y_pars <- tibble(ymin = ymin, ymax = ymax)
+# y_pars <- tibble(ymin = ymin, ymax = ymax)
 
 bundle_x <- tibble(asymp_right = asymp_right_x_val, asymp_left = asymp_left_x_val, 
                    shift = shift_x_val, steepness = steepness_x_val)

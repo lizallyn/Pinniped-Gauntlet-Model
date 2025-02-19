@@ -21,7 +21,7 @@ w_sealion <- 10
 ymin <- -10
 ymax <- 0
 intercept_x_val <- 0.01
-xmax <- 10
+xmax <- 1
 
 steepness <- 1
 threshold_val <- -5

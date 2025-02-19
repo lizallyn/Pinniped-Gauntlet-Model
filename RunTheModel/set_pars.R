@@ -13,14 +13,14 @@ days <- length(day_range)
 deltat_val <- 1/24
 
 # x parameters
-base_x <- 0
+base_x <- 0.01
 xmin <- 0
-xmax <- 10
+xmax <- 1
 
 # y parameters
-base_y <- 0
-ymin <- 0
-ymax <- 10
+# base_y <- 0
+# ymin <- 0
+# ymax <- 10
 
 # non-specialist x parameters
 asymp_left_x_val <- 0
@@ -64,7 +64,7 @@ w <- 4
 w_sealion <- 10
 step <- 0.15
 decay <- 0.1
-presence <- 10
+presence <- 1
 absence <- 0
 rho <- 0.1
 learn_rate <- 0.15

@@ -6,7 +6,7 @@ library(ggplot2)
 library(patchwork)
 library(kableExtra)
 library(paletteer)
-library(colorblindr)
+# library(colorblindr)
 
 
 # plot_x_range <- start_loop:end_loop
