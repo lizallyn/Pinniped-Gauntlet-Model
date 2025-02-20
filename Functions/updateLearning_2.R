@@ -16,8 +16,6 @@ updateLearning <- function(salmon_consumed, w, hunting, boats, x_t, step, decay,
               dead = dead, w1 = w1, w2 = w2, w3 = w3)
   y <- as.numeric(update["y_hat"])
   
-
-  # y_t1 <- y_t + d_y
   
   if(specialist == TRUE){
     P_x <- type3FuncRes(bundle_x_spec, val = x_t1)

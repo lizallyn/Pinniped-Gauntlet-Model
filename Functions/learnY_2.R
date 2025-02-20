@@ -17,20 +17,10 @@ learnY <- function(hunting, boats, learn_rate, rho, forage_loc, w1, w2, w3,
     w2_1 <- NA
     w3_1 <- NA
   } else {
-    y_hat <- max((x3*x1*w1 + x3*x2*w2 + x3*w3), 0)
-    w1_1 <- w1 + x3*learn_rate * x1 * (y - y_hat)
-    w2_1 <- w2 + x3*learn_rate * x2 * (y - y_hat)
-    w3_1 <- w3 + x3*learn_rate * x3 * (y - y_hat)
-    
-    if(w1 < 0){
-      w1_1 <- w1_1 - rho * w1
-    }
-    if(w2 < 0){
-      w2_1 <- w1_2 - rho * w2
-    }
-    if(w3 < 0){
-      w3_1 <- w3_1 - rho * w3
-    }
+    y_hat <- max((w1 + w2 + w3), 0)
+    w1_1 <- w1 + learn_rate * x1 * (y - y_hat) - decay * w1
+    w2_1 <- w2 + learn_rate * x2 * (y - y_hat) - decay * w2
+    w3_1 <- w3 + learn_rate * x3 * (y - y_hat) - decay * w3
   }
   
   return(tibble(y_hat = y_hat, w1 = w1_1, w2 = w2_1, 
