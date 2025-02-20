@@ -16,10 +16,10 @@ source("Functions/createHarvestPlan.R")
 source("Functions/createSalmonArrival.R")
 
 # 02 Prep Salmon Data
-source("Data/Prep_Salmon_Data.R")
+source("RunTheModel/Prep_Salmon_Data.R")
 
 # 03 Prep Pinniped Data
-source("Data/Prep_Pinniped_Data.R")
+source("RunTheModel/Prep_Pinniped_Data.R")
 
 # 04 Set Pars
 source("RunTheModel/set_pars.R")
@@ -61,7 +61,7 @@ if(no_seals == F && no_zc == F && no_ej == F){
 # 08 Plots
 source("Functions/Plots_Pv.R")
 source("Functions/Plots_salmon.R")
-source("Functions/Plots_responses.R")
+# source("Functions/Plots_responses.R")
 
 # Look at the Results
 gauntlet_plot + plot_layout(guides = "collect")
