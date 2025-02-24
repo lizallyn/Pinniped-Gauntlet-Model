@@ -5,9 +5,9 @@ rm(list=ls())
 
 ## Run it Manually
 
-case.study <- "Base"
-run_count <- 3
-# case.study <- "N1"
+# case.study <- "Base"
+# run_count <- 3
+case.study <- "N1"
 # case.study <- "B1"
 
 # 01 Set-Up Functions
@@ -86,3 +86,5 @@ plot_Px
 plot_y
 plot_Py
 length(kill_list)
+
+plot_H / plot_y + plot_layout(guides = "collect", axes = "collect")
