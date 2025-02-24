@@ -30,5 +30,3 @@ learnX <- function(food, x_t, step, decay, x_pars, forage_loc,
   return(as.numeric(d_x))
 }
 
-# learnX(food = 1, x_t = 1, step = step, decay = decay, x_pars = x_pars,
-#        forage_loc = 1, dead = F, baseline = 0)

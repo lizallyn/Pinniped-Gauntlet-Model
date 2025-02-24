@@ -5,9 +5,9 @@ rm(list=ls())
 
 ## Run it Manually
 
-# case.study <- "Base"
-# run_count <- 3
-case.study <- "N1"
+case.study <- "Base"
+run_count <- 3
+# case.study <- "N1"
 # case.study <- "B1"
 
 # 01 Set-Up Functions
@@ -36,7 +36,7 @@ source("Functions/learnX.R")
 source("Functions/learnY_2.R")
 source("Functions/type3FuncRes.R")
 source("Functions/linearFuncRes.R")
-source("Functions/updateLearning_2.R")
+source("Functions/updateLearning_3.R")
 source("Functions/makePlots.R")
 
 # 07 Run The Loop
@@ -66,6 +66,7 @@ source("Functions/Plots_salmon.R")
 # Look at the Results
 gauntlet_plot + plot_layout(guides = "collect")
 plot_seals #/ plot_ej / plot_zc + plot_layout(axis_titles = "collect")
+plot_zc
 escape_plot
 eaten_sp_plot
 plot_eaten / plot_eaten_zc + plot_layout(guides = "collect")

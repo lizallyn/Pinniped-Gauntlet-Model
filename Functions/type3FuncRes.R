@@ -10,6 +10,10 @@ type3FuncRes.A <- function(bundle_shape_pars, val){
   return(as.numeric(y))
 }
 
+# val <- seq(0, 10, 1)
+# bundle_shape_pars <- data.frame(buffer = 0, steepness = 0.75, threshold = 200)
+# type3FuncRes(bundle_shape_pars, val)
+
 type3FuncRes <- function(bundle_shape_pars, val){
   A <- bundle_shape_pars["asymp_left"]
   B <- bundle_shape_pars["steepness"]
@@ -21,11 +25,13 @@ type3FuncRes <- function(bundle_shape_pars, val){
   return(as.numeric(res))
 }
 
-# val <- seq(0, 10, 1)
-# bundle_shape_pars <- data.frame(buffer = 0, steepness = 0.75, threshold = 200)
-# type3FuncRes(bundle_shape_pars, val)
+# val <- 0.1
+# bundle_x_sl <- tibble(asymp_right = asymp_right_x_sl_val, 
+#                       asymp_left = asymp_left_x_sl_val, 
+#                       shift = shift_x_sl_val, steepness = steepness_x_sl_val)
+# type3FuncRes(bundle_x_sl, val)
 
-type3FuncRes <- function(bundle_shape_pars, val){
+type3FuncRes.B <- function(bundle_shape_pars, val){
   p <- bundle_shape_pars["asymp_left"]
   u <- bundle_shape_pars["steepness"]
   z <- bundle_shape_pars["shift"]

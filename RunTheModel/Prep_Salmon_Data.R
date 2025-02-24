@@ -21,10 +21,6 @@ if(case.study == "Base"){
   run_info <- read.csv("Data/salmon_run_info.csv")
   run_info <- run_info[1:run_count,]
   
-  salmon_catch_rates <- data.frame(matrix(data = 0, nrow = n_days, ncol = ncol(salmon_arrival), dimnames = dimnames(salmon_arrival)))
-  colnames(salmon_catch_rates) <- colnames(salmon_arrival)
-  salmon_catch_rates$Day <- salmon_arrival$Day
-  
   run_info$Escape <- 1/run_info$Residence
   n_species <- nrow(run_info)
   
@@ -37,6 +33,11 @@ if(case.study == "Base"){
   
   boat_days <- array(dim = n_days, data = 0)
   
+  salmon_catch_rates <- data.frame(matrix(data = 0, nrow = n_days, 
+                                          ncol = ncol(salmon_arrival), 
+                                          dimnames = dimnames(salmon_arrival)))
+  colnames(salmon_catch_rates) <- colnames(salmon_arrival)
+  salmon_catch_rates$Day <- salmon_arrival$Day
   
   for(i in 1:n_species){
     if(run_info$Fish_Rate[i] > 0){
@@ -50,8 +51,8 @@ if(case.study == "Base"){
   harvest_close <- 105 - (data_start - 1)
   harvest_days <- harvest_open:harvest_close
   
-  # min_fishers <- 13
-  # max_fishers <- 25
+  min_fishers <- 13
+  max_fishers <- 25
   
   min_harvesters <- 0
   max_harvesters <- max_fishers
