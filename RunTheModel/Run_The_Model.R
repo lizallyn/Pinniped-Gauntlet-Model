@@ -87,4 +87,4 @@ plot_y
 plot_Py
 length(kill_list)
 
-plot_H / plot_y + plot_layout(guides = "collect", axes = "collect")
+plot_H / plot_y / plot_x / plot_probs + plot_layout(guides = "collect", axes = "collect")
