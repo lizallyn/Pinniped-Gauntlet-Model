@@ -17,6 +17,10 @@ base_x <- 0.01
 xmin <- 0
 xmax <- 1
 
+# receptivity pars
+rec_y_pars <- tibble(height = sqrt(0.5), width = 6)
+rec_x_pars <- tibble(height = sqrt(0.5), width = 4.5, naive_peak = base_x)
+
 # y parameters
 # base_y <- 0
 # ymin <- 0
