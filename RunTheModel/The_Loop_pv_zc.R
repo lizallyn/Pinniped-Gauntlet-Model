@@ -16,9 +16,6 @@ for(t in 1:(days - 1)) {
   
   # round of copying for seals
   if(num_seals_2_copy > 0){
-    receptivity_y[,t] <- sapply(X = y[,t], FUN = receptivityY, pars = rec_y_pars)
-    receptivity_x[,t] <- sapply(X = x[,t], FUN = receptivityX, pars = rec_x_pars)
-    receptivity[,t] <- receptivity_x[,t] * receptivity_y[,t]
     
     P_social[,t] <- sapply(X = seal_prob_gauntlet[,t], FUN = collusion, 
                            probs_list = seal_prob_gauntlet[,t], seals_2_copy = num_seals_2_copy, 

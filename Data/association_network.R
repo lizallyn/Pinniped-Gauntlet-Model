@@ -33,4 +33,5 @@ max(sim_network)
 mean(sim_network)
 hist(sim_network, breaks = seq(0, 1, 0.01), xlim = c(0, 0.3))
 
-
+sim_network_2 <- sim_network <- round(rbeta(500000, fit$estimate[1], fit$estimate[2]), digits = 3)
+sim_network_3 <- sim_network <- round(rbeta(500000, fit$estimate[1], fit$estimate[2]), digits = 3)

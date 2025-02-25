@@ -44,16 +44,6 @@ if(num_seals > 0) {
   #social learning and network
   receptivity_x <- twoDzeroes
   receptivity_y <- twoDzeroes
-  network_pv <- matrix(data = sim_network[1:(num_seals * num_seals)], 
-                       nrow = num_seals, ncol = num_seals)
-  colnames(network_pv) <- 1:num_seals
-  rownames(network_pv) <- 1:num_seals
-  for(i in 1:num_seals){
-    network_pv[i,i] <- 0
-    for(j in 1:(i-1)){
-      network_pv[j,i] <- network_pv[i,j]
-    }
-  }
   
   x <- twoDzeroes
   y <- twoDzeroes

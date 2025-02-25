@@ -47,6 +47,8 @@ if(case.study == "Base"){
     }
   }
   
+  sealion_arrival <- 1
+  
   harvest_open <- 65 - (data_start - 1)
   harvest_close <- 105 - (data_start - 1)
   harvest_days <- harvest_open:harvest_close
@@ -98,6 +100,8 @@ if(case.study == "N1"){
   # for learning cues
   boat_days <- array(dim = n_days, data = 0)
   boat_days[fishery_dates] <- 1
+  
+  sealion_arrival <- 296
   
   # hunt info setup
   num_harvesters <- catch_info$Boats
