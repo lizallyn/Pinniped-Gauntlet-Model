@@ -5,33 +5,37 @@ rm(list=ls())
 
 ## Run it Manually
 
-# case.study <- "Base"
-# run_count <- 3
-case.study <- "N1"
+case.study <- "Base"
+run_count <- 3
+# case.study <- "N1"
 # case.study <- "B1"
 
 # 01 Set-Up Functions
 source("Functions/makeArray.R")
 source("Functions/createHarvestPlan.R")
 source("Functions/createSalmonArrival.R")
+source("Data/association_network.R")
 
 # 02 Prep Salmon Data
-source("RunTheModel/Prep_Salmon_Data.R")
+source("CopyOfRunTheModel/Prep_Salmon_Data.R")
 
 # 03 Prep Pinniped Data
-source("RunTheModel/Prep_Pinniped_Data.R")
+source("CopyOfRunTheModel/Prep_Pinniped_Data.R")
 
 # 04 Set Pars
-source("RunTheModel/set_pars.R")
+source("CopyOfRunTheModel/set_pars.R")
 
 # 05 Initialize Variables
-source("RunTheModel/initialize_variables.R")
+source("CopyOfRunTheModel/initialize_variables.R")
 
 # 06 Loop Functions
 source("Functions/salmonSpeciesUpdate.R")
 source("Functions/decideForagingDestination.R")
+source("Functions/socialInfo.R")
 source("Functions/collusion.R")
 source("Functions/getHarvested.R")
+source("Functions/receptivityY.R")
+source("Functions/receptivityX.R")
 source("Functions/learnX.R")
 source("Functions/learnY_2.R")
 source("Functions/type3FuncRes.R")
@@ -47,7 +51,7 @@ if(no_seals == F && no_zc == F && no_ej == F){
   source("Functions/Plots_Zc.R")
 } else if(no_seals == F && no_zc == F && no_ej == T){
   source("Functions/rungeKutta_2.R")
-  source("RunTheModel/The_Loop_pv_zc.R")
+  source("CopyOfRunTheModel/The_Loop_pv_zc.R")
   source("Functions/Plots_Zc.R")
 } else if(no_seals == F && no_zc == T && no_ej == F){
   source("Functions/rungeKutta_2.R")
@@ -85,6 +89,7 @@ plot_x
 plot_Px
 plot_y
 plot_Py
+plot_Psoc
 length(kill_list)
 
 plot_H / plot_y / plot_x / plot_probs + plot_layout(guides = "collect", axes = "collect")

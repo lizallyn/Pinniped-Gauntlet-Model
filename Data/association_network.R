@@ -18,9 +18,9 @@ long_network <- long_network[-which(long_network$ID == long_network$Buddy_ID),]
 long_network$Association[which(long_network$Association == 0)] <- 0.0000001
 
 # check stats and viz
-max(long_network$Association)
-mean(long_network$Association)
-hist(long_network$Association, breaks = seq(0, 0.3, 0.01))
+# max(long_network$Association)
+# mean(long_network$Association)
+# hist(long_network$Association, breaks = seq(0, 0.3, 0.01))
 
 # fit a beta dist to it
 start_vals <- list(shape1 = 0.1, shape2 = 10)
@@ -29,9 +29,9 @@ fit <- MASS::fitdistr(x = long_network$Association, densfun = "beta", start = st
 # simulate fake data from the fitted beta and viz it
 # round so almost-zeroes become zeroes again - janky zi workaround
 sim_network <- round(rbeta(500000, fit$estimate[1], fit$estimate[2]), digits = 3)
-max(sim_network)
-mean(sim_network)
-hist(sim_network, breaks = seq(0, 1, 0.01), xlim = c(0, 0.3))
+# max(sim_network)
+# mean(sim_network)
+# hist(sim_network, breaks = seq(0, 1, 0.01), xlim = c(0, 0.3))
 
-sim_network_2 <- sim_network <- round(rbeta(500000, fit$estimate[1], fit$estimate[2]), digits = 3)
-sim_network_3 <- sim_network <- round(rbeta(500000, fit$estimate[1], fit$estimate[2]), digits = 3)
+sim_network_2 <- round(rbeta(500000, fit$estimate[1], fit$estimate[2]), digits = 3)
+sim_network_3 <- round(rbeta(500000, fit$estimate[1], fit$estimate[2]), digits = 3)

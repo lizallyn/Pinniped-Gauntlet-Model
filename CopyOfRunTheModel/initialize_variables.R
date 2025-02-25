@@ -42,6 +42,7 @@ if(num_seals > 0) {
   }
   
   #social learning and network
+  receptivity <- twoDzeroes
   receptivity_x <- twoDzeroes
   receptivity_y <- twoDzeroes
   
