@@ -19,10 +19,15 @@ for(t in 1:(days - 1)) {
     receptivity_y[,t] <- sapply(X = y[,t], FUN = receptivityY, pars = rec_y_pars)
     receptivity_x[,t] <- sapply(X = x[,t], FUN = receptivityX, pars = rec_x_pars)
     receptivity[,t] <- receptivity_x[,t] * receptivity_y[,t]
-    
-    P_social[,t] <- sapply(X = seal_prob_gauntlet[,t], FUN = collusion, 
-                           probs_list = seal_prob_gauntlet[,t], seals_2_copy = num_seals_2_copy, 
-                           mean = mean, beta = beta)
+    for(seal in num_seals){
+      social_info <- socialInfo(network_pv[,seal], receptivity = receptivity[seal,t], 
+                                locs = seal_forage_loc[,t])
+      P_social[seal,t] <- (1-receptivity[seal,t]) * seal_forage_loc[seal,t] + 
+        receptivity[seal,t] * social_info
+    }
+    # P_social[,t] <- sapply(X = seal_prob_gauntlet[,t], FUN = collusion, 
+    #                        probs_list = seal_prob_gauntlet[,t], seals_2_copy = num_seals_2_copy, 
+    #                        mean = mean, beta = beta)
     seal_forage_loc[,t] <- sapply(X = P_social[,t], FUN = decideForagingDestination)
   }
   
