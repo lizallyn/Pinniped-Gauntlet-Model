@@ -1,11 +1,11 @@
-# Creating fake association network from Zac's data
+# Creating fake association network from Zach's data
 # see "social_associations_cleanup.R" in Case Studies repo
 
 library(tidyr)
 
 set.seed <- 5
 
-## load associations from Zac for 735 EMB Zc over all years of monitoring
+## load associations from Zach for 735 EMB Zc over all years of monitoring
 # 0s mean those individuals never overlapped (between or within years)
 network <- read.csv("Data/social_network_associations_zac_EMB.csv")
 
