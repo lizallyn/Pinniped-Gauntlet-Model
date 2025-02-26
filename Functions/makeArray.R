@@ -5,7 +5,7 @@ makeArray <- function(dims, start.val, names) {
   namey <- names[2]
   namez <- names[3]
   
-  if(length(dims) == 1){
+  if(length(names) == 1){
     new.array <- rep(start.val, dims[1])
     
   } else if(length(dims) == 2){

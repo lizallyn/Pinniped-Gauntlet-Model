@@ -14,6 +14,8 @@ deltat_val <- 1/24
 
 # x parameters
 base_x <- 0.01
+base_x_spec <- 0.1
+base_x_sl <- 0.25
 xmin <- 0
 xmax <- 1
 
@@ -66,10 +68,9 @@ shift_y_spec_val <- 500
 specialist_prob <- 0.5
 w <- 4
 w_sealion <- 10
-step <- 0.15
+step <- 0.1
+step_spec <- 0.15
 decay <- 0.1
-presence <- 1
-absence <- 0
 rho <- 0.1
 learn_rate <- 0.15
 

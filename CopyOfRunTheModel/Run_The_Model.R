@@ -84,7 +84,7 @@ salmon_eaten
 # check colorblind grid:
 # cvd_grid(eaten_sp_plot)
 
-plot_probs / plot_Psoc
+gauntlet_plot / plot_probs / plot_Psoc + plot_layout(guides = "collect", axes = "collect")
 plot_x
 plot_Px
 plot_y

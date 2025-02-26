@@ -18,10 +18,8 @@ learnX <- function(food, x_t, step, decay, x_pars, forage_loc,
       }
     } else {
       if(food > 0){
-        # lambda <- presence
         d_x <- step * (xmax - x_t)
       } else  if(food <= 0){
-        # lambda <- absence
         d_x <- step * (xmin - x_t)
       }
     }

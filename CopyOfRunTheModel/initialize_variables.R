@@ -46,12 +46,18 @@ if(num_seals > 0) {
   receptivity_x <- twoDzeroes
   receptivity_y <- twoDzeroes
   
-  x <- twoDzeroes
+  base_x <- makeArray(c(num_seals, days), start.val = base_x, names = c("Seal", "Day"))
+  base_x[specialist_seals,] <- base_x_spec
+  x <- base_x
   y <- twoDzeroes
   C <- twoDzeroes
   P_x <- twoDzeroes
   P_y <- makeArray(c(num_seals, days), start.val = 1, names = c("Seal", "Day"))
   P_social <- twoDzeroes
+  
+  #for learnX
+  step <- rep(step, num_seals)
+  step[specialist_seals] <- step_spec
   
   #for learnY R-W&P
   risk_boat_pv <- twoDzeroes
