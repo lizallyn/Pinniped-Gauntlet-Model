@@ -1,0 +1,25 @@
+---
+title: "Tuning to make sure this actually works?"
+output: pdf_document
+date: "`r Sys.Date()`"
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, fig.height = 5)
+```
+
+This doc is to record all the things I try while trying to get the pinniped attendance at the Gauntlet at the right level given all the new dynamics we've added/adjusted/trashed.
+
+## Describing the State of Things
+
+X and Y both range from 0 to 1 but are governed by different processes that represent two separate axes of behavior. X governs learning associated with the fitness of food patch options, and Y tracks the learning associated with fear of predation (or harvest in this case). 
+
+Whatever I'll come back here later...
+
+
+## Tuning Pinniped Attendance at the Gauntlet
+
+```{r}
+
+```
+

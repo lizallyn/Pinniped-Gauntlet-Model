@@ -1,5 +1,5 @@
 ## Set Up Variables ----
-# with new type3funcres structure
+# with no more Px
 
 ### Blank arrays----
 
@@ -29,7 +29,7 @@ if(num_seals > 0) {
   twoDzeroes <- makeArray(c(num_seals, days), start.val = 0, names = c("Seal", "Day"))
   
   num_specialists <- round(num_seals * prop_specialists)
-  num_seals_2_copy <- num_seals/num_haulouts
+  # num_seals_2_copy <- num_seals/num_haulouts
   salmon_consumed_pv <- twoDzeroes
   seal_prob_gauntlet <- twoDzeroes
   seal_forage_loc <- twoDzeroes
@@ -84,7 +84,7 @@ if(num_zc > 0) {
   
   twoDzeroes_zc <- makeArray(c(num_zc, days), start.val = 0, names = c("CSL", "Day"))
   
-  num_zc_2_copy <- num_zc 
+  # num_zc_2_copy <- num_zc 
   salmon_consumed_zc <- twoDzeroes_zc
   zc_prob_gauntlet <- twoDzeroes_zc
   zc_forage_loc <- twoDzeroes_zc
@@ -133,7 +133,7 @@ if(num_ej > 0){
   
   twoDzeroes_ej <- makeArray(c(num_ej, days), start.val = 0, names = c("SSL", "Day"))
   
-  num_ej_2_copy <- num_ej
+  # num_ej_2_copy <- num_ej
   salmon_consumed_ej <- twoDzeroes_ej
   ej_prob_gauntlet <- twoDzeroes_ej
   ej_forage_loc <- twoDzeroes_ej
@@ -169,20 +169,20 @@ if(num_ej > 0){
 x_pars <- tibble(xmin = xmin, xmax = xmax)
 # y_pars <- tibble(ymin = ymin, ymax = ymax)
 
-bundle_x <- tibble(asymp_right = asymp_right_x_val, asymp_left = asymp_left_x_val, 
-                   shift = shift_x_val, steepness = steepness_x_val)
-bundle_x_spec <- tibble(asymp_right = asymp_right_x_spec_val, 
-                        asymp_left = asymp_left_x_spec_val, 
-                   shift = shift_x_spec_val, steepness = steepness_x_spec_val)
-bundle_x_sl <- tibble(asymp_right = asymp_right_x_sl_val, 
-                        asymp_left = asymp_left_x_sl_val, 
-                        shift = shift_x_sl_val, steepness = steepness_x_sl_val)
-bundle_y <- tibble(asymp_right = asymp_right_y_val, asymp_left = asymp_left_y_val, 
-                   shift = shift_y_val, steepness = steepness_y_val)
-bundle_y_spec <- tibble(asymp_right = asymp_right_y_spec_val, 
-                        asymp_left = asymp_left_y_spec_val, 
-                   shift = shift_y_spec_val, steepness = steepness_y_spec_val)
-bundle_y_sl <- tibble(asymp_right = asymp_right_y_sl_val, asymp_left = asymp_left_y_sl_val, 
-                   shift = shift_y_sl_val, steepness = steepness_y_sl_val)
+# bundle_x <- tibble(asymp_right = asymp_right_x_val, asymp_left = asymp_left_x_val, 
+#                    shift = shift_x_val, steepness = steepness_x_val)
+# bundle_x_spec <- tibble(asymp_right = asymp_right_x_spec_val, 
+#                         asymp_left = asymp_left_x_spec_val, 
+#                    shift = shift_x_spec_val, steepness = steepness_x_spec_val)
+# bundle_x_sl <- tibble(asymp_right = asymp_right_x_sl_val, 
+#                         asymp_left = asymp_left_x_sl_val, 
+#                         shift = shift_x_sl_val, steepness = steepness_x_sl_val)
+# bundle_y <- tibble(asymp_right = asymp_right_y_val, asymp_left = asymp_left_y_val, 
+#                    shift = shift_y_val, steepness = steepness_y_val)
+# bundle_y_spec <- tibble(asymp_right = asymp_right_y_spec_val, 
+#                         asymp_left = asymp_left_y_spec_val, 
+#                    shift = shift_y_spec_val, steepness = steepness_y_spec_val)
+# bundle_y_sl <- tibble(asymp_right = asymp_right_y_sl_val, asymp_left = asymp_left_y_sl_val, 
+#                    shift = shift_y_sl_val, steepness = steepness_y_sl_val)
 
 
