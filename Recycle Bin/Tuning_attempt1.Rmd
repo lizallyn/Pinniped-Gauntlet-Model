@@ -5,7 +5,7 @@ date: "`r Sys.Date()`"
 ---
 
 ```{r setup, include = FALSE}
-knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, fig.height = 5)
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, fig.height = 8)
 ```
 
 This doc is to record all the things I try while trying to get the pinniped attendance at the Gauntlet at the right level given all the new dynamics we've added/adjusted/trashed.
@@ -19,7 +19,14 @@ Whatever I'll come back here later...
 
 ## Tuning Pinniped Attendance at the Gauntlet
 
-```{r}
+In this first parameterization, not enough pinnipeds are choosing to go to the Gauntlet.
 
+```{r}
+source("CopyOfRunTheModel/Run_The_Model.R")
+
+kable(pinnipeds)
+kable(data.frame(step[1], step_spec, w, w_sealion, scenario, scenario_sealion))
+gauntlet_plot / plot_seals / plot_probs + plot_layout(guides = "collect", axis_titles = "collect_x")
 ```
 
+In this first parameterization, not enough pinnipeds are choosing to go to the Gauntlet.

@@ -6,7 +6,6 @@ num_seals <- 100
 num_zc <- 20
 num_ej <- 0
 pinnipeds <- data.frame(Pv = num_seals, Zc = num_zc, Ej = num_ej)
-print(pinnipeds)
 
 num_pinn_sp <- length(which(pinnipeds > 0))
 list_of_pinns <- colnames(pinnipeds[which(pinnipeds > 0)])

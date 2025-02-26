@@ -66,10 +66,10 @@ rec_x_pars <- tibble(height = sqrt(0.5), width = 4.5)
 
 # individual learning parameters
 # specialist_prob <- 0.5
-w <- 3
-w_sealion <- 8
-step <- 0.2
-step_spec <- 0.25
+w <- 5
+w_sealion <- 10
+step <- 0.1
+step_spec <- 0.15
 decay <- 0.1
 rho <- 0.1
 learn_rate <- 0.15
