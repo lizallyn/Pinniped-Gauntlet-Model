@@ -21,7 +21,7 @@ xmax <- 1
 
 # receptivity pars
 rec_y_pars <- tibble(height = sqrt(0.5), width = 6)
-rec_x_pars <- tibble(height = sqrt(0.5), width = 4.5, naive_peak = base_x)
+rec_x_pars <- tibble(height = sqrt(0.5), width = 4.5)
 
 # y parameters
 # base_y <- 0

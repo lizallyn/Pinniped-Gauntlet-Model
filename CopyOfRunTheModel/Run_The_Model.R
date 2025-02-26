@@ -86,6 +86,7 @@ salmon_eaten
 
 gauntlet_plot / plot_probs / plot_Psoc + plot_layout(guides = "collect", axes = "collect")
 plot_x
+plot_x_zc
 plot_Px
 plot_y
 plot_Py

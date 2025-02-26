@@ -1,9 +1,9 @@
 # for the skewed dist that peaks at naive x value
 
-receptivityX <- function(pars, x_t){
+receptivityX <- function(pars, baseline_x, x_t){
   m <- pars["height"]
   b <- pars["width"]
-  c <- pars["naive_peak"]
+  c <- as.numeric(baseline_x)
   
   res <- (m*x_t^((c*(b-2)+1)/(1-c) - 1) * (1-x_t)^(b-1)) / 
     (c^((c*(b-2)+1)/(1-c)-1)*(1-c)^(b-1))

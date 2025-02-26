@@ -15,16 +15,15 @@ for(t in 1:(days - 1)) {
   seal_forage_loc[,t] <- sapply(X = seal_prob_gauntlet[,t], FUN = decideForagingDestination)
   
   # round of copying for seals
-  if(num_seals_2_copy > 0){
-    receptivity_y[,t] <- sapply(X = y[,t], FUN = receptivityY, pars = rec_y_pars)
-    receptivity_x[,t] <- sapply(X = x[,t], FUN = receptivityX, pars = rec_x_pars)
-    receptivity[,t] <- receptivity_x[,t] * receptivity_y[,t]
-    for(seal in 1:num_seals){
-      social_info <- socialInfo(network_pv[,seal], receptivity = receptivity[seal,t], 
-                                probs = seal_prob_gauntlet[,t])
-      P_social[seal,t] <- (1-receptivity[seal,t]) * seal_prob_gauntlet[seal,t] + 
-        receptivity[seal,t] * social_info
-    }
+  receptivity_y[,t] <- sapply(X = y[,t], FUN = receptivityY, pars = rec_y_pars)
+  receptivity_x[,t] <- sapply(X = x[,t], FUN = receptivityX, pars = rec_x_pars, 
+                              baseline_x = base_x)
+  receptivity[,t] <- receptivity_x[,t] * receptivity_y[,t]
+  for(seal in 1:num_seals){
+    social_info <- socialInfo(network_pv[,seal], receptivity = receptivity[seal,t], 
+                              probs = seal_prob_gauntlet[,t])
+    P_social[seal,t] <- (1-receptivity[seal,t]) * seal_prob_gauntlet[seal,t] + 
+      receptivity[seal,t] * social_info
     # P_social[,t] <- saptply(X = seal_prob_gauntlet[,t], FUN = collusion, 
     #                        probs_list = seal_prob_gauntlet[,t], seals_2_copy = num_seals_2_copy, 
     #                        mean = mean, beta = beta)
@@ -39,12 +38,20 @@ for(t in 1:(days - 1)) {
     
     # copying
     # Zc
-    if(num_zc_2_copy > 0){
-      P_social_zc[,t] <- sapply(X = zc_prob_gauntlet[,t], FUN = collusion, 
-                                probs_list = zc_prob_gauntlet[,t], seals_2_copy = num_zc_2_copy, 
-                                mean = mean, beta = beta)
-      zc_forage_loc[,t] <- sapply(X = P_social_zc[,t], FUN = decideForagingDestination)
+    receptivity_y_zc[,t] <- sapply(X = y_zc[,t], FUN = receptivityY, pars = rec_y_pars)
+    receptivity_x_zc[,t] <- sapply(X = x_zc[,t], FUN = receptivityX, pars = rec_x_pars,
+                                   baseline_x = base_x_sl)
+    receptivity_zc[,t] <- receptivity_x_zc[,t] * receptivity_y_zc[,t]
+    for(csl in 1:num_zc){
+      social_info_zc <- socialInfo(network_zc[,csl], receptivity = receptivity_zc[csl,t], 
+                                probs = zc_prob_gauntlet[,t])
+      P_social_zc[csl,t] <- (1-receptivity_zc[csl,t]) * zc_prob_gauntlet[csl,t] + 
+        receptivity_zc[csl,t] * social_info_zc
     }
+    # P_social_zc[,t] <- sapply(X = zc_prob_gauntlet[,t], FUN = collusion, 
+    #                           probs_list = zc_prob_gauntlet[,t], seals_2_copy = num_zc_2_copy, 
+    #                           mean = mean, beta = beta)
+    zc_forage_loc[,t] <- sapply(X = P_social_zc[,t], FUN = decideForagingDestination)
     
   } else {
     zc_forage_loc[,t] <- 0
@@ -125,14 +132,21 @@ for(t in 1:(days - 1)) {
     #                               steepness = steepness, threshold = threshold[seal])
     
     update_output <- updateLearning(salmon_consumed = salmon_consumed_pv[seal, t], 
-                                    boats = boat_days[t], rho = rho, learn_rate = learn_rate,
-                                    w = w, hunting = hunt,
-                                    x_t = x[seal, t], x_pars = x_pars,
-                                    step = step[seal], decay = decay,
+                                    boats = boat_days[t], 
+                                    rho = rho, 
+                                    learn_rate = learn_rate,
+                                    w = w, 
+                                    hunting = hunt,
+                                    x_t = x[seal, t], 
+                                    x_pars = x_pars,
+                                    step = step[seal], 
+                                    decay = decay,
                                     forage_loc = seal_forage_loc[seal, t], 
                                     dead = seal %in% kill_list,
-                                    baseline_x = base_x[seal], w1 = risk_boat_pv[seal, t],
-                                    w2 = risk_hunt_pv[seal, t], w3 = risk_g_pv[seal, t],
+                                    baseline_x = base_x[seal], 
+                                    w1 = risk_boat_pv[seal, t],
+                                    w2 = risk_hunt_pv[seal, t], 
+                                    w3 = risk_g_pv[seal, t],
                                     specialist = seal %in% specialist_seals, 
                                     bundle_x = bundle_x, 
                                     bundle_x_spec = bundle_x_spec, 
@@ -164,14 +178,21 @@ for(t in 1:(days - 1)) {
   for(csl in 1:num_zc){
     
     update_output <- updateLearning(salmon_consumed = salmon_consumed_zc[csl, t], 
-                                    w = w_sealion, hunting = hunt, boats = boat_days[t],
-                                    x_t = x_zc[csl, t], rho = rho, 
-                                    step = step, decay = decay, learn_rate = learn_rate,
-                                    forage_loc = zc_forage_loc[csl, t], x_pars = x_pars,
+                                    w = w_sealion, 
+                                    hunting = hunt_zc, 
+                                    boats = boat_days[t],
+                                    x_t = x_zc[csl, t], 
+                                    rho = rho, 
+                                    step = step_spec, 
+                                    decay = decay, 
+                                    learn_rate = learn_rate,
+                                    forage_loc = zc_forage_loc[csl, t], 
+                                    x_pars = x_pars,
                                     dead = csl %in% kill_list_zc,
                                     w1 = risk_boat_zc[csl, t],
-                                    w2 = risk_hunt_zc[csl, t], w3 = risk_g_zc[csl, t],
-                                    baseline_x = base_x,
+                                    w2 = risk_hunt_zc[csl, t], 
+                                    w3 = risk_g_zc[csl, t],
+                                    baseline_x = base_x_sl,
                                     specialist = csl %in% specialist_zc, 
                                     bundle_x = bundle_x, 
                                     bundle_x_spec = bundle_x_sl, 

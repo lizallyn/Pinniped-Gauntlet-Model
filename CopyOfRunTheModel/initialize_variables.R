@@ -96,7 +96,12 @@ if(num_zc > 0) {
     specialist_zc <- sample(1:num_zc, num_specialist_zc)
   }
   
-  x_zc <- twoDzeroes_zc
+  #social learning and network
+  receptivity_zc <- twoDzeroes
+  receptivity_x_zc <- twoDzeroes
+  receptivity_y_zc <- twoDzeroes
+  
+  x_zc <- makeArray(c(num_zc, days), start.val = base_x_sl, names = c("CSL", "Day"))
   y_zc <- twoDzeroes_zc
   C_zc <- twoDzeroes_zc
   P_x_zc <- twoDzeroes_zc

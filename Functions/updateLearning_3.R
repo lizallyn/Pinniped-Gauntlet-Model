@@ -17,13 +17,13 @@ updateLearning <- function(salmon_consumed, w, hunting, boats, x_t, step, decay,
   y <- as.numeric(update["y_hat"])
   
   
-  if(specialist == TRUE){
+  # if(specialist == TRUE){
+  #   P_x <- x_t1
+  #   P_y <- 1 - y
+  # } else {
     P_x <- x_t1
     P_y <- 1 - y
-  } else {
-    P_x <- x_t1
-    P_y <- 1 - y
-  }
+  # }
   
   return(tibble(x_t1 = x_t1, y_t1 = y, P_x = P_x, P_y = P_y,
                 w1 <- update["w1"], w2 <- update["w2"],

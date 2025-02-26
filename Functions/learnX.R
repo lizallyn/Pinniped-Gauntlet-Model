@@ -5,6 +5,7 @@ learnX <- function(food, x_t, step, decay, x_pars, forage_loc,
 
   xmin <- as.numeric(x_pars["xmin"])
   xmax <- as.numeric(x_pars["xmax"])
+  baseline <- as.numeric(baseline)
   
   
   if(dead == TRUE){
