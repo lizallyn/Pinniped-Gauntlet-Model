@@ -1,5 +1,5 @@
 ### For creating, storing, editing data on pinniped species
-# Dec 2024
+# Feb 2025
 
 # Pinniped input
 num_seals <- 100
@@ -35,7 +35,7 @@ Cmax_mat$Pv <- Cmax_pv
 Cmax_mat$Zc <- Cmax_zc
 
 gamma <- -1 # pred dep, this expects something between -1, 0
-Y <- 0 # this freaks out when I make it > 0, might just delete
+Y <- 0 # always 0 for this.
 
 error_msg <- "Error in pinniped accounting! They cannot count and neither can you!"
 

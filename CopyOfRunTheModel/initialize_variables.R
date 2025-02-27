@@ -153,7 +153,6 @@ if(num_ej > 0){
   pred_risk_ej <- twoDzeroes_ej
   
   harvest_days_ej <- harvest_days
-  # harvest_days_ej <- harvest_days_ej[which(harvest_days_ej %in% 1:days)]
   harvest_plan_ej <- createHarvestPlan(scenario = scenario_sealion, 
                                        harvest_days = harvest_days_ej,
                                        empty.array = oneDzeroes)
@@ -167,22 +166,6 @@ if(num_ej > 0){
 ### X and Y Shape Parameter Bundles ----
 
 x_pars <- tibble(xmin = xmin, xmax = xmax)
-# y_pars <- tibble(ymin = ymin, ymax = ymax)
 
-# bundle_x <- tibble(asymp_right = asymp_right_x_val, asymp_left = asymp_left_x_val, 
-#                    shift = shift_x_val, steepness = steepness_x_val)
-# bundle_x_spec <- tibble(asymp_right = asymp_right_x_spec_val, 
-#                         asymp_left = asymp_left_x_spec_val, 
-#                    shift = shift_x_spec_val, steepness = steepness_x_spec_val)
-# bundle_x_sl <- tibble(asymp_right = asymp_right_x_sl_val, 
-#                         asymp_left = asymp_left_x_sl_val, 
-#                         shift = shift_x_sl_val, steepness = steepness_x_sl_val)
-# bundle_y <- tibble(asymp_right = asymp_right_y_val, asymp_left = asymp_left_y_val, 
-#                    shift = shift_y_val, steepness = steepness_y_val)
-# bundle_y_spec <- tibble(asymp_right = asymp_right_y_spec_val, 
-#                         asymp_left = asymp_left_y_spec_val, 
-#                    shift = shift_y_spec_val, steepness = steepness_y_spec_val)
-# bundle_y_sl <- tibble(asymp_right = asymp_right_y_sl_val, asymp_left = asymp_left_y_sl_val, 
-#                    shift = shift_y_sl_val, steepness = steepness_y_sl_val)
 
 

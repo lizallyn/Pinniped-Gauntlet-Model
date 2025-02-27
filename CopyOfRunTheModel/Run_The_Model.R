@@ -1,4 +1,5 @@
 # Run the model for all flexible pinnipeds and flexible salmon runs
+# winter 2025
 
 # clear environment
 rm(list=ls())
