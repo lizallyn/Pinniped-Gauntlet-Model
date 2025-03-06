@@ -47,7 +47,7 @@ source("Functions/makePlots.R")
 # 07 Run The Loop
 if(no_seals == F && no_zc == F && no_ej == F){
   source("Functions/rungeKutta_3.R")
-  source("RunTheModel/06_The_Loop.R")
+  source("CopyOfRunTheModel/The_Loop_all.R")
   source("Functions/Plots_Ej.R")
   source("Functions/Plots_Zc.R")
 } else if(no_seals == F && no_zc == F && no_ej == T){
@@ -69,30 +69,30 @@ source("Functions/Plots_salmon.R")
 # source("Functions/Plots_responses.R")
 
 # Look at the Results
-# gauntlet_plot + plot_layout(guides = "collect")
-# plot_seals #/ plot_ej / plot_zc + plot_layout(axis_titles = "collect")
-# plot_zc
-# escape_plot
-# eaten_sp_plot
-# plot_eaten / plot_eaten_zc + plot_layout(guides = "collect")
-# fished_plot
-# plot_H #+ plot_H_ej + plot_H_zc
-# salmon_catch
-# salmon_escapement
-# salmon_eaten
-# # escape_plot / eaten_sp_plot / fished_plot + plot_layout(axis_titles = "collect", guides = "collect")
-# 
-# # check colorblind grid:
-# # cvd_grid(eaten_sp_plot)
-# 
-# gauntlet_plot / plot_probs / plot_Psoc + plot_layout(guides = "collect", axes = "collect")
-# plot_x
-# plot_x_zc
-# plot_Px
-# plot_H / plot_y
-# plot_Py
-# plot_Psoc
-# length(kill_list)
-# length(kill_list_zc)
-# 
-# plot_H / plot_y / plot_x / plot_probs + plot_layout(guides = "collect", axes = "collect")
+gauntlet_plot + plot_layout(guides = "collect")
+plot_seals #/ plot_ej / plot_zc + plot_layout(axis_titles = "collect")
+plot_zc
+escape_plot
+eaten_sp_plot
+plot_eaten / plot_eaten_zc + plot_layout(guides = "collect")
+fished_plot
+plot_H #+ plot_H_ej + plot_H_zc
+salmon_catch
+salmon_escapement
+salmon_eaten
+# escape_plot / eaten_sp_plot / fished_plot + plot_layout(axis_titles = "collect", guides = "collect")
+
+# check colorblind grid:
+# cvd_grid(eaten_sp_plot)
+
+gauntlet_plot / plot_probs / plot_Psoc + plot_layout(guides = "collect", axes = "collect")
+plot_x
+plot_x_zc
+plot_Px
+plot_H / plot_y
+plot_Py
+plot_Psoc
+length(kill_list)
+length(kill_list_zc)
+
+plot_H / plot_y / plot_x / plot_probs + plot_layout(guides = "collect", axes = "collect")
