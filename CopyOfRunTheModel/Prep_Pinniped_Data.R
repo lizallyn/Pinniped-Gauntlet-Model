@@ -4,7 +4,7 @@
 # Pinniped input
 num_seals <- 100
 num_zc <- 20
-num_ej <- 0
+num_ej <- 10
 pinnipeds <- data.frame(Pv = num_seals, Zc = num_zc, Ej = num_ej)
 
 num_pinn_sp <- length(which(pinnipeds > 0))

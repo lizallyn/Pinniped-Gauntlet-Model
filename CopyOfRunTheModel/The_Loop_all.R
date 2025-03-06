@@ -58,7 +58,7 @@ for(t in 1:(days - 1)) {
     receptivity_x_ej[,t] <- sapply(X = x_zc[,t], FUN = receptivityX, pars = rec_x_pars,
                                    baseline_x = base_x_sl)
     receptivity_ej[,t] <- receptivity_x_ej[,t] * receptivity_y_ej[,t]
-    for(csl in 1:num_ej){
+    for(ssl in 1:num_ej){
       social_info_ej <- socialInfo(network_ej[,ssl], receptivity = receptivity_ej[ssl,t], 
                                    probs = ej_prob_gauntlet[,t])
       P_social_ej[ssl,t] <- (1-receptivity_ej[ssl,t]) * ej_prob_gauntlet[ssl,t] + 
@@ -78,7 +78,7 @@ for(t in 1:(days - 1)) {
   # calculate salmon mortality 
   seals_at_gauntlet <- which(seal_forage_loc[,t] == 1)
   zc_at_gauntlet <- which(zc_forage_loc[,t] == 1)
-  ej_at_gauntlet <- which(zc_forage_loc[,t] == 1)
+  ej_at_gauntlet <- which(ej_forage_loc[,t] == 1)
   
   seals_at_gauntlet_save[[t]] <- seals_at_gauntlet
   zc_at_gauntlet_save[[t]] <- zc_at_gauntlet
@@ -88,12 +88,25 @@ for(t in 1:(days - 1)) {
   num_zc_at_gauntlet <- length(zc_at_gauntlet)
   num_ej_at_gauntlet <- length(ej_at_gauntlet)
   
-  salmon_result <- run_rungeKutta(salmon = daily_update, Cmax = Cmax_mat[,"Pv"], 
-                                  Nseal = num_seals_at_gauntlet, alpha = alpha_mat[,"Pv"], gamma = gamma, Y = Y,
-                                  Nsealion = num_zc_at_gauntlet, Cmax_SL = Cmax_mat[,"Zc"], 
-                                  alpha_SL = alpha_mat[,"Zc"], gamma_SL = gamma, Y_SL = Y,
+  salmon_result <- run_rungeKutta(salmon = daily_update, 
+                                  Cmax = Cmax_mat[,"Pv"], 
+                                  Nseal = num_seals_at_gauntlet, 
+                                  alpha = alpha_mat[,"Pv"], 
+                                  gamma = gamma, 
+                                  Y = Y,
+                                  NCSL = num_zc_at_gauntlet, 
+                                  Cmax_CSL = Cmax_mat[,"Zc"], 
+                                  alpha_CSL = alpha_mat[,"Zc"], 
+                                  gamma_CSL = gamma, 
+                                  Y_CSL = Y,
+                                  NSSL = num_ej_at_gauntlet, 
+                                  Cmax_SSL = Cmax_mat[,"Ej"], 
+                                  alpha_SSL = alpha_mat[,"Ej"], 
+                                  gamma_SSL = gamma, 
+                                  Y_SSL = Y,
                                   F_catch = as.numeric(salmon_catch_rates[t, 2:ncol(salmon_catch_rates)]), 
-                                  M = natural_mort, E = run_info$Escape, 
+                                  M = natural_mort, 
+                                  E = run_info$Escape, 
                                   deltat = deltat_val)
   
   # assign escape and gauntlet updates
@@ -101,13 +114,14 @@ for(t in 1:(days - 1)) {
   escape_salmon[t+1, 2:ncol(escape_salmon)] <- salmon_result[, "E"]
   fished_salmon[t, 2:ncol(escape_salmon)] <- salmon_result[, "Catch"]
   eaten_salmon[t, 2:ncol(escape_salmon)] <- salmon_result[, "C"] +
-    salmon_result[, "C_SL"]
+    salmon_result[, "C_CSL"] + salmon_result[, "C_SSL"]
   consumed_total[t] <- sum(eaten_salmon[t, 2:ncol(escape_salmon)])
   
   # assign consumed salmon to gauntlet pinnipeds
   
   consumed_by_pv <- sum(salmon_result[,"C"])
-  consumed_by_zc <- sum(salmon_result[,"C_SL"])
+  consumed_by_zc <- sum(salmon_result[,"C_CSL"])
+  consumed_by_ej <- sum(salmon_result[,"C_SSL"])
   
   if(num_seals_at_gauntlet == 0 | consumed_by_pv == 0) {
     salmon_consumed_pv[,t] <- 0
@@ -121,14 +135,35 @@ for(t in 1:(days - 1)) {
     salmon_consumed_zc[zc_at_gauntlet, t] <- consumed_by_zc/num_zc_at_gauntlet
   }
   
+  if(num_ej_at_gauntlet == 0 | consumed_by_ej == 0){
+    salmon_consumed_ej[,t] <- 0
+  } else {
+    salmon_consumed_ej[ej_at_gauntlet, t] <- consumed_by_ej/num_ej_at_gauntlet
+  }
+  
   # seal harvest
   # num_harvesters <- sample(min_harvesters:max_harvesters, 1)
-  H[t] <- getHarvested(day_plan = harvest_plan_pv[t], list_gauntlet_seals = seals_at_gauntlet, 
-                       num_fishers = num_harvesters[t], zone_efficiency = zone_efficiency, zone_steepness = zone_steepness, 
-                       efficiency = efficiency, steepness = steepness_H)
-  H_zc[t] <- getHarvested(day_plan = harvest_plan_zc[t], list_gauntlet_seals = zc_at_gauntlet, 
-                          num_fishers = num_harvesters[t], zone_efficiency = zone_efficiency, zone_steepness = zone_steepness,
-                          efficiency = efficiency, steepness = steepness_H)
+  H[t] <- getHarvested(day_plan = harvest_plan_pv[t], 
+                       list_gauntlet_seals = seals_at_gauntlet, 
+                       num_fishers = num_harvesters[t], 
+                       zone_efficiency = zone_efficiency, 
+                       zone_steepness = zone_steepness, 
+                       efficiency = efficiency, 
+                       steepness = steepness_H)
+  H_zc[t] <- getHarvested(day_plan = harvest_plan_zc[t], 
+                          list_gauntlet_seals = zc_at_gauntlet, 
+                          num_fishers = num_harvesters[t], 
+                          zone_efficiency = zone_efficiency, 
+                          zone_steepness = zone_steepness,
+                          efficiency = efficiency, 
+                          steepness = steepness_H)
+  H_ej[t] <- getHarvested(day_plan = harvest_plan_ej[t], 
+                          list_gauntlet_seals = ej_at_gauntlet, 
+                          num_fishers = num_harvesters[t], 
+                          zone_efficiency = zone_efficiency, 
+                          zone_steepness = zone_steepness,
+                          efficiency = efficiency, 
+                          steepness = steepness_H)
   hunt <- 0
   if(H[t] > 0){
     hunt <- 1
@@ -140,6 +175,12 @@ for(t in 1:(days - 1)) {
     hunt_zc <- 1
     killed <- sample(zc_at_gauntlet, H_zc[t])
     kill_list_zc <- c(kill_list_zc, killed)
+  }
+  hunt_ej <- 0
+  if(H_ej[t] > 0){
+    hunt_ej <- 1
+    killed <- sample(ej_at_gauntlet, H_ej[t])
+    kill_list_ej <- c(kill_list_ej, killed)
   }
   
   ## calculate x, y and prob_gauntlet for next time step
@@ -197,7 +238,7 @@ for(t in 1:(days - 1)) {
   for(csl in 1:num_zc){
     
     update_output <- updateLearning(salmon_consumed = salmon_consumed_zc[csl, t], 
-                                    w = w_sealion, 
+                                    w = w_CSL, 
                                     hunting = hunt_zc, 
                                     boats = boat_days[t],
                                     x_t = x_zc[csl, t], 
@@ -235,6 +276,52 @@ for(t in 1:(days - 1)) {
       C_zc[csl, t] <- NA
       P_x_zc[csl, t+1] <- NA
       P_y_zc[csl, t+1] <- NA
+    }
+  }
+  
+  # stellers
+  
+  for(ssl in 1:num_ej){
+    
+    update_output <- updateLearning(salmon_consumed = salmon_consumed_ej[ssl, t], 
+                                    w = w_SSL, 
+                                    hunting = hunt_ej, 
+                                    boats = boat_days[t],
+                                    x_t = x_ej[ssl, t], 
+                                    rho = rho, 
+                                    step = step_spec, 
+                                    decay = decay, 
+                                    learn_rate = learn_rate,
+                                    forage_loc = ej_forage_loc[ssl, t], 
+                                    x_pars = x_pars,
+                                    dead = ssl %in% kill_list_ej,
+                                    w1 = risk_boat_ej[ssl, t],
+                                    w2 = risk_hunt_ej[ssl, t], 
+                                    w3 = risk_g_ej[ssl, t],
+                                    baseline_x = base_x_sl,
+                                    specialist = ssl %in% specialist_ej, 
+                                    bundle_x = bundle_x, 
+                                    bundle_x_spec = bundle_x_sl, 
+                                    bundle_y = bundle_y,
+                                    bundle_y_spec = bundle_y_sl)
+    
+    x_ej[ssl, t+1] <- as.numeric(update_output["x_t1"])
+    y_ej[ssl, t+1] <- as.numeric(update_output["y_t1"])
+    P_x_ej[ssl, t+1] <- as.numeric(update_output["P_x"])
+    P_y_ej[ssl, t+1] <- as.numeric(update_output["P_y"])
+    risk_boat_ej[ssl, t+1] <- as.numeric(update_output["w1"])
+    risk_hunt_ej[ssl, t+1] <- as.numeric(update_output["w2"])
+    risk_g_ej[ssl, t+1] <- as.numeric(update_output["w3"])
+    ej_prob_gauntlet[ssl, t+1] <- P_x_ej[ssl, t+1] * P_y_ej[ssl, t+1]
+    
+    if(ssl %in% kill_list_ej){
+      ej_prob_gauntlet[ssl, t+1] <- NA
+      ej_forage_loc[ssl, t+1] <- NA
+      x_ej[ssl, t+1] <- NA
+      y_ej[ssl, t+1] <- NA
+      C_ej[ssl, t] <- NA
+      P_x_ej[ssl, t+1] <- NA
+      P_y_ej[ssl, t+1] <- NA
     }
   }
   

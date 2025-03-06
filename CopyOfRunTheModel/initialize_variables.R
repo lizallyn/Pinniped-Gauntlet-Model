@@ -139,7 +139,12 @@ if(num_ej > 0){
   ej_forage_loc <- twoDzeroes_ej
   ej_at_gauntlet_save <- list(rep(NA, days))
   
-  x_ej <- twoDzeroes_ej
+  #social learning and network
+  receptivity_ej <- twoDzeroes
+  receptivity_x_ej <- twoDzeroes
+  receptivity_y_ej <- twoDzeroes
+  
+  x_ej <- makeArray(c(num_ej, days), start.val = base_x_sl, names = c("SSL", "Day"))
   y_ej <- twoDzeroes_ej
   C_ej <- twoDzeroes_ej
   P_x_ej <- twoDzeroes_ej

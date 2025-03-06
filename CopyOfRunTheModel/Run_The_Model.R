@@ -54,13 +54,9 @@ if(no_seals == F && no_zc == F && no_ej == F){
   source("Functions/rungeKutta_2.R")
   source("CopyOfRunTheModel/The_Loop_pv_zc.R")
   source("Functions/Plots_Zc.R")
-} else if(no_seals == F && no_zc == T && no_ej == F){
-  source("Functions/rungeKutta_2.R")
-  # add if needed later
-  source("Functions/Plots_Ej.R")
 } else if(no_seals == F && no_zc == T && no_ej == T){
   source("Functions/rungeKutta.R")
-  source("RunTheModel/06_The_Loop_pv.R")
+  source("CopyOfRunTheModel/The_Loop_pv.R")
 } else {print(error_msg)}
 
 # 08 Plots
@@ -70,11 +66,11 @@ source("Functions/Plots_salmon.R")
 
 # Look at the Results
 gauntlet_plot + plot_layout(guides = "collect")
-plot_seals #/ plot_ej / plot_zc + plot_layout(axis_titles = "collect")
+plot_seals / plot_ej / plot_zc + plot_layout(axis_titles = "collect")
 plot_zc
 escape_plot
 eaten_sp_plot
-plot_eaten / plot_eaten_zc + plot_layout(guides = "collect")
+plot_eaten / plot_eaten_zc /plot_eaten_ej + plot_layout(guides = "collect")
 fished_plot
 plot_H #+ plot_H_ej + plot_H_zc
 salmon_catch
@@ -86,13 +82,17 @@ salmon_eaten
 # cvd_grid(eaten_sp_plot)
 
 gauntlet_plot / plot_probs / plot_Psoc + plot_layout(guides = "collect", axes = "collect")
+gauntlet_plot / plot_probs_zc / plot_Psoc_zc + plot_layout(guides = "collect", axes = "collect")
+gauntlet_plot / plot_probs_ej / plot_Psoc_ej + plot_layout(guides = "collect", axes = "collect")
 plot_x
 plot_x_zc
+plot_x_ej
 plot_Px
 plot_H / plot_y
 plot_Py
 plot_Psoc
 length(kill_list)
 length(kill_list_zc)
+length(kill_list_ej)
 
 plot_H / plot_y / plot_x / plot_probs + plot_layout(guides = "collect", axes = "collect")

@@ -25,7 +25,8 @@ rec_x_pars <- tibble(height = sqrt(0.5), width = 4.5)
 
 # individual learning parameters
 w <- 5
-w_sealion <- 10
+w_CSL <- 10
+w_SSL <- 15
 step <- 0.1
 step_spec <- 0.15
 decay <- 0.1
