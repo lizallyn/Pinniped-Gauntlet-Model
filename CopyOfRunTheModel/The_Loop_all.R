@@ -54,8 +54,8 @@ for(t in 1:(days - 1)) {
     ej_forage_loc[,t] <- sapply(X = ej_prob_gauntlet[,t], FUN = decideForagingDestination)
     
     # copying
-    receptivity_y_ej[,t] <- sapply(X = y_zc[,t], FUN = receptivityY, pars = rec_y_pars)
-    receptivity_x_ej[,t] <- sapply(X = x_zc[,t], FUN = receptivityX, pars = rec_x_pars,
+    receptivity_y_ej[,t] <- sapply(X = y_ej[,t], FUN = receptivityY, pars = rec_y_pars)
+    receptivity_x_ej[,t] <- sapply(X = x_ej[,t], FUN = receptivityX, pars = rec_x_pars,
                                    baseline_x = base_x_sl)
     receptivity_ej[,t] <- receptivity_x_ej[,t] * receptivity_y_ej[,t]
     for(ssl in 1:num_ej){

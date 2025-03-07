@@ -10,7 +10,9 @@ plot_consumed <- makePlot_2(x = 1:days + (start_loop - 1), x.name = "Day", y = c
 # Plots of Salmon Species data
 
 
-
+arrive_plot <- makePlot_4(data = salmon_arrival, variable.name = "Run", 
+                          value.name = "Daily Salmon Arrived", colors = colors_salmon,
+                          loop_days = F, start_loop = start_loop)
 escape_plot <- makePlot_4(data = round(escape_salmon), variable.name = "Run", 
                           value.name = "Daily Salmon Escaped", colors = colors_salmon,
                           loop_days = F, start_loop = start_loop)

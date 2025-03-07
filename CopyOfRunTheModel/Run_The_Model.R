@@ -11,6 +11,10 @@ run_count <- 3
 # case.study <- "N1"
 # case.study <- "B1"
 
+# bounds <- "Made-Up"
+bounds <- "High Consumption"
+# bounds <- "Low Consumption"
+
 # 01 Set-Up Functions
 source("Functions/makeArray.R")
 source("Functions/createHarvestPlan.R")
@@ -65,9 +69,14 @@ source("Functions/Plots_salmon.R")
 # source("Functions/Plots_responses.R")
 
 # Look at the Results
+eaten_sp_plot
+plot_eaten / plot_eaten_zc /plot_eaten_ej + plot_layout(guides = "collect")
+salmon_eaten
+
+arrive_plot
 gauntlet_plot + plot_layout(guides = "collect")
 plot_seals / plot_ej / plot_zc + plot_layout(axis_titles = "collect")
-plot_zc
+# plot_zc
 escape_plot
 eaten_sp_plot
 plot_eaten / plot_eaten_zc /plot_eaten_ej + plot_layout(guides = "collect")

@@ -20,19 +20,44 @@ num_specialist_zc <- 0 # figure out if we're keeping this? 4 phenotypes?
 sealion_arrival <- 1
 
 ## consumption parameters
-# replace these with .csv inputs when values finalized and justified
-alpha <- 0.05 
-alpha_mat <- data.frame(matrix(nrow = n_species, ncol = num_pinn_sp, data = alpha))
-colnames(alpha_mat) <- list_of_pinns
-rownames(alpha_mat) <- run_info$Run
 
-Cmax_pv <- 5
-Cmax_zc <- 15
-Cmax_ej <- 20
-Cmax_mat <- data.frame(matrix(nrow = n_species, ncol = num_pinn_sp, 
-                          data = Cmax_ej, dimnames = dimnames(alpha_mat)))
-Cmax_mat$Pv <- Cmax_pv
-Cmax_mat$Zc <- Cmax_zc
+if(bounds == "Made-Up"){
+  # replace these with .csv inputs when values finalized and justified
+  alpha <- 0.05 
+  alpha_mat <- data.frame(matrix(nrow = n_species, ncol = num_pinn_sp, data = alpha))
+  colnames(alpha_mat) <- list_of_pinns
+  rownames(alpha_mat) <- run_info$Run
+  
+  Cmax_pv <- 5
+  Cmax_zc <- 15
+  Cmax_ej <- 20
+  Cmax_mat <- data.frame(matrix(nrow = n_species, ncol = num_pinn_sp, 
+                                data = Cmax_ej, dimnames = dimnames(alpha_mat)))
+  Cmax_mat$Pv <- Cmax_pv
+  Cmax_mat$Zc <- Cmax_zc
+}
+if(bounds == "High Consumption"){
+  # replace these with .csv inputs when values finalized and justified
+  alpha <- 0.05 
+  alpha_mat <- data.frame(matrix(nrow = n_species, ncol = num_pinn_sp, data = alpha))
+  colnames(alpha_mat) <- list_of_pinns
+  rownames(alpha_mat) <- run_info$Run
+  
+  Cmax_mat <- data.frame(matrix(nrow = n_species, ncol = num_pinn_sp, 
+                                data = NA, dimnames = dimnames(alpha_mat)))
+  Cmax_mat["Run1",] <- high_energetics["Sockeye",]
+  Cmax_mat["Run2",] <- high_energetics["Chinook",]
+  Cmax_mat["Run3",] <- high_energetics["Chum",]
+}
+if(bounds == "Low Consumption"){
+  # replace these with .csv inputs when values finalized and justified
+  alpha <- 0.05 
+  alpha_mat <- data.frame(matrix(nrow = n_species, ncol = num_pinn_sp, data = alpha))
+  colnames(alpha_mat) <- list_of_pinns
+  rownames(alpha_mat) <- run_info$Run
+  
+  Cmax_mat <- low_energetics
+}
 
 gamma <- -1 # pred dep, this expects something between -1, 0
 Y <- 0 # always 0 for this.
