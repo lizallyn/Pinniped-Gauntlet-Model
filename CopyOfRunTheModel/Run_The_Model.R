@@ -11,8 +11,8 @@ run_count <- 3
 # case.study <- "N1"
 # case.study <- "B1"
 
-# bounds <- "Made-Up"
-bounds <- "High Consumption"
+bounds <- "Made-Up"
+# bounds <- "High Consumption"
 # bounds <- "Low Consumption"
 
 # 01 Set-Up Functions
