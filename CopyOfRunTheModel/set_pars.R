@@ -27,7 +27,7 @@ rec_x_pars <- tibble(height = sqrt(0.5), width = 4.5)
 w <- 1
 w_CSL <- 1.5
 w_SSL <- 2
-step <- 0.1
+step <- 0.15
 step_spec <- 0.15
 decay <- 0.1
 rho <- 0.1
