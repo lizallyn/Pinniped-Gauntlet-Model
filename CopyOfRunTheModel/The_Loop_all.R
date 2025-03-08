@@ -21,7 +21,7 @@ for(t in 1:(days - 1)) {
   receptivity[,t] <- receptivity_x[,t] * receptivity_y[,t]
   for(seal in 1:num_seals){
     social_info <- socialInfo(network_pv[,seal], receptivity = receptivity[seal,t], 
-                              probs = seal_prob_gauntlet[,t])
+                              probs = seal_prob_gauntlet[,t], self = seal)
     P_social[seal,t] <- (1-receptivity[seal,t]) * seal_prob_gauntlet[seal,t] + 
       receptivity[seal,t] * social_info
     # P_social[,t] <- saptply(X = seal_prob_gauntlet[,t], FUN = collusion, 
@@ -43,7 +43,7 @@ for(t in 1:(days - 1)) {
     receptivity_zc[,t] <- receptivity_x_zc[,t] * receptivity_y_zc[,t]
     for(csl in 1:num_zc){
       social_info_zc <- socialInfo(network_zc[,csl], receptivity = receptivity_zc[csl,t], 
-                                   probs = zc_prob_gauntlet[,t])
+                                   probs = zc_prob_gauntlet[,t], self = csl)
       P_social_zc[csl,t] <- (1-receptivity_zc[csl,t]) * zc_prob_gauntlet[csl,t] + 
         receptivity_zc[csl,t] * social_info_zc
     }
@@ -60,7 +60,7 @@ for(t in 1:(days - 1)) {
     receptivity_ej[,t] <- receptivity_x_ej[,t] * receptivity_y_ej[,t]
     for(ssl in 1:num_ej){
       social_info_ej <- socialInfo(network_ej[,ssl], receptivity = receptivity_ej[ssl,t], 
-                                   probs = ej_prob_gauntlet[,t])
+                                   probs = ej_prob_gauntlet[,t], self = ssl)
       P_social_ej[ssl,t] <- (1-receptivity_ej[ssl,t]) * ej_prob_gauntlet[ssl,t] + 
         receptivity_ej[ssl,t] * social_info_ej
     }

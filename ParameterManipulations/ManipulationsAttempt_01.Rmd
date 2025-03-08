@@ -1,0 +1,94 @@
+---
+title: "Trying to Illustrate the Cool Stuff"
+output: pdf_document
+date: "`r Sys.Date()`"
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, fig.height = 9)
+```
+
+The purpose of this document is to illustrate all the dynamics and functionality of this model that makes it so cool and useful. Chapter 2 will deal with all things specific to pinniped-salmon dynamics, politics, and management. Chapter 1 is just focusing on this sweet-as tool and what it can do. 
+
+## Mayonnaise Version
+
+This version of the model run features no social learning (by setting max receptivity height = 0), and no specialist behaviors (all steps, learning rates = 0.15; all x_base = 0.01). Boring.
+
+```{r mayonnaise}
+## Run it Manually
+
+case.study <- "Base"
+run_count <- 3
+# case.study <- "N1"
+# case.study <- "B1"
+
+# bounds <- "Made-Up"
+# bounds <- "High Consumption"
+bounds <- "Low Consumption"
+
+# 01 Set-Up Functions
+source("ParameterManipulations/loadLoopFunctions1.R")
+# 02 Prep Salmon Data
+source("CopyOfRunTheModel/Prep_Salmon_Data.R")
+# 03 Prep Pinniped Data
+source("CopyOfRunTheModel/Prep_Pinniped_Data.R")
+# 04 Set Pars
+source("CopyOfRunTheModel/set_pars.R")
+
+# fix pars
+base_x_sl <- base_x
+base_x_spec <- base_x
+rec_y_pars <- tibble(height = sqrt(0.5), width = 6)
+rec_x_pars <- tibble(height = sqrt(0.5), width = 4.5)
+
+# 05 Initialize Variables
+source("CopyOfRunTheModel/initialize_variables.R")
+# 06 Loop Functions
+source("ParameterManipulations/loadLoopFunctions2.R")
+# 07 Run The Loop
+source("ParameterManipulations/runLoop.R")
+# 08 Plots
+source("Functions/Plots_Pv.R")
+source("Functions/Plots_salmon.R")
+
+plot_seals / plot_ej / plot_zc + plot_layout(axis_titles = "collect")
+
+plot_x/plot_x_zc/plot_x_ej + plot_layout(axis_titles = "collect")
+```
+In this run, it takes all three species a while to learn about the Gauntlet as a foraging location. The baseline probability that any of them discover the Gauntlet is low (0.01) and they don't learn from each other, so it takes a long time for this behavior to catch on.
+
+## Fry Sauce
+
+This version of the model adds specialists to the Harbor seal population and lets the sea lion x_base also be larger. Still no social learning though. No pizzazzz.
+
+```{r fry sauce}
+
+case.study <- "Base"
+run_count <- 3
+bounds <- "Low Consumption"
+
+# 01 Set-Up Functions
+source("ParameterManipulations/loadLoopFunctions1.R")
+# 02 Prep Salmon Data
+source("CopyOfRunTheModel/Prep_Salmon_Data.R")
+# 03 Prep Pinniped Data
+source("CopyOfRunTheModel/Prep_Pinniped_Data.R")
+# 04 Set Pars
+source("CopyOfRunTheModel/set_pars.R")
+
+# fix pars
+rec_y_pars <- tibble(height = sqrt(0.5), width = 6)
+rec_x_pars <- tibble(height = sqrt(0.5), width = 4.5)
+
+# 05 Initialize Variables
+source("CopyOfRunTheModel/initialize_variables.R")
+# 06 Loop Functions
+source("ParameterManipulations/loadLoopFunctions2.R")
+# 07 Run The Loop
+source("ParameterManipulations/runLoop.R")
+# 08 Plots
+source("Functions/Plots_Pv.R")
+source("Functions/Plots_salmon.R")
+```
+
+

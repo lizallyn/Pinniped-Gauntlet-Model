@@ -31,7 +31,7 @@ if(num_seals > 0) {
   num_specialists <- round(num_seals * prop_specialists)
   # num_seals_2_copy <- num_seals/num_haulouts
   salmon_consumed_pv <- twoDzeroes
-  seal_prob_gauntlet <- twoDzeroes
+  seal_prob_gauntlet <- makeArray(c(num_seals, days), start.val = base_x, names = c("Seal", "Day"))
   seal_forage_loc <- twoDzeroes
   seals_at_gauntlet_save <- list(rep(NA, days))
   
@@ -40,6 +40,7 @@ if(num_seals > 0) {
   } else {
     specialist_seals <- sample(1:num_seals, num_specialists)
   }
+  seal_prob_gauntlet[specialist_seals] <- base_x_spec
   
   #social learning and network
   receptivity <- twoDzeroes
@@ -86,7 +87,7 @@ if(num_zc > 0) {
   
   # num_zc_2_copy <- num_zc 
   salmon_consumed_zc <- twoDzeroes_zc
-  zc_prob_gauntlet <- twoDzeroes_zc
+  zc_prob_gauntlet <- makeArray(c(num_zc, days), start.val = base_x_sl, names = c("CSL", "Day"))
   zc_forage_loc <- twoDzeroes_zc
   zc_at_gauntlet_save <- list(rep(NA, days))
   
@@ -135,7 +136,7 @@ if(num_ej > 0){
   
   # num_ej_2_copy <- num_ej
   salmon_consumed_ej <- twoDzeroes_ej
-  ej_prob_gauntlet <- twoDzeroes_ej
+  ej_prob_gauntlet <- makeArray(c(num_ej, days), start.val = base_x_sl, names = c("SSL", "Day"))
   ej_forage_loc <- twoDzeroes_ej
   ej_at_gauntlet_save <- list(rep(NA, days))
   

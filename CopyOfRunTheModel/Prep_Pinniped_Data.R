@@ -56,7 +56,11 @@ if(bounds == "Low Consumption"){
   colnames(alpha_mat) <- list_of_pinns
   rownames(alpha_mat) <- run_info$Run
   
-  Cmax_mat <- low_energetics
+  Cmax_mat <- data.frame(matrix(nrow = n_species, ncol = num_pinn_sp, 
+                                data = NA, dimnames = dimnames(alpha_mat)))
+  Cmax_mat["Run1",] <- low_energetics["Sockeye",]
+  Cmax_mat["Run2",] <- low_energetics["Chinook",]
+  Cmax_mat["Run3",] <- low_energetics["Chum",]
 }
 
 gamma <- -1 # pred dep, this expects something between -1, 0
