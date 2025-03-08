@@ -13,25 +13,25 @@ network <- read.csv("Data/social_network_associations_zac_EMB.csv")
 long_network <- network %>% 
   pivot_longer(!ID, names_to = "Buddy_ID", values_to = "Association")
 
-# remove self-associations and make 0s non-zero
+# remove self-associations and make all 1 and 0
 long_network <- long_network[-which(long_network$ID == long_network$Buddy_ID),]
-long_network$Association[which(long_network$Association == 0)] <- 0.0000001
+long_network$Association[which(long_network$Association > 0)] <- 1
 
 # check stats and viz
-# max(long_network$Association)
-# mean(long_network$Association)
-# hist(long_network$Association, breaks = seq(0, 0.3, 0.01))
+max(long_network$Association)
+mean(long_network$Association)
+hist(long_network$Association)
 
-# fit a beta dist to it
-start_vals <- list(shape1 = 0.1, shape2 = 10)
-fit <- MASS::fitdistr(x = long_network$Association, densfun = "beta", start = start_vals)
+# describe a binomial dist to it
+num_connections <- length(which(long_network$Association == 1))
+total_nodes <- nrow(long_network)
+prob_1 <- num_connections/total_nodes
 
 # simulate fake data from the fitted beta and viz it
 # round so almost-zeroes become zeroes again - janky zi workaround
-sim_network <- round(rbeta(500000, fit$estimate[1], fit$estimate[2]), digits = 3)
+sim_network <- rbinom(500000,1, prob_1)
 # max(sim_network)
 # mean(sim_network)
-# hist(sim_network, breaks = seq(0, 1, 0.01), xlim = c(0, 0.3))
-
-sim_network_2 <- round(rbeta(500000, fit$estimate[1], fit$estimate[2]), digits = 3)
-sim_network_3 <- round(rbeta(500000, fit$estimate[1], fit$estimate[2]), digits = 3)
+# hist(sim_network)
+sim_network_2 <- rbinom(500000,1, prob_1)
+sim_network_3 <- rbinom(500000,1, prob_1)

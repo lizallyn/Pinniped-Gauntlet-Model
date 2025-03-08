@@ -68,9 +68,6 @@ error_msg <- "Error in pinniped accounting! They cannot count and neither can yo
 
 # See "social_associations_cleanup.R" for more details
 # pulled from association matrix from Zac monitoring Zc at EMB
-# define parameters of the Beta dist fit to the associations
-# create associations matrix for Pv
-# round so 0's get created
 network_pv <- matrix(data = sim_network[1:(num_seals * num_seals)], 
                      nrow = num_seals, ncol = num_seals)
 colnames(network_pv) <- 1:num_seals
