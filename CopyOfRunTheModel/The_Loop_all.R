@@ -185,17 +185,37 @@ for(t in 1:(days - 1)) {
   
   ## calculate x, y and prob_gauntlet for next time step
   
+  # calculate salmon consumed as kcal
+  if(consumed_by_pv > 0){
+    props_pv_consumed <- data.frame(Run1 = (salmon_result[1,"C"]/consumed_by_pv),
+                                    Run2 = (salmon_result[2,"C"]/consumed_by_pv),
+                                    Run3 = (salmon_result[3,"C"]/consumed_by_pv))
+    pv_kcal <- sum(run_kcal * props_pv_consumed)
+  } else {pv_kcal <- 0}
+  if(consumed_by_zc > 0){
+    props_zc_consumed <- data.frame(Run1 = (salmon_result[1,"C_CSL"]/consumed_by_zc),
+                                    Run2 = (salmon_result[2,"C_CSL"]/consumed_by_zc),
+                                    Run3 = (salmon_result[3,"C_CSL"]/consumed_by_zc))
+    zc_kcal <- sum(run_kcal * props_zc_consumed)
+  } else {zc_kcal <- 0}
+  if(consumed_by_ej > 0){
+    props_ej_consumed <- data.frame(Run1 = (salmon_result[1,"C_SSL"]/consumed_by_ej),
+                                    Run2 = (salmon_result[2,"C_SSL"]/consumed_by_ej),
+                                    Run3 = (salmon_result[3,"C_SSL"]/consumed_by_ej))
+    ej_kcal <- sum(run_kcal * props_ej_consumed)
+  } else {ej_kcal <- 0}
+  
   # seals
   
   for(seal in 1:num_seals){
     # bundle_y_shape_pars <- tibble(buffer = buffer_Pymin[seal],
     #                               steepness = steepness, threshold = threshold[seal])
     
-    update_output <- updateLearning(salmon_consumed = salmon_consumed_pv[seal, t], 
+    update_output <- updateLearning(salmon_consumed = pv_kcal, 
                                     boats = boat_days[t], 
                                     rho = rho, 
                                     learn_rate = learn_rate,
-                                    w = w, 
+                                    w = w["Pv"], 
                                     hunting = hunt,
                                     x_t = x[seal, t], 
                                     x_pars = x_pars,
@@ -237,8 +257,8 @@ for(t in 1:(days - 1)) {
   
   for(csl in 1:num_zc){
     
-    update_output <- updateLearning(salmon_consumed = salmon_consumed_zc[csl, t], 
-                                    w = w_CSL, 
+    update_output <- updateLearning(salmon_consumed = zc_kcal, 
+                                    w = w["Zc"], 
                                     hunting = hunt_zc, 
                                     boats = boat_days[t],
                                     x_t = x_zc[csl, t], 
@@ -283,8 +303,8 @@ for(t in 1:(days - 1)) {
   
   for(ssl in 1:num_ej){
     
-    update_output <- updateLearning(salmon_consumed = salmon_consumed_ej[ssl, t], 
-                                    w = w_SSL, 
+    update_output <- updateLearning(salmon_consumed = ej_kcal, 
+                                    w = w["Ej"], 
                                     hunting = hunt_ej, 
                                     boats = boat_days[t],
                                     x_t = x_ej[ssl, t], 

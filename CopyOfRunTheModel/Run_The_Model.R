@@ -22,6 +22,7 @@ source("Functions/createSalmonArrival.R")
 source("Data/association_network.R")
 
 # 02 Prep Salmon Data
+source("CopyOfRunTheModel/Prep_Bioenergetics.R")
 source("CopyOfRunTheModel/Prep_Salmon_Data.R")
 
 # 03 Prep Pinniped Data
