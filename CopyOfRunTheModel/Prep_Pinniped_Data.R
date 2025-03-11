@@ -45,9 +45,9 @@ if(bounds == "High Consumption"){
   
   Cmax_mat <- data.frame(matrix(nrow = n_species, ncol = num_pinn_sp, 
                                 data = NA, dimnames = dimnames(alpha_mat)))
-  Cmax_mat["Run1",] <- ceiling(high_energetics["Sockeye",])
-  Cmax_mat["Run2",] <- ceiling(high_energetics["Chinook",])
-  Cmax_mat["Run3",] <- ceiling(high_energetics["Chum",])
+  Cmax_mat["Run1",] <- high_energetics["Sockeye",]
+  Cmax_mat["Run2",] <- high_energetics["Chinook",]
+  Cmax_mat["Run3",] <- high_energetics["Chum",]
 }
 if(bounds == "Low Consumption"){
   # replace these with .csv inputs when values finalized and justified
@@ -58,9 +58,9 @@ if(bounds == "Low Consumption"){
   
   Cmax_mat <- data.frame(matrix(nrow = n_species, ncol = num_pinn_sp, 
                                 data = NA, dimnames = dimnames(alpha_mat)))
-  Cmax_mat["Run1",] <- ceiling(low_energetics["Sockeye",])
-  Cmax_mat["Run2",] <- ceiling(low_energetics["Chinook",])
-  Cmax_mat["Run3",] <- ceiling(low_energetics["Chum",])
+  Cmax_mat["Run1",] <- low_energetics["Sockeye",]
+  Cmax_mat["Run2",] <- low_energetics["Chinook",]
+  Cmax_mat["Run3",] <- low_energetics["Chum",]
 }
 
 gamma <- -1 # pred dep, this expects something between -1, 0

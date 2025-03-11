@@ -32,7 +32,7 @@ Pv_diet_props <- data.frame(Chinook = 0.15, Chum = 0.52,
                             Coho = 0.034, Sockeye = 0.24)
 # diet proportions from Scordino 2022
 Ej_diet_props <- data.frame(Chinook = 0.68, Chum = 0.205, 
-                            Coho = 0.474, Sockeye = 0)
+                            Coho = 0.474, Sockeye = 0.01)
 # diet proportions from Scordino 2022
 Zc_diet_props <- data.frame(Chinook = 0.057, Chum = 0.229, 
                             Coho = 0.543, Sockeye = 0.057)
@@ -61,6 +61,6 @@ high_energetics <- t(high_energetics)
 
 # in kcal:
 w <- data.frame(Pv = 110, Zc = 3032.8, Ej = 4158.7)
-run_kcal <- data.frame(Run1 = salmon_kcal["Sockeye"], 
-                       Run2 = salmon_kcal["Chinook"],
-                       Run3 = salmon_kcal["Chum"])
+run_kcal <- data.frame(Run1 = as.numeric(salmon_kcal["Sockeye"]), 
+                       Run2 = as.numeric(salmon_kcal["Chinook"]),
+                       Run3 = as.numeric(salmon_kcal["Chum"]))
