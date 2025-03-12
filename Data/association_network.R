@@ -18,9 +18,9 @@ long_network <- long_network[-which(long_network$ID == long_network$Buddy_ID),]
 long_network$Association[which(long_network$Association > 0)] <- 1
 
 # check stats and viz
-max(long_network$Association)
-mean(long_network$Association)
-hist(long_network$Association)
+# max(long_network$Association)
+# mean(long_network$Association)
+# hist(long_network$Association)
 
 # describe a binomial dist to it
 num_connections <- length(which(long_network$Association == 1))

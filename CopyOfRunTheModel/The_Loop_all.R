@@ -190,19 +190,19 @@ for(t in 1:(days - 1)) {
     props_pv_consumed <- data.frame(Run1 = (salmon_result[1,"C"]/consumed_by_pv),
                                     Run2 = (salmon_result[2,"C"]/consumed_by_pv),
                                     Run3 = (salmon_result[3,"C"]/consumed_by_pv))
-    pv_kcal <- sum(run_kcal * props_pv_consumed)
+    pv_kcal <- sum(run_kcal * props_pv_consumed) * consumed_by_pv
   } else {pv_kcal <- 0}
   if(consumed_by_zc > 0){
     props_zc_consumed <- data.frame(Run1 = (salmon_result[1,"C_CSL"]/consumed_by_zc),
                                     Run2 = (salmon_result[2,"C_CSL"]/consumed_by_zc),
                                     Run3 = (salmon_result[3,"C_CSL"]/consumed_by_zc))
-    zc_kcal <- sum(run_kcal * props_zc_consumed)
+    zc_kcal <- sum(run_kcal * props_zc_consumed) * consumed_by_zc
   } else {zc_kcal <- 0}
   if(consumed_by_ej > 0){
     props_ej_consumed <- data.frame(Run1 = (salmon_result[1,"C_SSL"]/consumed_by_ej),
                                     Run2 = (salmon_result[2,"C_SSL"]/consumed_by_ej),
                                     Run3 = (salmon_result[3,"C_SSL"]/consumed_by_ej))
-    ej_kcal <- sum(run_kcal * props_ej_consumed)
+    ej_kcal <- sum(run_kcal * props_ej_consumed) * consumed_by_ej
   } else {ej_kcal <- 0}
   
   # seals

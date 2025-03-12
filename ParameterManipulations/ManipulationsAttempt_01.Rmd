@@ -29,6 +29,7 @@ bounds <- "Low Consumption"
 # 01 Set-Up Functions
 source("ParameterManipulations/loadLoopFunctions1.R")
 # 02 Prep Salmon Data
+source("CopyOfRunTheModel/Prep_Bioenergetics.R")
 source("CopyOfRunTheModel/Prep_Salmon_Data.R")
 # 03 Prep Pinniped Data
 source("CopyOfRunTheModel/Prep_Pinniped_Data.R")
@@ -38,8 +39,8 @@ source("CopyOfRunTheModel/set_pars.R")
 # fix pars
 base_x_sl <- base_x
 base_x_spec <- base_x
-rec_y_pars <- tibble(height = sqrt(0.5), width = 6)
-rec_x_pars <- tibble(height = sqrt(0.5), width = 4.5)
+rec_y_pars <- tibble(height = 0, width = 6)
+rec_x_pars <- tibble(height = 0, width = 4.5)
 
 # 05 Initialize Variables
 source("CopyOfRunTheModel/initialize_variables.R")
