@@ -56,13 +56,53 @@ plot_seals / plot_ej / plot_zc + plot_layout(axis_titles = "collect")
 
 plot_x/plot_x_zc/plot_x_ej + plot_layout(axis_titles = "collect")
 ```
-In this run, it takes all three species a while to learn about the Gauntlet as a foraging location. The baseline probability that any of them discover the Gauntlet is low (0.01) and they don't learn from each other, so it takes a long time for this behavior to catch on.
+In this run, it takes all three species a while to learn about the Gauntlet as a foraging location. The baseline probability that any of them discover the Gauntlet is low (0.01) and they don't learn from each other, so it takes a long time for this behavior to catch on. 
 
 ## Fry Sauce
 
 This version of the model adds specialists to the Harbor seal population and lets the sea lion x_base also be larger. Still no social learning though. No pizzazzz.
 
 ```{r fry sauce}
+
+case.study <- "Base"
+run_count <- 3
+bounds <- "Low Consumption"
+
+# 01 Set-Up Functions
+source("ParameterManipulations/loadLoopFunctions1.R")
+# 02 Prep Salmon Data
+source("CopyOfRunTheModel/Prep_Salmon_Data.R")
+# 03 Prep Pinniped Data
+source("CopyOfRunTheModel/Prep_Pinniped_Data.R")
+# 04 Set Pars
+source("CopyOfRunTheModel/set_pars.R")
+
+# fix pars
+rec_y_pars <- tibble(height = 0, width = 6)
+rec_x_pars <- tibble(height = 0, width = 4.5)
+
+# 05 Initialize Variables
+source("CopyOfRunTheModel/initialize_variables.R")
+# 06 Loop Functions
+source("ParameterManipulations/loadLoopFunctions2.R")
+# 07 Run The Loop
+source("ParameterManipulations/runLoop.R")
+# 08 Plots
+source("Functions/Plots_Pv.R")
+source("Functions/Plots_salmon.R")
+
+plot_seals / plot_ej / plot_zc + plot_layout(axis_titles = "collect")
+
+plot_x/plot_x_zc/plot_x_ej + plot_layout(axis_titles = "collect")
+```
+
+The sea lions are hugely impacted and their attendance at the Gauntlet goes way up. The seals somehow learn to leave the Gauntlet faster, which is confusing...
+
+## Garlic Aioli
+
+This version of the model keeps specialists to the Harbor seal population and lets the sea lion x_base also be larger. And adds social learning so max receptivity is 0.5 composite.
+
+```{r garlic aioli}
 
 case.study <- "Base"
 run_count <- 3
@@ -90,6 +130,10 @@ source("ParameterManipulations/runLoop.R")
 # 08 Plots
 source("Functions/Plots_Pv.R")
 source("Functions/Plots_salmon.R")
+
+plot_seals / plot_ej / plot_zc + plot_layout(axis_titles = "collect")
+
+plot_x/plot_x_zc/plot_x_ej + plot_layout(axis_titles = "collect")
 ```
 
-
+Sea lions surprisingly aren't that impacted by this, but seals are hugely impacted. Their attendance more than doubles and they learn to leave the gauntlet faster. 

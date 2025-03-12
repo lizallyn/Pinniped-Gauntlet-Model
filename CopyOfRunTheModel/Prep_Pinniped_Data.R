@@ -37,10 +37,8 @@ if(bounds == "Made-Up"){
   Cmax_mat$Zc <- Cmax_zc
 }
 if(bounds == "High Consumption"){
-  # replace these with .csv inputs when values finalized and justified
-  alpha <- 0.05 
-  alpha_mat <- data.frame(matrix(nrow = n_species, ncol = num_pinn_sp, data = alpha))
-  colnames(alpha_mat) <- list_of_pinns
+  # from csv estimates in Data folder
+  alpha_mat <- alpha_csv[1:3,]
   rownames(alpha_mat) <- run_info$Run
   
   Cmax_mat <- data.frame(matrix(nrow = n_species, ncol = num_pinn_sp, 
@@ -50,10 +48,8 @@ if(bounds == "High Consumption"){
   Cmax_mat["Run3",] <- high_energetics["Chum",]
 }
 if(bounds == "Low Consumption"){
-  # replace these with .csv inputs when values finalized and justified
-  alpha <- 0.05 
-  alpha_mat <- data.frame(matrix(nrow = n_species, ncol = num_pinn_sp, data = alpha))
-  colnames(alpha_mat) <- list_of_pinns
+  # from csv estimates in Data folder
+  alpha_mat <- alpha_csv[1:3,]
   rownames(alpha_mat) <- run_info$Run
   
   Cmax_mat <- data.frame(matrix(nrow = n_species, ncol = num_pinn_sp, 

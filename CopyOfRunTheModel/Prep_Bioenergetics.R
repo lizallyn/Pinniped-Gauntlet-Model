@@ -64,3 +64,9 @@ w <- data.frame(Pv = 350, Zc = 3032.8, Ej = 4158.7)
 run_kcal <- data.frame(Run1 = as.numeric(salmon_kcal["Sockeye"]), 
                        Run2 = as.numeric(salmon_kcal["Chinook"]),
                        Run3 = as.numeric(salmon_kcal["Chum"]))
+
+#### Parameter alpha ####
+
+# see Obsidian note Parameter-alpha
+
+alpha_csv <- read.csv("Data/alpha_vals.csv", row.names = 1)

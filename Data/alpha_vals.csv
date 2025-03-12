@@ -1,5 +1,5 @@
 ,Pv,Ej,Zc
-Sockeye,,,
-Chinook,,,
-Coho,,,
-Chum,,,
+Sockeye,0.1,0.01,0.01
+Chinook,0.01,0.1,0.1
+Chum,0.1,0.05,0.05
+Coho,0.05,0.05,0.05
