@@ -69,7 +69,7 @@ if(case.study == "N1"){
   n_species <- nrow(run_info)
   
   # create arrival data frame
-  salmon_arrival <- create_salmon_arrival(5, run_info)
+  salmon_arrival <- create_salmon_arrival(5, 5, run_info)
   colnames(salmon_arrival) <- c("Day", run_info$Run)
   n_days <- nrow(salmon_arrival)
   data_start <- salmon_arrival$Day[1]
