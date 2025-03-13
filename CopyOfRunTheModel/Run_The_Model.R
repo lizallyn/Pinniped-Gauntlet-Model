@@ -6,9 +6,9 @@ rm(list=ls())
 
 ## Run it Manually
 
-case.study <- "Base"
-run_count <- 3
-# case.study <- "N1"
+# case.study <- "Base"
+# run_count <- 3
+case.study <- "N1"
 # case.study <- "B1"
 
 # bounds <- "Made-Up"

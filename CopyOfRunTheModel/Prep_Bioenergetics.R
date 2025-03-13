@@ -61,9 +61,10 @@ high_energetics <- t(high_energetics)
 
 # in kcal:
 w <- data.frame(Pv = 350, Zc = 3032.8, Ej = 4158.7)
-run_kcal <- data.frame(Run1 = as.numeric(salmon_kcal["Sockeye"]), 
-                       Run2 = as.numeric(salmon_kcal["Chinook"]),
-                       Run3 = as.numeric(salmon_kcal["Chum"]))
+run_kcal <- data.frame(cbind(salmon_kcal, 
+                             Run1 = as.numeric(salmon_kcal["Sockeye"]), 
+                             Run2 = as.numeric(salmon_kcal["Chinook"]), 
+                             Run3 = as.numeric(salmon_kcal["Chum"])))
 
 #### Parameter alpha ####
 
